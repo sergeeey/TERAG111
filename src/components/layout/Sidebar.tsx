@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  Home, FileText, MessageCircle, Network, 
+import {
+  Home, FileText, MessageCircle, Network,
   TestTube, BarChart3, Settings, LogOut, Brain,
-  ChevronLeft, ChevronRight
+  ChevronLeft, ChevronRight, Eye
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: Home },
+  { name: 'TERAG Immersive', href: '/immersive', icon: Eye },
   { name: 'TERAG System', href: '/terag', icon: Brain },
   { name: 'Documents', href: '/documents', icon: FileText },
   { name: 'Query', href: '/query', icon: MessageCircle },

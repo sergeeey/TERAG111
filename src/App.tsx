@@ -16,6 +16,7 @@ const ABTesting = React.lazy(() => import('./pages/ABTesting'));
 const Analytics = React.lazy(() => import('./pages/Analytics'));
 const Settings = React.lazy(() => import('./pages/Settings'));
 const TeragSystem = React.lazy(() => import('./pages/TeragSystem'));
+const TeragImmersive = React.lazy(() => import('./pages/TeragImmersive'));
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                       <Route path="/analytics" element={<Analytics />} />
                       <Route path="/settings" element={<Settings />} />
                       <Route path="/terag" element={<TeragSystem />} />
+                      <Route path="/immersive" element={<TeragImmersive />} />
                     </Routes>
                   </Suspense>
                 </Layout>
