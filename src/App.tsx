@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './providers/ThemeProvider';
 import { AuthProvider } from './providers/AuthProvider';
 import { WebSocketProvider } from './providers/WebSocketProvider';
+import { LanguageProvider } from './i18n/LanguageContext';
 import { Layout } from './components/layout/Layout';
 import { LoadingSpinner } from './components/ui/LoadingSpinner';
 import { Toaster } from './components/ui/Toaster';
@@ -21,10 +22,11 @@ const TeragImmersive = React.lazy(() => import('./pages/TeragImmersive'));
 
 function App() {
   return (
-      <ThemeProvider>
-        <AuthProvider>
-          <WebSocketProvider>
-            <Router>
+      <LanguageProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <WebSocketProvider>
+              <Router>
               <div className="min-h-screen bg-terag-gradient text-terag-text-primary">
                 <Layout>
                   <Suspense fallback={<LoadingSpinner />}>
@@ -43,10 +45,11 @@ function App() {
                 </Layout>
                 <Toaster />
               </div>
-            </Router>
-          </WebSocketProvider>
-        </AuthProvider>
-      </ThemeProvider>
+              </Router>
+            </WebSocketProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </LanguageProvider>
   );
 }
 

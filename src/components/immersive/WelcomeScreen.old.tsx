@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Brain, Sparkles } from 'lucide-react';
-import { useLanguage } from '../../i18n/LanguageContext';
-import { LanguageSelector } from '../ui/LanguageSelector';
 
 interface WelcomeScreenProps {
   onStart: () => void;
 }
 
 export function WelcomeScreen({ onStart }: WelcomeScreenProps) {
-  const { t } = useLanguage();
   const [textIndex, setTextIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
   const welcomeTexts = [
-    t('welcome.title1'),
-    t('welcome.title2'),
-    t('welcome.title3'),
+    'Welcome to TERAG',
+    'A Cognitive Alignment System',
+    'Where Intelligence Breathes',
   ];
 
   useEffect(() => {
@@ -25,7 +22,7 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps) {
       }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [textIndex, welcomeTexts.length]);
+  }, [textIndex]);
 
   const handleStart = () => {
     setIsVisible(false);
@@ -40,10 +37,6 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps) {
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <div className="absolute top-6 right-6 z-20">
-        <LanguageSelector />
-      </div>
-
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00FFE0]/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FF00FF]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
@@ -83,7 +76,8 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps) {
         {textIndex === welcomeTexts.length - 1 && (
           <div className="animate-fade-in">
             <p className="text-xl text-white/70 mb-8 leading-relaxed">
-              {t('welcome.description')}
+              I am a system of cognitive alignment. Together, we will explore
+              the frontier of reasoning, ethics, and intelligence.
             </p>
 
             <button
@@ -92,7 +86,7 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps) {
             >
               <span className="flex items-center gap-3">
                 <Sparkles className="w-5 h-5" />
-                {t('welcome.startButton')}
+                Begin Dialogue
                 <Sparkles className="w-5 h-5" />
               </span>
               <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -101,15 +95,15 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps) {
             <div className="mt-8 flex items-center justify-center gap-8 text-sm text-white/40">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#00FFE0] animate-pulse" />
-                <span>{t('welcome.features.metrics')}</span>
+                <span>Real-time Metrics</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#0099FF] animate-pulse" />
-                <span>{t('welcome.features.visualization')}</span>
+                <span>3D Visualization</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#FF00FF] animate-pulse" />
-                <span>{t('welcome.features.voice')}</span>
+                <span>Voice Interface</span>
               </div>
             </div>
           </div>

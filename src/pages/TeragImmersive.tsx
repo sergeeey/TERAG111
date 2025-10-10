@@ -5,6 +5,7 @@ import { NeuroSpace, type VoiceState } from '../components/immersive/NeuroSpace'
 import { CognitiveConsole } from '../components/immersive/CognitiveConsole';
 import { MetricsHUD } from '../components/immersive/MetricsHUD';
 import { ReasoningGraphViewer } from '../components/immersive/ReasoningGraphViewer';
+import { LanguageSelector } from '../components/ui/LanguageSelector';
 import { teragAPI } from '../services/terag-api';
 import type { ReasoningGraph, MetricsData } from '../services/terag-api';
 
@@ -124,6 +125,10 @@ export default function TeragImmersive() {
       </div>
 
       <MetricsHUD metrics={metrics} isConnected={isConnected} />
+
+      <div className="fixed top-6 right-6 z-40">
+        <LanguageSelector />
+      </div>
 
       <div className="fixed top-6 left-6 z-40">
         <button

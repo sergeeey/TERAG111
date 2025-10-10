@@ -13,7 +13,7 @@ export function useVoiceOutput() {
   const [isEnabled, setIsEnabled] = useState(true);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
-  const speak = useCallback((text: string, onStart?: () => void, onEnd?: () => void) => {
+  const speak = useCallback((text: string, onStart?: () => void, onEnd?: () => void, language?: string) => {
     if (!isEnabled || !text || typeof window === 'undefined' || !window.speechSynthesis) {
       return;
     }
@@ -27,14 +27,23 @@ export function useVoiceOutput() {
     utterance.pitch = 1.0;
     utterance.volume = 0.8;
 
+    const lang = language || document.documentElement.lang || 'en';
     const voices = window.speechSynthesis.getVoices();
-    const preferredVoice = voices.find(
-      (voice) =>
-        voice.lang.startsWith('en') &&
-        (voice.name.includes('Google') || voice.name.includes('Microsoft'))
-    );
+
+    const preferredVoice = voices.find((voice) => {
+      if (lang === 'ru' || lang.startsWith('ru')) {
+        return voice.lang.startsWith('ru') &&
+               (voice.name.includes('Google') || voice.name.includes('Microsoft') || voice.name.includes('Yandex'));
+      }
+      return voice.lang.startsWith('en') &&
+             (voice.name.includes('Google') || voice.name.includes('Microsoft'));
+    });
+
     if (preferredVoice) {
       utterance.voice = preferredVoice;
+      utterance.lang = preferredVoice.lang;
+    } else {
+      utterance.lang = lang === 'ru' ? 'ru-RU' : 'en-US';
     }
 
     utterance.onstart = () => {
