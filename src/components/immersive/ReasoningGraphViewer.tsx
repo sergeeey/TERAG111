@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { X, Maximize2 } from 'lucide-react';
 import { NeuroSpace, type VoiceState } from './NeuroSpace';
 import type { ReasoningGraph } from '../../services/terag-api';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface ReasoningGraphViewerProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export function ReasoningGraphViewer({
   voiceState,
 }: ReasoningGraphViewerProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const { t } = useLanguage();
 
   if (!isOpen) return null;
 
@@ -40,10 +42,10 @@ export function ReasoningGraphViewer({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-[#00FFE0] animate-pulse" />
-            <h2 className="text-xl font-bold text-white">Reasoning Graph</h2>
+            <h2 className="text-xl font-bold text-white">{t('graph.title')}</h2>
             {isReasoning && (
               <span className="px-3 py-1 text-xs font-semibold text-[#00FFE0] bg-[#00FFE0]/10 rounded-full border border-[#00FFE0]/30">
-                PROCESSING
+                {t('graph.processing')}
               </span>
             )}
           </div>
@@ -52,14 +54,14 @@ export function ReasoningGraphViewer({
             <button
               onClick={handleFullscreen}
               className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-              title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+              title={isFullscreen ? t('graph.exitFullscreen') : t('graph.enterFullscreen')}
             >
               <Maximize2 className="w-5 h-5 text-white" />
             </button>
             <button
               onClick={onClose}
               className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-              title="Close"
+              title={t('graph.close')}
             >
               <X className="w-5 h-5 text-white" />
             </button>
@@ -94,11 +96,11 @@ export function ReasoningGraphViewer({
 
           <div className="mt-4 p-4 rounded-lg bg-gradient-to-r from-[#00FFE0]/10 to-[#FF00FF]/10 border border-[#00FFE0]/20">
             <p className="text-sm text-white/80 leading-relaxed">
-              <span className="font-semibold text-[#00FFE0]">Agent Flow:</span>{' '}
+              <span className="font-semibold text-[#00FFE0]">{t('graph.agentFlow')}:</span>{' '}
               {graph.nodes.map((n) => n.label).join(' → ')}
             </p>
             <p className="text-xs text-white/50 mt-2">
-              {graph.edges.length} connections • IEI Score: {ieiScore.toFixed(3)}
+              {graph.edges.length} {t('graph.connections')} • {t('hud.iei')}: {ieiScore.toFixed(3)}
             </p>
           </div>
         </div>

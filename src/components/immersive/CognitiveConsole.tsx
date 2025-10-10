@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Send, Sparkles } from 'lucide-react';
 import { VoiceRecorder, VoiceButton, type VoiceState } from './VoiceRecorder';
 import { VoiceToggle, useVoiceOutput } from './VoiceOutput';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface CognitiveConsoleProps {
   onQuery: (query: string) => void;
@@ -24,6 +25,7 @@ export function CognitiveConsole({
   const [isVoiceModeEnabled, setIsVoiceModeEnabled] = useState(false);
   const [transcribedText, setTranscribedText] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t } = useLanguage();
 
   const { speak, isSpeaking, isEnabled: isSoundEnabled, toggleEnabled: toggleSound } = useVoiceOutput();
 
@@ -85,10 +87,10 @@ export function CognitiveConsole({
   };
 
   const getStatusMessage = () => {
-    if (currentVoiceState === 'listening') return 'Listening to your voice...';
-    if (currentVoiceState === 'processing') return 'TERAG is reasoning...';
-    if (isSpeaking) return 'TERAG is speaking...';
-    if (isProcessing) return 'TERAG is reasoning...';
+    if (currentVoiceState === 'listening') return t('states.listening');
+    if (currentVoiceState === 'processing') return t('states.reasoning');
+    if (isSpeaking) return t('states.speaking');
+    if (isProcessing) return t('states.reasoning');
     return '';
   };
 
@@ -100,12 +102,12 @@ export function CognitiveConsole({
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 rounded-full bg-[#00FFE0] mt-2 animate-pulse" />
               <div className="flex-1">
-                <p className="text-sm text-[#00FFE0] font-semibold mb-1">TERAG Response</p>
+                <p className="text-sm text-[#00FFE0] font-semibold mb-1">{t('console.response')}</p>
                 <p className="text-white/90 leading-relaxed">{response}</p>
                 {isSpeaking && (
                   <div className="mt-2 flex items-center gap-2">
                     <Sparkles className="w-4 h-4 text-[#00FFE0] animate-pulse" />
-                    <span className="text-xs text-[#00FFE0]/70">Speaking...</span>
+                    <span className="text-xs text-[#00FFE0]/70">{t('console.speaking')}</span>
                   </div>
                 )}
               </div>
@@ -116,7 +118,7 @@ export function CognitiveConsole({
         {transcribedText && (
           <div className="mb-4 p-3 rounded-lg bg-blue-500/10 border border-blue-500/30 backdrop-blur-md">
             <p className="text-sm text-blue-300">
-              <span className="font-semibold">Transcribed: </span>
+              <span className="font-semibold">{t('console.transcribed')}: </span>
               {transcribedText}
             </p>
           </div>
@@ -135,7 +137,7 @@ export function CognitiveConsole({
                       type="text"
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
-                      placeholder="Ask TERAG anything..."
+                      placeholder={t('console.placeholder')}
                       disabled={isProcessing}
                       className="flex-1 bg-transparent text-white placeholder-white/40 text-lg outline-none"
                     />
@@ -146,7 +148,7 @@ export function CognitiveConsole({
                         onClick={handleVoiceModeToggle}
                         className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-[#00FFE0]/20 hover:from-blue-500/30 hover:to-[#00FFE0]/30 transition-all duration-300 border border-blue-500/30 text-sm font-semibold text-white"
                       >
-                        Voice Mode
+                        {t('console.voiceMode')}
                       </button>
 
                       <VoiceToggle
@@ -175,8 +177,8 @@ export function CognitiveConsole({
                       />
 
                       <div className="text-left">
-                        <p className="text-white font-semibold">Voice Mode Active</p>
-                        <p className="text-sm text-white/50">Click microphone to start</p>
+                        <p className="text-white font-semibold">{t('console.voiceModeActive')}</p>
+                        <p className="text-sm text-white/50">{t('console.clickToStart')}</p>
                       </div>
                     </div>
 
@@ -192,7 +194,7 @@ export function CognitiveConsole({
                         onClick={handleVoiceModeToggle}
                         className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 text-sm font-semibold text-white"
                       >
-                        Text Mode
+                        {t('console.textMode')}
                       </button>
                     </div>
                   </div>
@@ -215,10 +217,10 @@ export function CognitiveConsole({
           <div className="mt-3 flex items-center justify-between px-2">
             <p className="text-xs text-white/40">
               {isVoiceModeEnabled
-                ? 'Click microphone to speak • Click Text Mode to type'
-                : 'Press Enter to send • Click Voice Mode to speak'}
+                ? `${t('console.clickToStart')} • ${t('console.textMode')}`
+                : `${t('console.pressEnter')} • ${t('console.clickToSpeak')}`}
             </p>
-            <p className="text-xs text-white/40">Powered by TERAG v5.1</p>
+            <p className="text-xs text-white/40">{t('console.poweredBy')}</p>
           </div>
         </form>
       </div>

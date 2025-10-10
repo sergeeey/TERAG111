@@ -8,8 +8,10 @@ import { ReasoningGraphViewer } from '../components/immersive/ReasoningGraphView
 import { LanguageSelector } from '../components/ui/LanguageSelector';
 import { teragAPI } from '../services/terag-api';
 import type { ReasoningGraph, MetricsData } from '../services/terag-api';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function TeragImmersive() {
+  const { t } = useLanguage();
   const [showWelcome, setShowWelcome] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [response, setResponse] = useState('');
@@ -137,16 +139,16 @@ export default function TeragImmersive() {
           className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-[#10131A]/95 to-[#1A1E2E]/95 backdrop-blur-xl rounded-xl border border-[#00FFE0]/20 hover:border-[#00FFE0]/40 transition-all duration-300 shadow-lg hover:shadow-[#00FFE0]/20 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <Eye className="w-5 h-5 text-[#00FFE0]" />
-          <span className="text-white font-semibold">View Reasoning</span>
+          <span className="text-white font-semibold">{t('navigation.viewReasoning')}</span>
           {isProcessing && (
             <div className="w-2 h-2 rounded-full bg-[#00FFE0] animate-pulse" />
           )}
         </button>
 
         <div className="mt-4 px-6 py-3 bg-gradient-to-r from-[#10131A]/95 to-[#1A1E2E]/95 backdrop-blur-xl rounded-xl border border-[#00FFE0]/20">
-          <div className="text-xs text-white/50 mb-1">Active Mode</div>
+          <div className="text-xs text-white/50 mb-1">{t('navigation.activeMode')}</div>
           <div className="text-sm font-semibold text-white">
-            {voiceState === 'listening' ? 'Listening' : voiceState === 'processing' ? 'Thinking' : isProcessing ? 'Reasoning' : 'Ready'}
+            {voiceState === 'listening' ? t('states.idle') : voiceState === 'processing' ? t('states.thinking') : isProcessing ? t('states.reasoning') : t('states.ready')}
           </div>
         </div>
       </div>

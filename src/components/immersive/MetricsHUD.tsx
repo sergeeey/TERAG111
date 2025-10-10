@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Activity, Brain, CheckCircle, TrendingUp } from 'lucide-react';
 import type { MetricsData } from '../../services/terag-api';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface MetricsHUDProps {
   metrics: MetricsData;
@@ -98,6 +99,8 @@ function MetricGauge({ label, value, icon, color }: MetricGaugeProps) {
 }
 
 export function MetricsHUD({ metrics, isConnected }: MetricsHUDProps) {
+  const { t } = useLanguage();
+
   const getColorForValue = (value: number) => {
     if (value > 0.9) return '#00FFE0';
     if (value > 0.8) return '#00D4FF';
@@ -114,28 +117,28 @@ export function MetricsHUD({ metrics, isConnected }: MetricsHUDProps) {
               <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-[#00FFE0]' : 'bg-red-500'} animate-pulse`} />
               <div className={`absolute inset-0 w-3 h-3 rounded-full ${isConnected ? 'bg-[#00FFE0]' : 'bg-red-500'} animate-ping opacity-75`} />
             </div>
-            <h3 className="text-lg font-bold text-white">Cognitive Metrics</h3>
+            <h3 className="text-lg font-bold text-white">{t('hud.title')}</h3>
           </div>
           <TrendingUp className="w-5 h-5 text-[#00FFE0]" />
         </div>
 
         <div className="grid grid-cols-1 gap-6">
           <MetricGauge
-            label="IEI Score"
+            label={t('hud.iei')}
             value={metrics.iei}
             icon={<Brain className="w-4 h-4" />}
             color={getColorForValue(metrics.iei)}
           />
 
           <MetricGauge
-            label="Coherence"
+            label={t('hud.coherence')}
             value={metrics.coherence}
             icon={<Activity className="w-4 h-4" />}
             color={getColorForValue(metrics.coherence)}
           />
 
           <MetricGauge
-            label="Faithfulness"
+            label={t('hud.faithfulness')}
             value={metrics.faithfulness}
             icon={<CheckCircle className="w-4 h-4" />}
             color={getColorForValue(metrics.faithfulness)}
@@ -144,15 +147,15 @@ export function MetricsHUD({ metrics, isConnected }: MetricsHUDProps) {
 
         <div className="mt-6 pt-4 border-t border-white/10">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-white/50">System Status</span>
+            <span className="text-white/50">{t('hud.systemStatus')}</span>
             <span className={`font-semibold ${isConnected ? 'text-[#00FFE0]' : 'text-red-400'}`}>
-              {isConnected ? 'ONLINE' : 'OFFLINE'}
+              {isConnected ? t('hud.online') : t('hud.offline')}
             </span>
           </div>
 
           {metrics.timestamp && (
             <div className="flex items-center justify-between text-xs mt-2">
-              <span className="text-white/50">Last Update</span>
+              <span className="text-white/50">{t('hud.lastUpdate')}</span>
               <span className="text-white/70">
                 {new Date(metrics.timestamp).toLocaleTimeString()}
               </span>
@@ -163,12 +166,12 @@ export function MetricsHUD({ metrics, isConnected }: MetricsHUDProps) {
         <div className="mt-4 p-3 bg-gradient-to-r from-[#00FFE0]/5 to-[#FF00FF]/5 rounded-lg border border-[#00FFE0]/10">
           <p className="text-xs text-white/60 leading-relaxed">
             {metrics.iei > 0.9
-              ? 'Exceptional cognitive performance. System operating at peak efficiency.'
+              ? t('hud.exceptional')
               : metrics.iei > 0.8
-              ? 'Strong reasoning coherence. All systems nominal.'
+              ? t('hud.strong')
               : metrics.iei > 0.7
-              ? 'Moderate performance. Consider optimization.'
-              : 'Performance degradation detected. Review required.'}
+              ? t('hud.moderate')
+              : t('hud.degraded')}
           </p>
         </div>
       </div>
