@@ -4,13 +4,24 @@ import { OrbitControls, Sphere, Line } from '@react-three/drei';
 import * as THREE from 'three';
 import type { GraphNode, GraphEdge } from '../../services/terag-api';
 
+export type VoiceState = 'idle' | 'listening' | 'processing';
+
 interface NeuroSpaceProps {
   graph: { nodes: GraphNode[]; edges: GraphEdge[] };
   isReasoning: boolean;
   ieiScore: number;
+  voiceState?: VoiceState;
 }
 
-function TeragCore({ isReasoning, ieiScore }: { isReasoning: boolean; ieiScore: number }) {
+function TeragCore({
+  isReasoning,
+  ieiScore,
+  voiceState = 'idle',
+}: {
+  isReasoning: boolean;
+  ieiScore: number;
+  voiceState?: VoiceState;
+}) {
   const meshRef = useRef<THREE.Mesh>(null);
   const glowRef = useRef<THREE.Mesh>(null);
 
@@ -35,11 +46,19 @@ function TeragCore({ isReasoning, ieiScore }: { isReasoning: boolean; ieiScore: 
   });
 
   const coreColor = useMemo(() => {
+    if (voiceState === 'listening') return '#4A9EFF';
+    if (voiceState === 'processing') return '#FFD700';
     if (ieiScore > 0.9) return '#00FFE0';
     if (ieiScore > 0.8) return '#00D4FF';
     if (ieiScore > 0.7) return '#0099FF';
     return '#FF6B6B';
-  }, [ieiScore]);
+  }, [ieiScore, voiceState]);
+
+  const emissiveIntensity = useMemo(() => {
+    if (voiceState === 'listening') return 0.7;
+    if (voiceState === 'processing') return 0.9;
+    return 0.5;
+  }, [voiceState]);
 
   return (
     <group>
@@ -47,7 +66,7 @@ function TeragCore({ isReasoning, ieiScore }: { isReasoning: boolean; ieiScore: 
         <meshStandardMaterial
           color={coreColor}
           emissive={coreColor}
-          emissiveIntensity={0.5}
+          emissiveIntensity={emissiveIntensity}
           metalness={0.8}
           roughness={0.2}
         />
@@ -68,11 +87,13 @@ function TeragCore({ isReasoning, ieiScore }: { isReasoning: boolean; ieiScore: 
 function AgentNode({
   node,
   isActive,
-  ieiScore
+  ieiScore,
+  voiceState = 'idle',
 }: {
   node: GraphNode;
   isActive: boolean;
   ieiScore: number;
+  voiceState?: VoiceState;
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
 
@@ -89,7 +110,11 @@ function AgentNode({
     node.z || 0,
   ], [node]);
 
-  const nodeColor = node.type === 'controller' ? '#FF00FF' : '#00FFE0';
+  const nodeColor = useMemo(() => {
+    if (voiceState === 'listening') return '#4A9EFF';
+    if (voiceState === 'processing') return '#FFD700';
+    return node.type === 'controller' ? '#FF00FF' : '#00FFE0';
+  }, [node.type, voiceState]);
 
   return (
     <group position={position}>
@@ -190,7 +215,7 @@ function ParticleField() {
   );
 }
 
-export function NeuroSpace({ graph, isReasoning, ieiScore }: NeuroSpaceProps) {
+export function NeuroSpace({ graph, isReasoning, ieiScore, voiceState }: NeuroSpaceProps) {
   return (
     <div className="w-full h-full bg-[#0A0E1A]">
       <Canvas
@@ -207,7 +232,7 @@ export function NeuroSpace({ graph, isReasoning, ieiScore }: NeuroSpaceProps) {
         <pointLight position={[10, 10, 10]} intensity={0.5} color="#00FFE0" />
         <pointLight position={[-10, -10, -10]} intensity={0.3} color="#FF00FF" />
 
-        <TeragCore isReasoning={isReasoning} ieiScore={ieiScore} />
+        <TeragCore isReasoning={isReasoning} ieiScore={ieiScore} voiceState={voiceState} />
 
         {graph.nodes.map((node) => (
           <AgentNode
@@ -215,6 +240,7 @@ export function NeuroSpace({ graph, isReasoning, ieiScore }: NeuroSpaceProps) {
             node={node}
             isActive={isReasoning}
             ieiScore={ieiScore}
+            voiceState={voiceState}
           />
         ))}
 

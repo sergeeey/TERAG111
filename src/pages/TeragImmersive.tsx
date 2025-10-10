@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Eye } from 'lucide-react';
 import { WelcomeScreen } from '../components/immersive/WelcomeScreen';
-import { NeuroSpace } from '../components/immersive/NeuroSpace';
+import { NeuroSpace, type VoiceState } from '../components/immersive/NeuroSpace';
 import { CognitiveConsole } from '../components/immersive/CognitiveConsole';
 import { MetricsHUD } from '../components/immersive/MetricsHUD';
 import { ReasoningGraphViewer } from '../components/immersive/ReasoningGraphViewer';
@@ -12,6 +12,7 @@ export default function TeragImmersive() {
   const [showWelcome, setShowWelcome] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [response, setResponse] = useState('');
+  const [voiceState, setVoiceState] = useState<VoiceState>('idle');
   const [metrics, setMetrics] = useState<MetricsData>({
     iei: 0.85,
     coherence: 0.88,
@@ -114,7 +115,12 @@ export default function TeragImmersive() {
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-[#0A0E1A] via-[#10131A] to-[#1A1E2E] overflow-hidden">
       <div className="absolute inset-0">
-        <NeuroSpace graph={graph} isReasoning={isProcessing} ieiScore={metrics.iei} />
+        <NeuroSpace
+          graph={graph}
+          isReasoning={isProcessing}
+          ieiScore={metrics.iei}
+          voiceState={voiceState}
+        />
       </div>
 
       <MetricsHUD metrics={metrics} isConnected={isConnected} />
@@ -135,7 +141,7 @@ export default function TeragImmersive() {
         <div className="mt-4 px-6 py-3 bg-gradient-to-r from-[#10131A]/95 to-[#1A1E2E]/95 backdrop-blur-xl rounded-xl border border-[#00FFE0]/20">
           <div className="text-xs text-white/50 mb-1">Active Mode</div>
           <div className="text-sm font-semibold text-white">
-            {isProcessing ? 'Reasoning' : 'Listening'}
+            {voiceState === 'listening' ? 'Listening' : voiceState === 'processing' ? 'Thinking' : isProcessing ? 'Reasoning' : 'Ready'}
           </div>
         </div>
       </div>
@@ -145,6 +151,8 @@ export default function TeragImmersive() {
         onVoiceQuery={handleVoiceQuery}
         isProcessing={isProcessing}
         response={response}
+        voiceState={voiceState}
+        onVoiceStateChange={setVoiceState}
       />
 
       <ReasoningGraphViewer
@@ -153,6 +161,7 @@ export default function TeragImmersive() {
         graph={graph}
         isReasoning={isProcessing}
         ieiScore={metrics.iei}
+        voiceState={voiceState}
       />
     </div>
   );

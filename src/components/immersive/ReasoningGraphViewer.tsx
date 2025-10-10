@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Maximize2 } from 'lucide-react';
-import { NeuroSpace } from './NeuroSpace';
+import { NeuroSpace, type VoiceState } from './NeuroSpace';
 import type { ReasoningGraph } from '../../services/terag-api';
 
 interface ReasoningGraphViewerProps {
@@ -9,6 +9,7 @@ interface ReasoningGraphViewerProps {
   graph: ReasoningGraph;
   isReasoning: boolean;
   ieiScore: number;
+  voiceState?: VoiceState;
 }
 
 export function ReasoningGraphViewer({
@@ -17,6 +18,7 @@ export function ReasoningGraphViewer({
   graph,
   isReasoning,
   ieiScore,
+  voiceState,
 }: ReasoningGraphViewerProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -66,7 +68,7 @@ export function ReasoningGraphViewer({
       </div>
 
       <div className="w-full h-full">
-        <NeuroSpace graph={graph} isReasoning={isReasoning} ieiScore={ieiScore} />
+        <NeuroSpace graph={graph} isReasoning={isReasoning} ieiScore={ieiScore} voiceState={voiceState} />
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 z-10 p-6 bg-gradient-to-t from-[#10131A] to-transparent">

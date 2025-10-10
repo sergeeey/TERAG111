@@ -1,11 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
-import { Mic, Send, Volume2, VolumeX } from 'lucide-react';
+import { Send, Sparkles } from 'lucide-react';
+import { VoiceRecorder, VoiceButton, type VoiceState } from './VoiceRecorder';
+import { VoiceToggle, useVoiceOutput } from './VoiceOutput';
 
 interface CognitiveConsoleProps {
   onQuery: (query: string) => void;
   onVoiceQuery?: (audioBlob: Blob) => void;
   isProcessing: boolean;
   response: string;
+  voiceState?: VoiceState;
+  onVoiceStateChange?: (state: VoiceState) => void;
 }
 
 export function CognitiveConsole({
@@ -13,75 +17,108 @@ export function CognitiveConsole({
   onVoiceQuery,
   isProcessing,
   response,
+  voiceState: externalVoiceState,
+  onVoiceStateChange,
 }: CognitiveConsoleProps) {
   const [query, setQuery] = useState('');
-  const [isRecording, setIsRecording] = useState(false);
-  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const audioChunksRef = useRef<Blob[]>([]);
+  const [isVoiceModeEnabled, setIsVoiceModeEnabled] = useState(false);
+  const [transcribedText, setTranscribedText] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const { speak, isSpeaking, isEnabled: isSoundEnabled, toggleEnabled: toggleSound } = useVoiceOutput();
+
+  const voiceRecorder = VoiceRecorder({
+    onRecordingComplete: (audioBlob) => {
+      if (onVoiceQuery) {
+        onVoiceQuery(audioBlob);
+      }
+    },
+    isProcessing,
+  });
+
+  const currentVoiceState = externalVoiceState || voiceRecorder.voiceState;
+
   useEffect(() => {
-    if (!isProcessing && inputRef.current) {
+    if (onVoiceStateChange) {
+      onVoiceStateChange(currentVoiceState);
+    }
+  }, [currentVoiceState, onVoiceStateChange]);
+
+  useEffect(() => {
+    if (!isProcessing && inputRef.current && !isVoiceModeEnabled) {
       inputRef.current.focus();
     }
-  }, [isProcessing]);
+  }, [isProcessing, isVoiceModeEnabled]);
+
+  useEffect(() => {
+    if (response && isSoundEnabled && !isProcessing) {
+      const handleSpeakingStart = () => {
+        if (onVoiceStateChange) {
+          onVoiceStateChange('processing');
+        }
+      };
+
+      const handleSpeakingEnd = () => {
+        if (onVoiceStateChange) {
+          onVoiceStateChange('idle');
+        }
+      };
+
+      speak(response, handleSpeakingStart, handleSpeakingEnd);
+    }
+  }, [response, isSoundEnabled, isProcessing, speak, onVoiceStateChange]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim() && !isProcessing) {
       onQuery(query.trim());
       setQuery('');
+      setTranscribedText('');
     }
   };
 
-  const startRecording = async () => {
-    if (!onVoiceQuery) return;
-
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
-      mediaRecorderRef.current = mediaRecorder;
-      audioChunksRef.current = [];
-
-      mediaRecorder.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          audioChunksRef.current.push(event.data);
-        }
-      };
-
-      mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-        onVoiceQuery(audioBlob);
-        stream.getTracks().forEach((track) => track.stop());
-      };
-
-      mediaRecorder.start();
-      setIsRecording(true);
-    } catch (error) {
-      console.error('Failed to start recording:', error);
+  const handleVoiceModeToggle = () => {
+    setIsVoiceModeEnabled(!isVoiceModeEnabled);
+    if (voiceRecorder.isRecording) {
+      voiceRecorder.stopRecording();
     }
   };
 
-  const stopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-    }
+  const getStatusMessage = () => {
+    if (currentVoiceState === 'listening') return 'Listening to your voice...';
+    if (currentVoiceState === 'processing') return 'TERAG is reasoning...';
+    if (isSpeaking) return 'TERAG is speaking...';
+    if (isProcessing) return 'TERAG is reasoning...';
+    return '';
   };
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-6">
       <div className="max-w-4xl mx-auto">
         {response && (
-          <div className="mb-4 p-4 rounded-lg bg-gradient-to-r from-[#00FFE0]/10 to-[#0099FF]/10 border border-[#00FFE0]/30 backdrop-blur-md">
+          <div className="mb-4 p-4 rounded-lg bg-gradient-to-r from-[#00FFE0]/10 to-[#0099FF]/10 border border-[#00FFE0]/30 backdrop-blur-md animate-fade-in">
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 rounded-full bg-[#00FFE0] mt-2 animate-pulse" />
               <div className="flex-1">
                 <p className="text-sm text-[#00FFE0] font-semibold mb-1">TERAG Response</p>
                 <p className="text-white/90 leading-relaxed">{response}</p>
+                {isSpeaking && (
+                  <div className="mt-2 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-[#00FFE0] animate-pulse" />
+                    <span className="text-xs text-[#00FFE0]/70">Speaking...</span>
+                  </div>
+                )}
               </div>
             </div>
+          </div>
+        )}
+
+        {transcribedText && (
+          <div className="mb-4 p-3 rounded-lg bg-blue-500/10 border border-blue-500/30 backdrop-blur-md">
+            <p className="text-sm text-blue-300">
+              <span className="font-semibold">Transcribed: </span>
+              {transcribedText}
+            </p>
           </div>
         )}
 
@@ -91,69 +128,85 @@ export function CognitiveConsole({
 
             <div className="relative p-6">
               <div className="flex items-center gap-4">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Ask TERAG anything..."
-                  disabled={isProcessing || isRecording}
-                  className="flex-1 bg-transparent text-white placeholder-white/40 text-lg outline-none"
-                />
-
-                <div className="flex items-center gap-2">
-                  {onVoiceQuery && (
-                    <button
-                      type="button"
-                      onClick={isRecording ? stopRecording : startRecording}
+                {!isVoiceModeEnabled ? (
+                  <>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      placeholder="Ask TERAG anything..."
                       disabled={isProcessing}
-                      className={`p-3 rounded-full transition-all duration-300 ${
-                        isRecording
-                          ? 'bg-red-500 hover:bg-red-600 animate-pulse'
-                          : 'bg-[#00FFE0]/10 hover:bg-[#00FFE0]/20'
-                      } disabled:opacity-50 disabled:cursor-not-allowed`}
-                    >
-                      <Mic className="w-5 h-5 text-white" />
-                    </button>
-                  )}
+                      className="flex-1 bg-transparent text-white placeholder-white/40 text-lg outline-none"
+                    />
 
-                  <button
-                    type="button"
-                    onClick={() => setIsSoundEnabled(!isSoundEnabled)}
-                    className="p-3 rounded-full bg-[#00FFE0]/10 hover:bg-[#00FFE0]/20 transition-all duration-300"
-                  >
-                    {isSoundEnabled ? (
-                      <Volume2 className="w-5 h-5 text-white" />
-                    ) : (
-                      <VolumeX className="w-5 h-5 text-white" />
-                    )}
-                  </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={handleVoiceModeToggle}
+                        className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-[#00FFE0]/20 hover:from-blue-500/30 hover:to-[#00FFE0]/30 transition-all duration-300 border border-blue-500/30 text-sm font-semibold text-white"
+                      >
+                        Voice Mode
+                      </button>
 
-                  <button
-                    type="submit"
-                    disabled={!query.trim() || isProcessing || isRecording}
-                    className="p-3 rounded-full bg-gradient-to-r from-[#00FFE0] to-[#0099FF] hover:from-[#00FFE0]/90 hover:to-[#0099FF]/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#00FFE0]/20"
-                  >
-                    <Send className="w-5 h-5 text-[#0A0E1A]" />
-                  </button>
-                </div>
+                      <VoiceToggle
+                        enabled={isSoundEnabled}
+                        onToggle={toggleSound}
+                        isSpeaking={isSpeaking}
+                      />
+
+                      <button
+                        type="submit"
+                        disabled={!query.trim() || isProcessing}
+                        className="p-3 rounded-full bg-gradient-to-r from-[#00FFE0] to-[#0099FF] hover:from-[#00FFE0]/90 hover:to-[#0099FF]/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#00FFE0]/20"
+                      >
+                        <Send className="w-5 h-5 text-[#0A0E1A]" />
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex-1 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <VoiceButton
+                        isRecording={voiceRecorder.isRecording}
+                        voiceState={currentVoiceState}
+                        onToggle={voiceRecorder.toggleRecording}
+                        disabled={isProcessing}
+                      />
+
+                      <div className="text-left">
+                        <p className="text-white font-semibold">Voice Mode Active</p>
+                        <p className="text-sm text-white/50">Click microphone to start</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <VoiceToggle
+                        enabled={isSoundEnabled}
+                        onToggle={toggleSound}
+                        isSpeaking={isSpeaking}
+                      />
+
+                      <button
+                        type="button"
+                        onClick={handleVoiceModeToggle}
+                        className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 text-sm font-semibold text-white"
+                      >
+                        Text Mode
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {isProcessing && (
+              {getStatusMessage() && (
                 <div className="mt-4 flex items-center gap-3">
                   <div className="flex gap-1">
                     <span className="w-2 h-2 bg-[#00FFE0] rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
                     <span className="w-2 h-2 bg-[#00FFE0] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
                     <span className="w-2 h-2 bg-[#00FFE0] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                   </div>
-                  <span className="text-sm text-[#00FFE0]/70">TERAG is reasoning...</span>
-                </div>
-              )}
-
-              {isRecording && (
-                <div className="mt-4 flex items-center gap-3">
-                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                  <span className="text-sm text-red-400">Recording audio...</span>
+                  <span className="text-sm text-[#00FFE0]/70">{getStatusMessage()}</span>
                 </div>
               )}
             </div>
@@ -161,11 +214,11 @@ export function CognitiveConsole({
 
           <div className="mt-3 flex items-center justify-between px-2">
             <p className="text-xs text-white/40">
-              Press Enter to send • Use microphone for voice input
+              {isVoiceModeEnabled
+                ? 'Click microphone to speak • Click Text Mode to type'
+                : 'Press Enter to send • Click Voice Mode to speak'}
             </p>
-            <p className="text-xs text-white/40">
-              Powered by TERAG v5.1
-            </p>
+            <p className="text-xs text-white/40">Powered by TERAG v5.1</p>
           </div>
         </form>
       </div>
