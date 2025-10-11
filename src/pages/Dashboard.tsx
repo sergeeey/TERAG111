@@ -6,6 +6,7 @@ import {
   BarChart3, Radio, Waves
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { SolarSystem } from '../components/background/SolarSystem';
 
 interface AgentStatus {
   id: string;
@@ -118,8 +119,12 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0A0E1A] via-[#10131A] to-[#1A1E2E] p-6">
-      <div className="max-w-[1800px] mx-auto space-y-6">
+    <div className="min-h-screen bg-[#000000] p-6 relative overflow-hidden">
+      {/* Solar System Background */}
+      <SolarSystem />
+
+      {/* Content */}
+      <div className="max-w-[1800px] mx-auto space-y-6 relative z-10">
 
         {/* Header */}
         <motion.div
@@ -142,7 +147,7 @@ export default function Dashboard() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="px-6 py-3 bg-gradient-to-br from-[#1a1d3f] to-[#252936] rounded-2xl border border-cyan-500/20 shadow-lg shadow-cyan-500/10">
+            <div className="px-6 py-3 bg-gradient-to-br from-[#1a1d3f]/80 to-[#252936]/80 backdrop-blur-xl rounded-2xl border border-cyan-500/20 shadow-lg shadow-cyan-500/10">
               <div className="flex items-center gap-3">
                 <div className={`w-3 h-3 rounded-full ${systemStatus === 'online' ? 'bg-cyan-400' : 'bg-purple-400'} animate-pulse`} />
                 <span className="text-white/80 text-sm font-medium">
@@ -165,7 +170,7 @@ export default function Dashboard() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
 
-              <div className="relative bg-gradient-to-br from-[#1a1d3f] to-[#252936] p-6 rounded-3xl border border-white/5 shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500">
+              <div className="relative bg-gradient-to-br from-[#1a1d3f]/80 to-[#252936]/80 backdrop-blur-xl p-6 rounded-3xl border border-white/5 shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500">
                 <div className="flex items-start justify-between mb-4">
                   <div className={`p-3 bg-gradient-to-br ${metric.color} rounded-2xl shadow-lg`}>
                     {metric.icon}
@@ -209,7 +214,7 @@ export default function Dashboard() {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-[32px] blur-2xl group-hover:blur-3xl transition-all duration-700" />
 
-              <div className="relative bg-gradient-to-br from-[#1a1d3f] to-[#252936] p-8 rounded-[32px] border border-cyan-500/20 shadow-2xl">
+              <div className="relative bg-gradient-to-br from-[#1a1d3f]/80 to-[#252936]/80 backdrop-blur-xl p-8 rounded-[32px] border border-cyan-500/20 shadow-2xl">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-2">
                     <Brain className="w-5 h-5 text-cyan-400" />
@@ -302,7 +307,7 @@ export default function Dashboard() {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-[32px] blur-2xl group-hover:blur-3xl transition-all duration-700" />
 
-              <div className="relative bg-gradient-to-br from-[#1a1d3f] to-[#252936] p-8 rounded-[32px] border border-white/5 shadow-2xl">
+              <div className="relative bg-gradient-to-br from-[#1a1d3f]/80 to-[#252936]/80 backdrop-blur-xl p-8 rounded-[32px] border border-white/5 shadow-2xl">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-bold text-white flex items-center gap-3">
                     <Cpu className="w-6 h-6 text-purple-400" />
@@ -327,7 +332,7 @@ export default function Dashboard() {
                       transition={{ delay: 0.6 + index * 0.05 }}
                       className="relative group/agent"
                     >
-                      <div className="bg-gradient-to-br from-[#10131A] to-[#1A1E2E] p-5 rounded-2xl border border-white/5 hover:border-cyan-500/30 transition-all duration-300">
+                      <div className="bg-gradient-to-br from-[#10131A]/70 to-[#1A1E2E]/70 backdrop-blur-md p-5 rounded-2xl border border-white/5 hover:border-cyan-500/30 transition-all duration-300">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
                             <div className={`w-2 h-2 rounded-full ${
@@ -384,7 +389,7 @@ export default function Dashboard() {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-[32px] blur-2xl group-hover:blur-3xl transition-all duration-700" />
 
-              <div className="relative bg-gradient-to-br from-[#1a1d3f] to-[#252936] p-8 rounded-[32px] border border-white/5 shadow-2xl">
+              <div className="relative bg-gradient-to-br from-[#1a1d3f]/80 to-[#252936]/80 backdrop-blur-xl p-8 rounded-[32px] border border-white/5 shadow-2xl">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-bold text-white flex items-center gap-3">
                     <Radio className="w-6 h-6 text-green-400" />
@@ -446,7 +451,7 @@ export default function Dashboard() {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-[32px] blur-2xl group-hover:blur-3xl transition-all duration-700" />
 
-              <div className="relative bg-gradient-to-br from-[#1a1d3f] to-[#252936] p-8 rounded-[32px] border border-white/5 shadow-2xl">
+              <div className="relative bg-gradient-to-br from-[#1a1d3f]/80 to-[#252936]/80 backdrop-blur-xl p-8 rounded-[32px] border border-white/5 shadow-2xl">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-bold text-white flex items-center gap-3">
                     <Globe className="w-6 h-6 text-cyan-400" />
