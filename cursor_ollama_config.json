@@ -1,0 +1,66 @@
+﻿{
+    "cursor_ai_models":  {
+                             "deepseek-coder":  {
+                                                    "baseURL":  "http://localhost:11434/v1",
+                                                    "provider":  "openai",
+                                                    "description":  "DeepSeek Coder - Programming Agent",
+                                                    "model":  "deepseek-coder:6.7b",
+                                                    "apiKey":  "ollama"
+                                                },
+                             "mistral":  {
+                                             "baseURL":  "http://localhost:11434/v1",
+                                             "provider":  "openai",
+                                             "description":  "Mistral - General Purpose",
+                                             "model":  "mistral:latest",
+                                             "apiKey":  "ollama"
+                                         },
+                             "qwen2.5-instruct":  {
+                                                      "baseURL":  "http://localhost:11434/v1",
+                                                      "provider":  "openai",
+                                                      "description":  "Qwen2.5 - Reasoning Agent",
+                                                      "model":  "qwen2.5:7b-instruct",
+                                                      "apiKey":  "ollama"
+                                                  },
+                             "phi3":  {
+                                          "baseURL":  "http://localhost:11434/v1",
+                                          "provider":  "openai",
+                                          "description":  "Phi3 - Fast Reasoning",
+                                          "model":  "phi3:latest",
+                                          "apiKey":  "ollama"
+                                      },
+                             "nous-hermes2":  {
+                                                  "baseURL":  "http://localhost:11434/v1",
+                                                  "provider":  "openai",
+                                                  "description":  "Nous Hermes2 - Evaluation Agent",
+                                                  "model":  "nous-hermes2:10.7b",
+                                                  "apiKey":  "ollama"
+                                              }
+                         },
+    "mcp_servers":  {
+                        "quick_rag":  {
+                                          "args":  [
+                                                       "quick_rag.py"
+                                                   ],
+                                          "command":  "python",
+                                          "name":  "quick_rag",
+                                          "description":  "Quick RAG search",
+                                          "type":  "local"
+                                      },
+                        "local_rag":  {
+                                          "args":  [
+                                                       "ask_rag.py"
+                                                   ],
+                                          "command":  "python",
+                                          "name":  "local_rag",
+                                          "description":  "RAG search in codebase",
+                                          "type":  "local"
+                                      }
+                    },
+    "workspace_settings":  {
+                               "ai.enableCompletions":  true,
+                               "ai.enableVoice":  true,
+                               "ai.enableCodeActions":  true,
+                               "ai.model":  "deepseek-coder",
+                               "ai.enableChat":  true
+                           }
+}
