@@ -1,0 +1,35 @@
+{
+  "cursor_ai_models": {
+    "local_ollama": {
+      "provider": "openai",
+      "model": "deepseek-coder",
+      "baseURL": "http://localhost:11434/v1",
+      "apiKey": "ollama",
+      "description": "DeepSeek Coder (Local via Ollama)"
+    },
+    "local_mistral": {
+      "provider": "openai", 
+      "model": "mistral",
+      "baseURL": "http://localhost:11434/v1",
+      "apiKey": "ollama",
+      "description": "Mistral (Local via Ollama)"
+    }
+  },
+  "mcp_servers": {
+    "local_rag": {
+      "name": "local_rag",
+      "command": "python",
+      "args": ["ask_rag.py"],
+      "type": "local",
+      "description": "Local RAG search for codebase"
+    }
+  },
+  "workspace_settings": {
+    "ai.model": "local_ollama",
+    "ai.enableCodeActions": true,
+    "ai.enableChat": true,
+    "ai.enableCompletions": true,
+    "git.enableSmartCommit": true,
+    "git.autoStash": true
+  }
+}
