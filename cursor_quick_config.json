@@ -1,0 +1,17 @@
+﻿{
+  "cursor_ai_models": {
+    "local_ollama": {
+      "provider": "openai",
+      "model": "deepseek-coder",
+      "baseURL": "http://localhost:11434/v1",
+      "apiKey": "ollama"
+    }
+  },
+  "mcp_servers": {
+    "local_rag": {
+      "name": "local_rag",
+      "command": "python",
+      "args": ["quick_rag.py"]
+    }
+  }
+}
