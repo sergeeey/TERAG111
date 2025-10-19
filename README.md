@@ -3,11 +3,15 @@
 ## ⚡ Быстрый запуск
 
 ```bash
-# Автоматическая настройка за 30 секунд
+# 🚀 ПОЛНАЯ АВТОМАТИЗАЦИЯ (рекомендуется)
+# Устанавливает Java 17 + Neo4j + RAG + все зависимости
+powershell -ExecutionPolicy Bypass -File .\setup-terag-auto.ps1
+
+# ⚡ Быстрая настройка (30 секунд, только RAG)
 powershell -ExecutionPolicy Bypass -File .\quick-setup-fixed.ps1
 
-# Или полная настройка (2-3 минуты)
-powershell -ExecutionPolicy Bypass -File .\setup-terag.ps1
+# 📋 Ручная настройка через Cursor IDE
+# Откройте setup_instructions/install_java_neo4j.md в Cursor
 ```
 
 ## 🎯 Что это
@@ -29,6 +33,9 @@ TERAG Immersive Shell — это 3D интерактивный интерфей�
 - **Styling**: Tailwind CSS
 - **AI Integration**: Ollama (локальные модели)
 - **RAG System**: ChromaDB + LangChain
+- **Graph Database**: Neo4j Community Edition
+- **Graph Analysis**: NetworkX
+- **Runtime**: Java 17 (OpenJDK Temurin)
 - **Voice**: Web Speech API
 
 ## 📋 Требования
@@ -36,6 +43,8 @@ TERAG Immersive Shell — это 3D интерактивный интерфей�
 - Node.js 18+
 - Python 3.10+
 - Ollama (локальные LLM модели)
+- Java 17+ (автоматически устанавливается)
+- Neo4j (автоматически устанавливается)
 - Git
 
 ## 🚀 Установка
@@ -47,7 +56,10 @@ TERAG Immersive Shell — это 3D интерактивный интерфей�
 git clone https://github.com/sergeeey/TERAG111.git
 cd TERAG111
 
-# Запустите автоматическую настройку
+# 🚀 ПОЛНАЯ АВТОМАТИЗАЦИЯ (Java + Neo4j + RAG)
+powershell -ExecutionPolicy Bypass -File .\setup-terag-auto.ps1
+
+# ⚡ БЫСТРАЯ НАСТРОЙКА (только RAG)
 powershell -ExecutionPolicy Bypass -File .\quick-setup-fixed.ps1
 ```
 
