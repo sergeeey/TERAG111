@@ -297,7 +297,7 @@
           },
           "metadata": {
             "type": "object",
-            "description": "Дополнительные метаданные с request_id и timestamp. Может быть пустым объектом, но не null.",
+            "description": "Дополнительные метаданные с request_id, timestamp и геологическими данными для интеграции с GeoScan. Может быть пустым объектом, но не null.",
             "required": ["request_id", "timestamp"],
             "properties": {
               "request_id": {
@@ -329,6 +329,55 @@
                   "type": "string"
                 },
                 "description": "Список ошибок (если есть)"
+              },
+              "h3_index": {
+                "type": "string",
+                "description": "H3 индекс ячейки для геолокации (используется в GeoScan для привязки к картам)",
+                "example": "8a1fb46622d7fff"
+              },
+              "lat": {
+                "type": "number",
+                "format": "float",
+                "description": "Широта точки анализа (WGS84, градусы)",
+                "minimum": -90,
+                "maximum": 90,
+                "example": 47.123456
+              },
+              "lon": {
+                "type": "number",
+                "format": "float",
+                "description": "Долгота точки анализа (WGS84, градусы)",
+                "minimum": -180,
+                "maximum": 180,
+                "example": 73.654321
+              },
+              "satellite_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Список идентификаторов спутников, использованных для анализа (например, Sentinel-2, Landsat-9)",
+                "example": ["Sentinel-2", "Landsat-9"]
+              },
+              "confidence_intervals": {
+                "type": "object",
+                "description": "Доверительные интервалы для геологических инференсов (опционально)",
+                "properties": {
+                  "rss_score_lower": {
+                    "type": "number",
+                    "format": "float",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Нижняя граница доверительного интервала для RSS"
+                  },
+                  "rss_score_upper": {
+                    "type": "number",
+                    "format": "float",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Верхняя граница доверительного интервала для RSS"
+                  }
+                }
               }
             },
             "additionalProperties": true

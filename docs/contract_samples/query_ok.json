@@ -1,0 +1,54 @@
+{
+  "answer": "Анализ геофизической аномалии завершен. Вероятность наличия золотого месторождения: 0.72 (высокая). Обоснование: магнитная аномалия 150 nT указывает на наличие магнитных минералов, характерных для золотоносных пород. Анализ графа знаний TERAG выявил сходство с известными месторождениями в регионе (Bestobe, Аксу).",
+  "query": "Проанализируй геофизическую аномалию в регионе Бестобе",
+  "attempts": 1,
+  "max_attempts": 2,
+  "used_strategies": ["hybrid_auto"],
+  "decision": "accept",
+  "quality_score": 0.88,
+  "rss_score": 0.88,
+  "rssscore": 0.88,
+  "last_critique": "Ответ качественный и соответствует запросу",
+  "retrieval_results_count": 15,
+  "trace": [
+    {
+      "event_type": "start",
+      "node_name": "retrieval",
+      "status": "success",
+      "timestamp": "2025-12-04T06:54:50.640082+00:00",
+      "details": {
+        "strategy": "hybrid_auto",
+        "results_count": 15
+      }
+    },
+    {
+      "event_type": "finish",
+      "node_name": "synthesis",
+      "status": "success",
+      "timestamp": "2025-12-04T06:54:51.123456+00:00",
+      "details": {
+        "quality_score": 0.88
+      }
+    }
+  ],
+  "metadata": {
+    "request_id": "550e8400-e29b-41d4-a716-446655440000",
+    "timestamp": "2025-12-04T06:54:50.640082+00:00",
+    "trace_id": "550e8400-e29b-41d4-a716-446655440000",
+    "mission_id": "geoscan_insight_20251204_123456",
+    "status": "completed",
+    "errors": [],
+    "h3_index": "8a1fb46622d7fff",
+    "lat": 47.123456,
+    "lon": 73.654321,
+    "satellite_ids": ["Sentinel-2", "Landsat-9"],
+    "confidence_intervals": {
+      "rss_score_lower": 0.85,
+      "rss_score_upper": 0.91
+    }
+  },
+  "timestamp": "2025-12-04T06:54:50.640082+00:00"
+}
+
+
+
