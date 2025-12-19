@@ -354,28 +354,81 @@
               "satellite_ids": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": ["Sentinel-2", "Sentinel-1", "Landsat-9", "Landsat-8", "ASTER", "MODIS"]
                 },
-                "description": "Список идентификаторов спутников, использованных для анализа (например, Sentinel-2, Landsat-9)",
-                "example": ["Sentinel-2", "Landsat-9"]
+                "description": "Список идентификаторов спутников, использованных для анализа. Критично для привязки к спутниковым снимкам Sentinel Hub.",
+                "example": ["Sentinel-2", "Landsat-9"],
+                "minItems": 0
               },
               "confidence_intervals": {
                 "type": "object",
-                "description": "Доверительные интервалы для геологических инференсов (опционально)",
+                "description": "Доверительные интервалы для геологических инференсов. Используется для минимизации False Positives в золотодобыче (Bestobe Mission).",
                 "properties": {
                   "rss_score_lower": {
                     "type": "number",
                     "format": "float",
                     "minimum": 0,
                     "maximum": 1,
-                    "description": "Нижняя граница доверительного интервала для RSS"
+                    "description": "Нижняя граница доверительного интервала для RSS (95% confidence)"
                   },
                   "rss_score_upper": {
                     "type": "number",
                     "format": "float",
                     "minimum": 0,
                     "maximum": 1,
-                    "description": "Верхняя граница доверительного интервала для RSS"
+                    "description": "Верхняя граница доверительного интервала для RSS (95% confidence)"
+                  },
+                  "au_grade_estimate": {
+                    "type": "number",
+                    "format": "float",
+                    "minimum": 0,
+                    "description": "Оценка содержания золота (г/т) на основе анализа аномалий"
+                  },
+                  "sulfide_presence_probability": {
+                    "type": "number",
+                    "format": "float",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Вероятность наличия сульфидизации (критично для орогенного золота Бестобе)"
+                  },
+                  "quartz_vein_probability": {
+                    "type": "number",
+                    "format": "float",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Вероятность наличия кварцевых жил (критично для орогенного золота Бестобе)"
+                  },
+                  "tectonic_fault_probability": {
+                    "type": "number",
+                    "format": "float",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Вероятность тектонических нарушений (критично для орогенного золота Бестобе)"
+                  }
+                }
+              },
+              "geo_tags": {
+                "type": "object",
+                "description": "Геологические теги для структурированного анализа (Bestobe Mission)",
+                "properties": {
+                  "deposit_type": {
+                    "type": "string",
+                    "enum": ["orogenic_gold", "epithermal", "porphyry", "skarn", "unknown"],
+                    "description": "Тип месторождения (орогенное золото для Бестобе)"
+                  },
+                  "mineralization_indicators": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": ["quartz_veins", "sulfides", "tectonic_faults", "alteration_zones", "magnetic_anomalies"]
+                    },
+                    "description": "Индикаторы минерализации для орогенного золота"
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "Геологический регион (например, 'Bestobe', 'Chu-Sarysu')",
+                    "example": "Bestobe"
                   }
                 }
               }
