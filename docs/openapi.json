@@ -1,0 +1,503 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "TERAG v2.0 API",
+    "version": "2.0.0",
+    "description": "TERAG (Traceable Reasoning Architecture Graph) v2.0 API - Когнитивный backend для Graph-RAG и reasoning. Контракт для интеграции с внешними системами (GeoScan и др.).",
+    "contact": {
+      "name": "TERAG Team",
+      "url": "https://github.com/terag/terag"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8001",
+      "description": "Local development server"
+    },
+    {
+      "url": "https://api.terag.example.com",
+      "description": "Production server (example)"
+    }
+  ],
+  "tags": [
+    {
+      "name": "TERAG v2.0",
+      "description": "Основные endpoints TERAG v2.0 для reasoning и Graph-RAG"
+    },
+    {
+      "name": "Metrics",
+      "description": "AI-REPS метрики системы"
+    },
+    {
+      "name": "Health",
+      "description": "Health check endpoints"
+    }
+  ],
+  "paths": {
+    "/api/v2/query": {
+      "post": {
+        "tags": ["TERAG v2.0"],
+        "summary": "Обработка запроса через TERAG v2.0 LangGraph пайплайн",
+        "description": "Выполняет полный цикл reasoning: RouterNode → RetrievalNode → SynthesisNode → VerificationNode → CriticNode. Возвращает структурированный ответ с dual-format (канонические + legacy поля) для обратной совместимости.",
+        "operationId": "queryTeragV2",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRequest"
+              },
+              "examples": {
+                "basic": {
+                  "summary": "Базовый запрос",
+                  "value": {
+                    "query": "Что связано с месторождениями в моём графе?",
+                    "max_attempts": 2
+                  }
+                },
+                "geoscan": {
+                  "summary": "Запрос от GeoScan",
+                  "value": {
+                    "query": "Проанализируй геофизическую аномалию в регионе Бестобе",
+                    "max_attempts": 3
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ с reasoning результатом",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueryResponse"
+                },
+                "examples": {
+                  "success": {
+                    "summary": "Успешный ответ",
+                    "value": {
+                      "$ref": "../contract_samples/query_ok.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Ошибка валидации запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Сервис недоступен (TERAG v2.0 не инициализирован)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "service_unavailable": {
+                    "summary": "Сервис недоступен",
+                    "value": {
+                      "$ref": "../contract_samples/error_503.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/metrics": {
+      "get": {
+        "tags": ["Metrics"],
+        "summary": "Получение AI-REPS метрик системы",
+        "description": "Возвращает агрегированные метрики работы TERAG: RSS, COS, FAITH, Growth, Resonance, Confidence. Dual-format: snake_case (канон) + UPPERCASE (legacy) для обратной совместимости.",
+        "operationId": "getMetrics",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Метрики AI-REPS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricsResponse"
+                },
+                "examples": {
+                  "success": {
+                    "summary": "Успешный ответ с метриками",
+                    "value": {
+                      "$ref": "../contract_samples/metrics_ok.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/health": {
+      "get": {
+        "tags": ["Health", "TERAG v2.0"],
+        "summary": "Health check для TERAG v2.0",
+        "description": "Проверяет готовность TERAG v2.0: подключение к Neo4j, доступность LangGraph, инициализацию LLM клиента.",
+        "operationId": "healthCheckV2",
+        "responses": {
+          "200": {
+            "description": "Статус системы",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-TERAG-API-Key",
+        "description": "API Key для аутентификации. Опционально, если AUTH_AVAILABLE=false."
+      }
+    },
+    "schemas": {
+      "QueryRequest": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Текстовый запрос пользователя",
+            "example": "Что связано с месторождениями в моём графе?"
+          },
+          "max_attempts": {
+            "type": "integer",
+            "description": "Максимальное количество попыток reasoning (по умолчанию 2)",
+            "default": 2,
+            "minimum": 1,
+            "maximum": 10
+          }
+        }
+      },
+      "QueryResponse": {
+        "type": "object",
+        "required": ["answer", "query", "attempts", "max_attempts", "used_strategies", "decision", "rss_score", "rssscore", "retrieval_results_count", "trace", "metadata", "timestamp"],
+        "description": "Ответ от TERAG v2.0. Dual-format: канонические поля (rss_score) + legacy алиасы (rssscore, quality_score).",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "description": "Финальный ответ на запрос"
+          },
+          "query": {
+            "type": "string",
+            "description": "Исходный запрос"
+          },
+          "attempts": {
+            "type": "integer",
+            "description": "Количество выполненных попыток"
+          },
+          "max_attempts": {
+            "type": "integer",
+            "description": "Максимальное количество попыток"
+          },
+          "used_strategies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Использованные стратегии retrieval"
+          },
+          "decision": {
+            "type": "string",
+            "enum": ["accept", "retry_with_new_strategy", "give_up"],
+            "description": "Решение критика"
+          },
+          "quality_score": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Оценка качества ответа (0-1). Legacy алиас. NOTE: Это НЕ решение о бурении, а оценка качества reasoning."
+          },
+          "rss_score": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Reasoning Stability Score (0-1). Каноническое поле для GeoScan."
+          },
+          "rssscore": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Reasoning Stability Score (0-1). Legacy алиас без подчеркивания для совместимости."
+          },
+          "last_critique": {
+            "type": "string",
+            "nullable": true,
+            "description": "Вербализация критика"
+          },
+          "retrieval_results_count": {
+            "type": "integer",
+            "description": "Количество найденных результатов"
+          },
+          "trace": {
+            "type": "array",
+            "description": "T.R.A.C. trace - список событий для аудита. Может быть пустым списком, но не null.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "minItems": 0
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Дополнительные метаданные с request_id и timestamp. Может быть пустым объектом, но не null.",
+            "required": ["request_id", "timestamp"],
+            "properties": {
+              "request_id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Уникальный идентификатор запроса для корреляции с логами"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "ISO-8601 UTC timestamp запроса"
+              },
+              "trace_id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Идентификатор T.R.A.C. trace"
+              },
+              "mission_id": {
+                "type": "string",
+                "description": "Идентификатор миссии (если используется)"
+              },
+              "status": {
+                "type": "string",
+                "description": "Статус выполнения"
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Список ошибок (если есть)"
+              }
+            },
+            "additionalProperties": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Временная метка ответа (ISO-8601 UTC)"
+          }
+        }
+      },
+      "MetricsResponse": {
+        "type": "object",
+        "required": ["rss", "cos", "faith", "growth", "resonance", "confidence", "timestamp", "RSS", "COS", "FAITH", "Growth", "Resonance"],
+        "description": "AI-REPS метрики системы. Dual-format: snake_case (канон) + UPPERCASE (legacy).",
+        "properties": {
+          "rss": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Reasoning Stability Score (канон)"
+          },
+          "RSS": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Reasoning Stability Score (legacy)"
+          },
+          "cos": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Cognitive Overhead Score (канон)"
+          },
+          "COS": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Cognitive Overhead Score (legacy)"
+          },
+          "faith": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Faithfulness Score (канон)"
+          },
+          "FAITH": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Faithfulness Score (legacy)"
+          },
+          "growth": {
+            "type": "number",
+            "format": "float",
+            "description": "Growth Score (канон)"
+          },
+          "Growth": {
+            "type": "number",
+            "format": "float",
+            "description": "Growth Score (legacy)"
+          },
+          "resonance": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Resonance Score (канон)"
+          },
+          "Resonance": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Resonance Score (legacy)"
+          },
+          "confidence": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence Score (канон и legacy)"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO-8601 UTC timestamp метрик"
+          }
+        }
+      },
+      "HealthResponse": {
+        "type": "object",
+        "required": ["status", "neo4j_connected", "langgraph_available", "llm_client_available", "timestamp"],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["ok", "degraded", "error"],
+            "description": "Общий статус системы"
+          },
+          "neo4j_connected": {
+            "type": "boolean",
+            "description": "Подключение к Neo4j установлено"
+          },
+          "langgraph_available": {
+            "type": "boolean",
+            "description": "LangGraph доступен"
+          },
+          "llm_client_available": {
+            "type": "boolean",
+            "description": "LLM клиент инициализирован"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO-8601 UTC timestamp проверки"
+          },
+          "message": {
+            "type": "string",
+            "description": "Дополнительное сообщение (если status != ok)"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": ["error", "error_code", "request_id", "timestamp"],
+        "description": "Единый формат ошибок для всех non-200 ответов",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Текстовое описание ошибки"
+          },
+          "error_code": {
+            "type": "string",
+            "description": "Код ошибки для программной обработки",
+            "enum": [
+              "VALIDATION_ERROR",
+              "TERAG_V2_UNAVAILABLE",
+              "TERAG_V2_NOT_INITIALIZED",
+              "INTERNAL_SERVER_ERROR",
+              "SERVICE_UNAVAILABLE"
+            ]
+          },
+          "request_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Уникальный идентификатор запроса для корреляции с логами"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO-8601 UTC timestamp ошибки"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "description": "Дополнительные детали ошибки (для VALIDATION_ERROR)"
+          }
+        }
+      }
+    }
+  }
+}
+
