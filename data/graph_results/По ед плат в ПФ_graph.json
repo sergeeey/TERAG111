@@ -1,0 +1,57 @@
+{
+  "file": "data\\converted\\По ед плат в ПФ.txt",
+  "language": "ru",
+  "triplets_count": 7,
+  "triplets": [
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Исходный файл: По ед плат в ПФ.docx",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Путь: data\\Солва\\По ед плат в ПФ.docx",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Размер: 729 символов",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "В настоящий момент, установлено, что с целью получения макси",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Система «Скоринга» автоматически одобряет   данные заявки.",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "С целью минимизации имеющихся  благоприятных условий  для по",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Прошу Вас внести изменения и дополнения в программное обеспе",
+      "confidence": 0.85,
+      "language": "ru"
+    }
+  ],
+  "processed_at": "2025-10-26T10:36:45.994184"
+}

@@ -1,0 +1,106 @@
+{
+  "file": "data\\converted\\ответ на запрос АФР об идентификации_ru.txt",
+  "language": "ru",
+  "triplets_count": 14,
+  "triplets": [
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Исходный файл: ответ на запрос АФР об идентификации.docx",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Путь: data\\Солва\\Для нац Банка\\ответ на запрос с АФР по мо",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Размер: 646 символов",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Исх. №__________",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "«___» 2020г.",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Агентство Республики Казахстан",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "по регулированию и развитию финансового рынка",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "ТОО «МФО «ОнлайнКазФинанс»» (далее  МФО) свидетельствует вам",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "По п1 апроса с 1 января 2020 года по 10 ноября 2020 года МФО",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "всем заемщикам",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "92 микрокдита с подозением на на общую сумму 4 789 135 тенге",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Доля мошенничества состав %",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Генеральный директор",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "ТОО «МФО «ОнлайнКазФинанс»                                  ",
+      "confidence": 0.85,
+      "language": "ru"
+    }
+  ],
+  "processed_at": "2025-10-26T10:36:44.575063"
+}

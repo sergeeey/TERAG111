@@ -1,0 +1,120 @@
+{
+  "file": "data\\converted\\Директору ТОО (4)_ru.txt",
+  "language": "ru",
+  "triplets_count": 16,
+  "triplets": [
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Исходный файл: Директору ТОО (4).docx",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Путь: data\\Солва\\Пров органы пакет документов\\Завления в о",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Размер: 1610 символов",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Директору ТОО \"Онлайн Финанс»",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Заявитель: \t Егоров Сергей Юрьевич,",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "11.08.1964г.р. ИИН 640811301406,      г.Сарань, ул.Жамбыла, ",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Представитель: адвокат Тащилин Е.С.",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "м.н. г. Караганда, ул. Алиханова, д. 20",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "8 (701) 518-74-90.",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "В период времени с декабря 2016 года по март 2017 года неизв",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "По данному факту в производстве СО ОВД г. Сарани находилось ",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "В ходе досудебного расследования уголовного дела, были устан",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "На основании изложенного прошу Вас прекратить и отозвать в о",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Приложение: доверенность, уведомление, ответы с ДП Караганди",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "« 21 » февраля 2020г.",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Представитель Егорова С.Ю., адвокат Тащилин Е.С.____________",
+      "confidence": 0.85,
+      "language": "ru"
+    }
+  ],
+  "processed_at": "2025-10-26T10:36:40.743914"
+}

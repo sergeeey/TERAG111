@@ -1,0 +1,134 @@
+{
+  "file": "data\\converted\\Признание юр лица (5).txt",
+  "language": "ru",
+  "triplets_count": 18,
+  "triplets": [
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Исходный файл: Признание юр лица (5).docx",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Путь: data\\Солва\\Пров органы пакет документов\\Завления в о",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Размер: 1714 символов",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "П О С Т А Н О В Л Е Н И Е",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "о признании юридического лица в качестве потерпевшего",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "г. Алматы\t\t\t\tвремя: \"_\"\"__\"\t\t                \"__\".06.2020 г.",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Следователь СО Юго-Восточного ОП УП города Караганды рядовой",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "В период времени с  года по  года неизвестное лицо, находясь",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "27.05.2020 года данный факт зарегистрирован в Едином реестре",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "В ходе досудебного расследования установлено, что ТОО Онлайн",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "На основании вышеизложенного, руководствуюсь ст.ст.71 ч.12, ",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "П О С Т А Н О В И Л :",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Признать потерпевшим - юридическое лицо ТОО Онлайн Финанс.",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "О принятом решении уведомить заинтересованных лиц.",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Копию настоящего постановления направить прокурору района им",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Следователь СО",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Юго-Восточного ОП",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "рядовой полиции \t\t\t\t\t                        Шарипова О.Б.",
+      "confidence": 0.85,
+      "language": "ru"
+    }
+  ],
+  "processed_at": "2025-10-26T10:36:46.959750"
+}

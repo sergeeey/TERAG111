@@ -1,0 +1,50 @@
+{
+  "timestamp": "2025-11-06T21:53:10.890148",
+  "lm_studio": {
+    "status": "partial",
+    "available": true,
+    "models": [
+      "openai/gpt-oss-20b",
+      "text-embedding-nomic-embed-text-v1.5"
+    ],
+    "generation_works": false,
+    "latency": null,
+    "error": "Таймаут запроса к LM Studio API: "
+  },
+  "brave_search": {
+    "status": "success",
+    "available": true,
+    "api_key_set": true,
+    "search_works": true,
+    "error": null
+  },
+  "bright_data": {
+    "status": "partial",
+    "available": true,
+    "proxy_http_set": true,
+    "proxy_ws_set": true,
+    "api_key_set": false,
+    "mcp_server_set": true,
+    "error": null
+  },
+  "neo4j": {
+    "status": "success",
+    "available": true,
+    "connected": true,
+    "nodes_count": 85,
+    "relationships_count": 77,
+    "error": null,
+    "entities_count": 59,
+    "signals_count": 22,
+    "domains_count": 4
+  },
+  "integration": {
+    "status": "partial",
+    "lm_studio_ready": false,
+    "osint_ready": true,
+    "graph_ready": true,
+    "full_pipeline_ready": false,
+    "error": null
+  },
+  "overall_status": "failed"
+}

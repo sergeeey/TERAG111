@@ -1,0 +1,470 @@
+{
+  "file": "data\\converted\\Кожухарь_ru.txt",
+  "language": "ru",
+  "triplets_count": 66,
+  "triplets": [
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Исходный файл: Кожухарь.pdf",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Путь: data\\Солва\\Пров органы пакет документов\\Завления в о",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Размер: 1974 символов",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "--- Страница 1 ---",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "01.09.2020 Moneyman - Admin",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "https://admin.moneyman.kz/secure/new-admin/index.html#/loans",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Займы >Заем",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Статус Просрочен",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Дата оконча ния займа",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Заемщик Андрей Леонид ович К ожухарь",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "ID зае мщик а 81315642",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Риск к оды XM080, XM200, SU100, ID001,",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "SC31800, CS100, MA W0001",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "IP адрес 37.151.92.233",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Устройство MOBILE_WEB",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Все данные Сист емная информацияДата запо лнения 19.09.2017 ",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Дата выдачи  00:00:00",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Заявки История",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Способ по лучения BANK_A CCOUNT  ()",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Дата пог ашения",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Срок займа 14 дней 03.10.2017",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Просрочк а 1064 дней 04.10.2017",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Получа тель А СП ИсторияВалю та KZT",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Сумма 60.000.00 тг .",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Комис сия 3й",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "стороны0.00 тг .",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Ставк а 0.5000%",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Скидк а 0.00",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Погасить 64.200.00 тг .",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Погасить сег одня 1.679.750.00 тг .",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Штраф 5.000.00 тг . 2.74%",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "График пла тежей ПоказатьОферта Скачать ()",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Оферта Т СТ -",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Назначение пла тежа 1736878",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "ID перево да 397266",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Квитанция 1679750 Скачать",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Коллект ор В рабо те СБ",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Начисления по",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "займ уСкачать ()",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Требование о",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "возвра теСкачать ()",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "рабо тодателюСкачать ()",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Отве ты зае мщик а",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "для ID V Банк Тип кре дита Дата выдачи Сумма Max просрочк а ",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "АО \"ЕВР АЗИЙСКИЙ Б АНК\" Займ 23.01.2017 207.000.00 тг . Не п",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "АЛЬ ЯНС Б АНК Займ 07.03.2007 2.662.000.00 тг . Погашен",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Риск инфо IDV Max просрочк а Отче ты ГЦВП Время запроса Код ",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Кредитная Заявк аВремя запроса",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "19.09.2017 14:39Код ответа",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "0Текст ответа",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "OKОтче ты ПКБ Время запроса",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "19.09.2017 14:39Код ответа",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "0Текст ответа",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "19.09.2017Trust Score Sour ce of the R eal IP",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "subscriberCheck de vices Score contribu\u0000on fr om the ma tche",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "-3Детали займа Моше Верифик ация Погашение бону сом ()",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Закрыть зае м по су ду",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "19.09.2017 ()",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "01.09.2020 ()",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "--- Страница 2 ---",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "01.09.2020 Moneyman - Admin",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "https://admin.moneyman.kz/secure/new-admin/index.html#/loans",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "нетКарта найд ена",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Погашение 0",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Продление 1",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Рестр уктуризация 0Меню",
+      "confidence": 0.85,
+      "language": "ru"
+    }
+  ],
+  "processed_at": "2025-10-26T10:36:42.640431"
+}

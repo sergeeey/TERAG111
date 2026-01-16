@@ -1,0 +1,42 @@
+This is a test document in English language.
+
+The document contains information about artificial intelligence systems and machine learning algorithms.
+
+Key topics covered:
+- Neural networks
+- Deep learning
+- Natural language processing
+- Computer vision
+- Reinforcement learning
+
+This document demonstrates the multilingual capabilities of the TERAG system.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

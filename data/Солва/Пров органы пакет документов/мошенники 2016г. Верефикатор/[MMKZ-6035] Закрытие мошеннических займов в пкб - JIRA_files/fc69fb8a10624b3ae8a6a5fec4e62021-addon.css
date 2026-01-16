@@ -1,0 +1,224 @@
+/* add-on styles */
+.intro-header h1 {
+  font-size: 48px;
+  line-height: 60px;
+  padding-top: 20px;
+}
+.intro-header p.subtitle {
+  font-size: 24px;
+  line-height: 30px;
+  padding-bottom: 20px;
+}
+.main-panel .aui-page-panel-item {
+  padding: 20px 40px 20px 0;
+  height: 100px;
+}
+
+.xray-static-message {
+    margin: 10px 10px 0 10px;
+}
+
+.xray-dialog-content {
+	background-color: white;
+    height:auto;
+}
+
+span.xray-hide-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+}
+
+body.aui-page-hybrid {
+    background-color: white;
+    margin: 0 !important;
+    height: initial;
+}
+
+/*section#content {
+    margin-top: 5px;
+}*/
+
+.description {
+    color: #707070;
+    font-size: 12px;
+    line-height: 1.66666666666667;
+    margin: 5px 0 0 0;
+    clear: left;
+}
+
+.filters-responsive {
+    width: 100%;
+}
+
+.filters-responsive.filters-responsive__m-l-90 {
+    margin-left: -90px;
+}
+
+@media screen and (min-width : 740px) {
+    .filters-responsive.filters-responsive__m-l-90 {
+        margin-left: 0px;
+        max-width: 650px;
+    }
+}
+
+@media screen and (min-width : 650px) {
+    .filters-responsive {
+        max-width: 650px;
+    }
+}
+
+.xray--panel {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
+.xray--no-table-data {
+    padding: 20px 0px;
+}
+
+/* IE 11 */
+input::-ms-clear { display: none; }
+
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
+/* Skeleton */
+
+.xray-skeleton {
+    display: table;
+    width: 100%;
+}
+
+.xray-skeleton-table-header {
+    display: inline-block;
+    width: 100%;
+}
+
+.xray-skeleton-table-header__p-top-20 {
+    padding-top: 20px;
+}
+
+.xray-skeleton-content {
+    display: table-cell;
+    vertical-align: top;
+    width: 100%;
+}
+
+.xray-skeleton-paragraph {
+    padding-left: 0;
+}
+
+.xray-skeleton-content .xray-skeleton-subtitle {
+    height: 16px;
+    background: #f2f2f2;
+    width: 200px;
+    margin-top: 15px;
+}
+
+.xray-skeleton-content .xray-skeleton-field {
+    height: 32px;
+    background: #f2f2f2;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.xray-skeleton-content .xray-skeleton-progress {
+    height: 20px;
+    background: #f2f2f2;
+    width: 100%;
+    margin: 10px 0;
+    border-radius: .4em;
+}
+
+.xray-skeleton-content .xray-skeleton-paragraph>li {
+    height: 16px;
+    background: #f2f2f2;
+    list-style: none;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.xray-skeleton-content .xray-skeleton-paragraph>li+li {
+    margin-top: 14px;
+}
+
+.xray-skeleton-btn {
+    height: 32px;
+    background-color: #f2f2f2;
+    border-radius: 3px;
+}
+
+.xray-skeleton-btn__sm {
+    width: 75px;
+}
+
+.xray-skeleton-btn__md {
+    width: 100px;
+}
+
+.xray-skeleton-actions {
+    width: 240px;
+    float: right;
+    display: inline-block;
+    margin-bottom: 20px
+}
+
+.xray-skeleton-executions-status {
+    height: 45px;
+    width: 70px;
+    border-radius: 0;
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+}
+
+.m-r-10 {
+    margin-right: 10px;
+}
+
+.m-r-5 {
+    margin-right: 5px;
+}
+
+.xray-skeleton.xray-skeleton-active .xray-skeleton-content .xray-skeleton-paragraph>li,
+.xray-skeleton.xray-skeleton-active .xray-skeleton-content .xray-skeleton-btn,
+.xray-skeleton.xray-skeleton-active .xray-skeleton-content .xray-skeleton-subtitle,
+.xray-skeleton.xray-skeleton-active .xray-skeleton-content .xray-skeleton-field,
+.xray-skeleton.xray-skeleton-active .xray-skeleton-content .xray-skeleton-progress {
+    background: -webkit-gradient(linear, left top, right top, color-stop(25%, #f2f2f2), color-stop(37%, #e6e6e6), color-stop(63%, #f2f2f2));
+    background: -webkit-linear-gradient(left, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+    background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+    -webkit-animation: xray-skeleton-loading 1.4s ease infinite;
+    animation: xray-skeleton-loading 1.4s ease infinite;
+    background-size: 400% 100%;
+}
+
+@-webkit-keyframes xray-skeleton-loading {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+@keyframes xray-skeleton-loading {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}

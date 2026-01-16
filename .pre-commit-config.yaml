@@ -1,0 +1,115 @@
+# Pre-commit hooks configuration for TERAG
+# Prevents committing secrets, large files, and ensures code quality
+
+repos:
+  # Gitleaks - Detect secrets and credentials
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.0
+    hooks:
+      - id: gitleaks
+        args: ['--verbose', '--no-git']
+        description: "Detect secrets and credentials in code"
+
+  # Pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        description: "Remove trailing whitespace"
+      - id: end-of-file-fixer
+        description: "Ensure files end with newline"
+      - id: check-yaml
+        description: "Validate YAML files"
+        args: ['--safe']
+      - id: check-json
+        description: "Validate JSON files"
+      - id: check-added-large-files
+        description: "Prevent committing large files"
+        args: ['--maxkb=1000']
+      - id: check-merge-conflict
+        description: "Check for merge conflict markers"
+      - id: check-case-conflict
+        description: "Check for case conflicts"
+      - id: detect-private-key
+        description: "Detect private keys in commits"
+      - id: mixed-line-ending
+        description: "Fix mixed line endings"
+        args: ['--fix=lf']
+
+  # Python-specific hooks
+  - repo: https://github.com/psf/black
+    rev: 24.2.0
+    hooks:
+      - id: black
+        language_version: python3
+        description: "Format Python code with black"
+        args: ['--line-length=100']
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        description: "Sort Python imports"
+        args: ['--profile', 'black', '--line-length=100']
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        description: "Lint Python code"
+        args: ['--max-line-length=100', '--extend-ignore=E203,W503']
+
+  # Security checks
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.6
+    hooks:
+      - id: bandit
+        description: "Security linting for Python"
+        args: ['-r', 'src/', 'installer/', '--skip', 'B101,B601']
+        pass_filenames: false
+        always_run: true
+  
+  # Safety - Check for known security vulnerabilities
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+    rev: v1.3.3
+    hooks:
+      - id: python-safety-dependencies-check
+        description: "Check for known security vulnerabilities in dependencies"
+        files: requirements.txt
+
+  # YAML/JSON formatting
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        description: "Format JSON, YAML, Markdown files"
+        types: [json, yaml, markdown]
+        exclude: ^(package-lock.json|.*\.min\.json)$
+
+# Configuration
+default_language_version:
+  python: python3.10
+
+# Exclude patterns
+exclude: |
+  (?x)^(
+      node_modules/|
+      \.git/|
+      \.venv/|
+      venv/|
+      dist/|
+      build/|
+      \.cache/|
+      chroma_db/|
+      data/|
+      audit_reports/|
+      \.pytest_cache/|
+      __pycache__/|
+      \.mypy_cache/|
+      \.ruff_cache/
+  )
+
+
+
+
+

@@ -1,0 +1,29 @@
+mission:
+  name: "deep_search_template"
+  schedule: "manual"
+  steps:
+    - name: collect_brave_data
+      module: brave_extractor
+      query: "{{query}}"
+      output: "deep_{{id}}_raw.json"
+    - name: analyze_data
+      module: bright_analyzer
+      input: "deep_{{id}}_raw.json"
+      output: "deep_{{id}}_insights.json"
+    - name: update_graph
+      module: graph_updater
+      input: "deep_{{id}}_insights.json"
+      update_mode: append
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,92 @@
+{
+  "file": "data\\converted\\test_english_document_en.txt",
+  "language": "en",
+  "triplets_count": 12,
+  "triplets": [
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Исходный файл: test_english_document.txt",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Путь: data\\test_english_document.txt",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Размер: 359 символов",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "This is a test document in English language.",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "The document contains information about artificial intellige",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Key topics covered:",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "- Neural networks",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "- Deep learning",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "- Natural language processing",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "- Computer vision",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "- Reinforcement learning",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "This document demonstrates the multilingual capabilities of ",
+      "confidence": 0.85,
+      "language": "en"
+    }
+  ],
+  "processed_at": "2025-10-26T10:36:38.304855"
+}

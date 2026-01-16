@@ -1,0 +1,64 @@
+{
+  "file": "data\\converted\\Диплом_en.txt",
+  "language": "en",
+  "triplets_count": 8,
+  "triplets": [
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Исходный файл: Диплом.PDF",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Путь: data\\Солва\\Проверка Агентов\\Абильхаир Н.13.02.20г\\Ди",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Размер: 190 символов",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "--- Страница 1 ---",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "''\"\"\" -*(ilililry'reil?;;i;;;#;;a#ii---\" MaMaHALIFbr6ofinnur",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "EAKAJIABPhI",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "lKF-E tr{b | 70921 |",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": ",/ \\ Tipxeynerrripi........*.......-..................L96...",
+      "confidence": 0.85,
+      "language": "en"
+    }
+  ],
+  "processed_at": "2025-10-26T10:36:40.701267"
+}

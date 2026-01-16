@@ -1,0 +1,6 @@
+# Исходный файл: lang.txt
+# Путь: data\config\lang.txt
+# Размер: 2 символов
+# Язык: unknown
+
+ru

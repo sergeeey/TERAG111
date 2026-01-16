@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TERAG ReasonGraph Schema",
+  "description": "Схема для представления состояния reasoning графа",
+  "type": "object",
+  "required": ["nodes", "edges", "metadata"],
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "description": "Узлы reasoning графа",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "label"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор узла"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["guardrail", "planner", "solver", "verifier", "ethical", "reject"],
+            "description": "Тип узла"
+          },
+          "label": {
+            "type": "string",
+            "description": "Название узла"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "active", "completed", "failed"],
+            "description": "Статус узла"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Уверенность узла"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Временная метка выполнения"
+          },
+          "data": {
+            "type": "object",
+            "description": "Данные узла",
+            "additionalProperties": true
+          },
+          "position": {
+            "type": "object",
+            "description": "3D позиция узла",
+            "properties": {
+              "x": {"type": "number"},
+              "y": {"type": "number"},
+              "z": {"type": "number"}
+            }
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "description": "Связи между узлами",
+      "items": {
+        "type": "object",
+        "required": ["id", "source", "target"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор связи"
+          },
+          "source": {
+            "type": "string",
+            "description": "ID исходного узла"
+          },
+          "target": {
+            "type": "string",
+            "description": "ID целевого узла"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["reasoning_flow", "guardrail_check", "reject", "data_flow"],
+            "description": "Тип связи"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Уверенность связи"
+          },
+          "data_flow": {
+            "type": "object",
+            "description": "Данные, передаваемые по связи",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Метаданные графа",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Исходный запрос"
+        },
+        "final_answer": {
+          "type": "string",
+          "description": "Финальный ответ"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "ethical_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "alignment_status": {
+          "type": "string",
+          "enum": ["ethical", "questionable", "harmful"]
+        },
+        "secure_reasoning_index": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "string"
+        },
+        "mlflow_run_id": {
+          "type": "string"
+        },
+        "langsmith_run_id": {
+          "type": "string"
+        }
+      }
+    },
+    "scratchpad": {
+      "type": "array",
+      "description": "Рабочая память (Chain-of-Thought)",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "description": "Временная линия шагов reasoning",
+      "items": {
+        "type": "object",
+        "properties": {
+          "step": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "type": "number",
+            "description": "Длительность в секундах"
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+

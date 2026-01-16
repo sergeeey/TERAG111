@@ -1,0 +1,174 @@
+{
+  "timestamp": "2025-11-06T16:11:12.921495",
+  "host": {
+    "os": "Windows",
+    "os_version": "10.0.26200",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "hostname": "DESKTOP-E9NI1TR"
+  },
+  "python": {
+    "version": "3.13.5",
+    "implementation": "CPython"
+  },
+  "resources": {
+    "disk": {
+      "total": 2096004767744,
+      "used": 331392630784,
+      "free": 1764612136960,
+      "percent": 15.81068115320601
+    },
+    "cpu": {
+      "count": 24,
+      "percent": 2.9,
+      "freq": {
+        "current": 2700.0,
+        "min": 0.0,
+        "max": 2700.0
+      }
+    },
+    "memory": {
+      "total": 102455574528,
+      "available": 62507839488,
+      "used": 39947735040,
+      "percent": 39.0,
+      "free": 62507839488
+    }
+  },
+  "docker": {
+    "available": true,
+    "version": "28.5.1",
+    "containers": [
+      {
+        "name": "terag-api",
+        "id": "bf99072aa01c",
+        "image": "terag-terag-api:latest",
+        "status": "running",
+        "created": "2025-11-05T06:16:19.757161428Z",
+        "ports": {
+          "8000/tcp": [
+            {
+              "HostIp": "0.0.0.0",
+              "HostPort": "8000"
+            },
+            {
+              "HostIp": "::",
+              "HostPort": "8000"
+            }
+          ]
+        }
+      },
+      {
+        "name": "terag-grafana",
+        "id": "0c90b756f8d6",
+        "image": "grafana/grafana:latest",
+        "status": "running",
+        "created": "2025-11-05T04:26:27.12228733Z",
+        "ports": {
+          "3000/tcp": [
+            {
+              "HostIp": "0.0.0.0",
+              "HostPort": "3000"
+            },
+            {
+              "HostIp": "::",
+              "HostPort": "3000"
+            }
+          ]
+        }
+      },
+      {
+        "name": "terag-neo4j",
+        "id": "ed46c975608f",
+        "image": "neo4j:5.15-community",
+        "status": "restarting",
+        "created": "2025-11-05T04:26:26.57778345Z",
+        "ports": {}
+      },
+      {
+        "name": "terag-prometheus",
+        "id": "0cae78683cbb",
+        "image": "prom/prometheus:latest",
+        "status": "running",
+        "created": "2025-11-05T04:26:26.571172771Z",
+        "ports": {
+          "9090/tcp": [
+            {
+              "HostIp": "0.0.0.0",
+              "HostPort": "9090"
+            },
+            {
+              "HostIp": "::",
+              "HostPort": "9090"
+            }
+          ]
+        }
+      },
+      {
+        "name": "reflexio_api",
+        "id": "ce9fa9d04ef5",
+        "image": "reflexio-api:latest",
+        "status": "exited",
+        "created": "2025-11-03T19:35:06.277701188Z",
+        "ports": {}
+      },
+      {
+        "name": "boring_clarke",
+        "id": "8cb922ff303b",
+        "image": "hello-world:latest",
+        "status": "exited",
+        "created": "2025-10-17T21:35:05.866350444Z",
+        "ports": {}
+      },
+      {
+        "name": "mystifying_chaplygin",
+        "id": "d6e6d4bf7eb6",
+        "image": "hello-world:latest",
+        "status": "exited",
+        "created": "2025-10-17T14:19:08.36456117Z",
+        "ports": {}
+      }
+    ],
+    "images": 8,
+    "containers_total": 7,
+    "containers_running": 3,
+    "terag_containers": [
+      "terag-api",
+      "terag-grafana",
+      "terag-neo4j",
+      "terag-prometheus"
+    ],
+    "terag_containers_running": [
+      "terag-api",
+      "terag-grafana",
+      "terag-prometheus"
+    ]
+  },
+  "services": {
+    "lm_studio": {
+      "name": "LM Studio",
+      "endpoint": "http://localhost:1234/v1/models",
+      "available": true,
+      "status_code": 200
+    },
+    "neo4j": {
+      "name": "Neo4j",
+      "endpoint": "bolt://localhost:7687",
+      "available": false
+    },
+    "ollama": {
+      "name": "Ollama",
+      "endpoint": "http://localhost:11434/api/tags",
+      "available": false,
+      "error": "timed out"
+    }
+  },
+  "ports": {
+    "1234 (LM Studio)": true,
+    "7687 (Neo4j)": false,
+    "7474 (Neo4j Browser)": false,
+    "11434 (Ollama)": false,
+    "8000 (TERAG API)": true
+  }
+}

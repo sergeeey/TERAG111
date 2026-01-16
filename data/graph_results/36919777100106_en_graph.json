@@ -1,0 +1,407 @@
+{
+  "file": "data\\converted\\36919777100106_en.txt",
+  "language": "en",
+  "triplets_count": 57,
+  "triplets": [
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Исходный файл: 36919777100106.docx",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Путь: data\\Солва\\ТОО ТехСерфисТрейд\\36919777100106.docx",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Размер: 21864 символов",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Қазақстан Республикасының Ұлттық куәландырушы орталығының ті",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Бірегей нөмір: | 36919777100106",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Өтініш берушінің  сәйкестендіру деректері: | Өтініш берушіні",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "БСН: | 181140017878 | 181140017878 | 181140017878 | 18114001",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Мекеменің аты: | \"ТехСервисТрейд\" жауапкершілігі шектеулі се",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "ЖСН: | 800517300236 | 800517300236 | 800517300236 | 80051730",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Аты: | СЕРГЕЙ | СЕРГЕЙ | СЕРГЕЙ | СЕРГЕЙ",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Тегі: | БОЙКО | БОЙКО | БОЙКО | БОЙКО",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Әкесінің аты: | ВАЛЕРЬЕВИЧ | ВАЛЕРЬЕВИЧ | ВАЛЕРЬЕВИЧ | ВАЛЕР",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Ел: | KZ | KZ | KZ | KZ",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Электронды поштаның адресы: | sergey.boiko@solva.kz | sergey",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Облыс: | Алматы | Алматы | Алматы | Алматы",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Елді мекен: | Алматы | Алматы | Алматы | Алматы",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Сақтау орны: | Дербес компьютер | Дербес компьютер | Дербес ",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Телефон:  __________________________________________________",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Тіркеу куәліктерінің әрекет ету мерзімі: 1 жыл | Тіркеу куәл",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Қазақстан Республикасы ұлттық куәландырушы орталығы жазылушы",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Электрондық цифрлық қолтаңбаның тиісті жабық кілтін құру үші",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "ҰКО АҚҚҚ( МЕМСТ 34.310-2004 512 бит, RSA 2,048 бит ) | ҰКО А",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Ашық кілт (заңды тұлға - бірінші басшы (эцп)) | Ашық кілт (з",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "0440f1dba84026bfe414670ecb38c48fb3e3ebf6dd6a9546fa3f52f718c4",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Ашық кілт (заңды тұлға -  бірінші басшы (сәйкестендіру)) | А",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "3082010a02820101008bdfe9f4146f5c95de5287ed6752d1657f82d0a0f0",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Қосымша жазбалар үшін: | Қосымша жазбалар үшін: | Қосымша жа",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Ақпараттық жүйелерде қамтылған заңмен қорғалатын құпияны құр",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Күні:\t«____» ______________________ 20___ жыл. | Күні:\t«____",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Өтініш берушінің қолы: _______________________ | Өтініш беру",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Заявление на выдачу регистрационных свидетельств Национально",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Уникальный номер заявки: | 36919777100106",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Идентификационные данные заявителя: | Идентификационные данн",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "БИН: | 181140017878 | 181140017878 | 181140017878 | 18114001",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Название организации: | \"ТехСервисТрейд\" жауапкершілігі шект",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "ИИН: | 800517300236 | 800517300236 | 800517300236 | 80051730",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Имя: | СЕРГЕЙ | СЕРГЕЙ | СЕРГЕЙ | СЕРГЕЙ",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Фамилия: | БОЙКО | БОЙКО | БОЙКО | БОЙКО",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Отчество: | ВАЛЕРЬЕВИЧ | ВАЛЕРЬЕВИЧ | ВАЛЕРЬЕВИЧ | ВАЛЕРЬЕВИ",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Страна: | KZ | KZ | KZ | KZ",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Адрес электронной почты: | sergey.boiko@solva.kz | sergey.bo",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Область: | Алматы | Алматы | Алматы | Алматы",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Населенный пункт: | Алматы | Алматы | Алматы | Алматы",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Хранилище: | Персональный компьютер | Персональный компьютер",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Телефон:  __________________________________________________",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Срок действия регистрационных свидетельств: 1 год | Срок дей",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "С правилами применения регистрационных свидетельств подписчи",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Данные о средствах электронной цифровой подписи, используемы",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "СКЗИ НУЦ( ГОСТ 34.310-2004 512 бит, RSA 2,048 бит ) | СКЗИ Н",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Открытый ключ (юридическое лицо - первый руководитель (эцп))",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "0440f1dba84026bfe414670ecb38c48fb3e3ebf6dd6a9546fa3f52f718c4",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Открытый ключ (юридическое лицо - первый руководитель (аутен",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "3082010a02820101008bdfe9f4146f5c95de5287ed6752d1657f82d0a0f0",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Место для дополнительной информации: | Место для дополнитель",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Согласен на обработку моих персональных данных в целях получ",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Дата:\t«____» ______________________ 20___ год. | Дата:\t«____",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Подпись заявителя: _______________________ | Подпись заявите",
+      "confidence": 0.85,
+      "language": "en"
+    }
+  ],
+  "processed_at": "2025-10-26T10:36:36.758280"
+}

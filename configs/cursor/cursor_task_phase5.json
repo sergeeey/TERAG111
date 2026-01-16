@@ -1,0 +1,133 @@
+{
+  "project": "TERAG 2.1 — Vizier's Bridge (Phase 5)",
+  "phase": "Phase 5",
+  "version": "1.0",
+  "owner": "Сергей Валерьевич",
+  "status": "Approved",
+  "goal": "Создать визуальный интерфейс 'Мост Визиря', отображающий процесс рассуждения агента TERAG в реальном времени через ReasonGraph и 3D визуализацию.",
+
+  "objectives": [
+    "Сформировать формат данных ReasonGraph для сериализации состояния LangGraph.",
+    "Реализовать FastAPI SSE эндпоинт для потоковой передачи ReasonGraph.",
+    "Создать фронтенд-интерфейс на React + Three.js (React Three Fiber).",
+    "Интегрировать визуализацию с LangSmith трассировкой и MLflow метриками.",
+    "Добавить интерактивность: подсветка активных узлов, фильтры, шкалы уверенности."
+  ],
+
+  "implementation_plan": [
+    {
+      "task": "5.1 ReasonGraph Schema",
+      "description": "Создание JSON схемы для представления состояния reasoning графа.",
+      "files": [
+        "src/visualization/reason_graph_schema.json",
+        "src/core/agents/langgraph_serializer.py"
+      ],
+      "actions": [
+        "Определить узлы (nodes): Guardrail, Planner, Solver, Verifier, Ethical.",
+        "Определить связи (edges) с атрибутами: type, confidence, data_flow.",
+        "Добавить поля: scratchpad, timestamps, sri, ethical_score.",
+        "Реализовать сериализацию текущего состояния LangGraph → ReasonGraph JSON."
+      ],
+      "expected_result": "ReasonGraph JSON содержит все состояния reasoning и пригоден для визуализации."
+    },
+
+    {
+      "task": "5.2 FastAPI SSE Stream",
+      "description": "Реализовать сервер потоковой передачи ReasonGraph состояния в реальном времени.",
+      "files": [
+        "src/api/routes/stream.py"
+      ],
+      "actions": [
+        "Создать эндпоинт /api/stream, использующий Server-Sent Events (SSE).",
+        "Передавать обновления после каждого узла LangGraph.",
+        "Использовать graph.stream(thread_id) для получения промежуточных состояний.",
+        "Добавить поддержку фильтров (например, show=ethical,planner)."
+      ],
+      "expected_result": "Клиенты получают непрерывный поток JSON-событий ReasonGraph в реальном времени."
+    },
+
+    {
+      "task": "5.3 React Three Fiber Interface",
+      "description": "Создать фронтенд-приложение, визуализирующее ReasonGraph в 3D.",
+      "files": [
+        "frontend/src/components/ViziersBridge.tsx",
+        "frontend/src/hooks/useReasonGraph.ts",
+        "frontend/src/types/reasonGraph.ts"
+      ],
+      "actions": [
+        "Использовать react-three-fiber и drei для рендеринга узлов и связей.",
+        "Подключиться к SSE-потоку /api/stream.",
+        "Подсвечивать активный узел, отображать confidence и SRI.",
+        "Добавить панель с LangSmith trace info (tokens, latency).",
+        "Реализовать управление камерой и фильтрацию по типу узлов."
+      ],
+      "expected_result": "Интерактивный 3D ReasonGraph с динамическими обновлениями reasoning процесса."
+    },
+
+    {
+      "task": "5.4 LangSmith & MLflow Integration",
+      "description": "Объединить визуализацию ReasonGraph с LangSmith и MLflow метриками.",
+      "files": [
+        "src/visualization/integrations/langsmith_adapter.py",
+        "src/visualization/integrations/mlflow_adapter.py"
+      ],
+      "actions": [
+        "Получать LangSmith traces (tokens_used, step_duration) и связывать их с узлами.",
+        "Отображать MLflow metrics (ethical_score, sri) в панели метрик.",
+        "Добавить timeline view: шаги рассуждения во времени.",
+        "Сохранять итоговый ReasonGraph как артефакт в MLflow run."
+      ],
+      "expected_result": "Визуализация синхронизирована с LangSmith trace и MLflow метриками."
+    },
+
+    {
+      "task": "5.5 CI/CD & Documentation",
+      "description": "Добавить пайплайн для тестирования визуализации и документацию.",
+      "files": [
+        ".github/workflows/visualization.yml",
+        "docs/VIZIERS_BRIDGE_IMPLEMENTATION.md"
+      ],
+      "actions": [
+        "Настроить Playwright/E2E тесты для проверки фронтенда.",
+        "Добавить сборку фронтенда в CI (npm build + pytest backend).",
+        "Создать документацию с архитектурой, API и схемой данных.",
+        "Добавить изображения и примеры ReasonGraph."
+      ],
+      "expected_result": "Визуализация тестируется автоматически, документация доступна в docs/."
+    }
+  ],
+
+  "metrics": {
+    "sse_uptime": ">= 0.98",
+    "ui_fps": ">= 60",
+    "reason_graph_completeness": ">= 0.95",
+    "trace_sync_accuracy": ">= 0.9"
+  },
+
+  "ci_cd_pipeline": {
+    "tools": ["pytest", "Playwright", "npm", "LangSmith", "MLflow"],
+    "stages": ["Build", "Stream Test", "UI Test", "Metrics Upload"],
+    "outputs": ["reason_graph.json", "viziers_bridge_screenshots", "trace_metrics.json"]
+  },
+
+  "deliverables": [
+    "src/core/agents/langgraph_serializer.py",
+    "src/api/routes/stream.py",
+    "frontend/src/components/ViziersBridge.tsx",
+    "frontend/src/hooks/useReasonGraph.ts",
+    "frontend/src/types/reasonGraph.ts",
+    "src/visualization/integrations/langsmith_adapter.py",
+    "src/visualization/integrations/mlflow_adapter.py",
+    "docs/VIZIERS_BRIDGE_IMPLEMENTATION.md",
+    ".github/workflows/visualization.yml"
+  ]
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,112 @@
+name: Security Updates Check
+
+on:
+  schedule:
+    # Запуск каждый понедельник в 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch:  # Ручной запуск
+
+jobs:
+  check-vulnerabilities:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety pip-audit
+        pip install -r requirements.txt
+    
+    - name: Install Node.js dependencies
+      run: npm ci
+    
+    - name: Check Python vulnerabilities (safety)
+      run: |
+        safety check --json > safety-report.json || true
+        safety check || true
+      continue-on-error: true
+    
+    - name: Check Python vulnerabilities (pip-audit)
+      run: |
+        pip-audit --format=json --output pip-audit-report.json || true
+        pip-audit || true
+      continue-on-error: true
+    
+    - name: Check Node.js vulnerabilities
+      run: |
+        npm audit --json > npm-audit-report.json || true
+        npm audit || true
+      continue-on-error: true
+    
+    - name: Check outdated packages
+      run: |
+        pip list --outdated --format=json > python-outdated.json || true
+        npm outdated --json > npm-outdated.json || true
+      continue-on-error: true
+    
+    - name: Upload reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: vulnerability-reports
+        path: |
+          safety-report.json
+          pip-audit-report.json
+          npm-audit-report.json
+          python-outdated.json
+          npm-outdated.json
+    
+    - name: Create issue on vulnerabilities
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          let hasVulnerabilities = false;
+          
+          try {
+            const safety = JSON.parse(fs.readFileSync('safety-report.json', 'utf8'));
+            if (safety.vulnerabilities && safety.vulnerabilities.length > 0) {
+              hasVulnerabilities = true;
+            }
+          } catch (e) {}
+          
+          try {
+            const npm = JSON.parse(fs.readFileSync('npm-audit-report.json', 'utf8'));
+            if (npm.metadata && npm.metadata.vulnerabilities && npm.metadata.vulnerabilities.total > 0) {
+              hasVulnerabilities = true;
+            }
+          } catch (e) {}
+          
+          if (hasVulnerabilities) {
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🔒 Обнаружены уязвимости в зависимостях',
+              body: 'Обнаружены уязвимости в зависимостях проекта. Проверьте отчеты в артефактах workflow.',
+              labels: ['security', 'dependencies']
+            });
+          }
+
+
+
+
+
+
+
+
+

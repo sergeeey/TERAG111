@@ -1,0 +1,372 @@
+{
+  "file": "data\\converted\\Приложение2.txt",
+  "language": "ru",
+  "triplets_count": 52,
+  "triplets": [
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Исходный файл: Приложение2.PDF",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Путь: data\\Солва\\Проверка Агентов\\Абильхаир Н.13.02.20г\\Пр",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "# Размер: 3291 символов",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "--- Страница 1 ---",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "14. Teoperuvecnoe o6y.renue:",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "J'IIIHbIHaurueNosauue",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "trUCUUIIJIIIHKo,ru.recrno",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "aKaAeMIrqecKI{x",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "KpeArrroB - ECTSOuenrca",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "6a.n.naxTpaAn-",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "',2 3 4 5 6 7",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Br 3416 Elrmemno:ror:uJ B+ 111 xoPonotsiof34l7 EIro{Irmm5 A-",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Bot2216 Eoraslm I A- 357 qTTIITIHO",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "BK 1208 Baegerue 6uo*orrru 5 A. 3,67 oTJUTO",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "6PMK I2O4 Bae4erue a netrarorgqecryrc ctrequaffi Bocrl 2 B+ ",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "ZhEYMGI?O7 Bo:pacruar r$zrrotorur n EroJrLHat nrugHa t B+ xo",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "QZoo2405 3oo-rronll no3gocosrsD(5 A. a67oT.lnlr|tioutt I l0)",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "'3!{xl0 A- 3,67 OIJIIIItr{O",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "6LTBO 2406 Jranmcxntr *rur B u3ysegrn ononorru z B 3 xopomo",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "7BOA3209 Memtmro upeno,taaarm dno;rorma 5 B. 3 xopouloIMik34",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "28 M34422 Mcrery;rrpuar GxoaorueB. 2\"67 xoPom",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "21ogDoP4419 O6yrenae 6uo:ronmwram Arrcqs['rurr rro o6eoaaero",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "7AH24W O6qarxmoa ) B+ xoPouro",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "SI'ZhU44IE uprMrJaUK BHeMatrHffi pa6or 5 B. 2,67 xoporlD",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "24BPL:ZihU34t3 Opraxrnaum laSoparopnrrx pa6m no 6nolomlr 5 A",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "25TKNIIII Ocnoax 6emracgocru xffitterexrffibsocrlr 5 A. 3,67",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "26KN2l 13Oerorx npara J A. 1,67 OTJITlrUTO",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "EI!'l2112 Ocgoxu xonororsecxofi reopr:u 3 B+ 3,33 xoporxo",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "2E Ped22Al fletrarornmB J xoPono",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "29 PM 3306 lle,tarorrr.rccrufi lresaroruexT A- 3i7 of,ttrst(",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "30 Say 2 103Ilorumronlf, 5 A- 157 oTttr%o3lY,BZh-tH34t4 Ilpa",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "KBChT 3 IOE I lporptrcilosartHo{pRer{TrrpoBaHH[,ril mocrpaHf",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "KK{O)T3107 llpo$ecouoaarbxbrfi xaeaxcnrfr (pyccrnfi ) mrrx ?",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "34 PAD 1206 r rclI,(ojloru.'| ll p&]BrtIe qejloaerS5 B+ 3,33",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "35 Dlia23A3 Psmrxoaelelflle A mrltItIHo",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "JOooT 2205 Cauol|o3Haarre A- 3,67 oTilttrno",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "37 Ale I102 ComrororruJ B+ 333 xopoElo",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "38TaTA3203 Teopnx u xero,qlra rocrmraremrofi paEora A. oTll]",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "oF q+a7 Qu:noloralpacrenrX ) B+ xopoluo",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "40 AZW 34tC Olsuo.qorru .reroEeKa L xltBorfiBx 5 A oTtlItllr",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "42 Fil 2104 <Dtmoco$lu5 A- 357 OTJII'qHO",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "43cGuaz' lfuro:rorun u raorurornr 5 A- 3,67 STJIIIIIIIOM El3",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "45ETDIIIO 3ronorE tryctoltrrl,rscepa33fif,tdc B+ 3 it xopoln",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "46ozhzhE4428 :rronortrl pacT€sd II xItBoIgbD[ A- 357 OTTI,$I",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "Fe2702 SrnoneAamrnra A- 3.67 OT,]ItrWOF",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "l5.Ko.nuqecTBoaKatreMI,IqecKI{xKpeAI{ToB-ECTSTeopeT[qecKoroo",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "16. PerueHueM l-ocyAapcrBeHHoft arrecraur{oHHofi KoMuccIall ",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "nprcvnir:reHa (rprfcBoeHa) ftawuqftIyncanan",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "IIo cneuI,IaJrbHocTu",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "o6p a3oB are,rbH afl rrporpaMMa",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "* e coomeemcm+uu c Tunosbtr'tu npdzhnaMu deamau,uocmu opeaHr",
+      "confidence": 0.85,
+      "language": "ru"
+    },
+    {
+      "subject": "Документ",
+      "predicate": "упоминает",
+      "object": "ftuu) nocteaysoscnozo o6pa3o6aHut, c 24 Hot6pn 2018 zoda 1yx",
+      "confidence": 0.85,
+      "language": "ru"
+    }
+  ],
+  "processed_at": "2025-10-26T10:36:47.094616"
+}

@@ -1,0 +1,118 @@
+# TERAG Cognitive OSINT Mission Configuration
+# Конфигурация миссии для автономного сбора и валидации OSINT-данных
+
+mission:
+  name: "TERAG Cognitive OSINT Collector"
+  version: "1.0.0"
+  duration: 7  # days
+  schedule: "daily"  # daily, weekly, or manual
+  
+  # Компоненты миссии
+  components:
+    - brave_search      # Поиск через Brave Search API
+    - bright_extraction  # Извлечение контента через Bright Data
+    - deepconf_validation # Валидация через DeepConf/PEMM
+    - graph_rag_update   # Обновление графа знаний в Neo4j
+    - reasoning_phase     # Фаза рассуждений и выводов
+    - metrics_logging     # Логирование метрик
+    - daily_report        # Генерация ежедневного отчёта
+
+  # Цели миссии
+  goals:
+    - collect_verified_data_from_open_web
+    - build_cognitive_graph_in_neo4j
+    - evaluate_reliability_and_contextual_depth
+    - generate_daily_and_weekly_reports
+
+  # Темы для поиска (можно расширять)
+  topics:
+    - "AI cognitive architectures"
+    - "OSINT methodologies"
+    - "Graph-RAG implementations"
+    - "Knowledge validation techniques"
+    - "PEMM framework applications"
+
+  # Настройки компонентов
+  brave_search:
+    enabled: true
+    api_key: "${BRAVE_API_KEY}"  # Из переменных окружения
+    max_results_per_query: 10
+    max_queries_per_day: 50
+    languages: ["en", "ru"]
+    safe_search: "moderate"
+
+  bright_extraction:
+    enabled: true
+    mcp_server: "bright_data"  # MCP сервер для Bright Data
+    scrape_method: "scrape_as_markdown"
+    max_pages_per_day: 100
+    timeout_seconds: 30
+    retry_attempts: 3
+
+  deepconf_validation:
+    enabled: true
+    confidence_threshold: 0.7  # Минимальный confidence для сохранения
+    pemm_enabled: true  # Использовать PEMM архитектуру
+    llm_critic_model: "qwen3"  # Модель для критики
+    validation_batch_size: 10
+
+  graph_rag:
+    enabled: true
+    neo4j_uri: "${NEO4J_URI}"
+    neo4j_user: "${NEO4J_USER}"
+    neo4j_password: "${NEO4J_PASSWORD}"
+    batch_size: 50
+    create_relationships: true
+    confidence_property: "deepconf_score"
+
+  reasoning:
+    enabled: true
+    llm_model: "qwen3"  # Модель для рассуждений
+    max_reasoning_depth: 3
+    generate_anomalies: true
+    generate_insights: true
+
+  metrics:
+    enabled: true
+    prometheus_enabled: true
+    log_encoding_errors: true
+    log_confidence_distribution: true
+    log_graph_metrics: true
+
+  # Выходные файлы
+  output:
+    daily_summary: "/data/daily_summary.md"
+    graph_snapshot: "/data/graph_snapshot.json"
+    confidence_matrix: "/data/confidence_matrix.csv"
+    mission_log: "/data/mission_log.jsonl"
+    anomalies_report: "/data/anomalies_report.md"
+
+  # Настройки расписания
+  schedule_config:
+    daily_run_time: "02:00"  # Время ежедневного запуска (UTC)
+    timezone: "UTC"
+    skip_weekends: false
+
+  # Ограничения ресурсов
+  resource_limits:
+    max_memory_mb: 4096
+    max_cpu_percent: 80
+    max_disk_gb: 10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

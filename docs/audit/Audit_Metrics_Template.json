@@ -1,0 +1,106 @@
+{
+  "audit_metadata": {
+    "module_name": "[Название модуля]",
+    "audit_date": "YYYY-MM-DD",
+    "auditor": "[Имя исполнителя]",
+    "audit_version": "1.0",
+    "maturity_level_target": 4,
+    "maturity_level_actual": 0
+  },
+  "metrics": {
+    "metric_name_1": {
+      "target": 0.0,
+      "actual": 0.0,
+      "unit": "unit",
+      "status": "green|yellow|red",
+      "comment": "Комментарий к метрике"
+    },
+    "metric_name_2": {
+      "target": 0.0,
+      "actual": 0.0,
+      "unit": "unit",
+      "status": "green|yellow|red",
+      "comment": "Комментарий к метрике"
+    }
+  },
+  "checklist_results": {
+    "category_1": {
+      "check_1": {
+        "status": "passed|partial|failed",
+        "comment": "Комментарий"
+      },
+      "check_2": {
+        "status": "passed|partial|failed",
+        "comment": "Комментарий"
+      },
+      "category_score": 0
+    },
+    "category_2": {
+      "check_1": {
+        "status": "passed|partial|failed",
+        "comment": "Комментарий"
+      },
+      "category_score": 0
+    }
+  },
+  "risks": [
+    {
+      "level": "critical|high|medium|low",
+      "title": "Название риска",
+      "description": "Описание риска",
+      "impact": "Влияние на систему",
+      "mitigation": "План митигации",
+      "status": "open|mitigated|closed"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "critical|high|medium|low",
+      "title": "Название рекомендации",
+      "description": "Описание рекомендации",
+      "estimated_effort_hours": 0,
+      "expected_impact": "Ожидаемый эффект",
+      "status": "pending|in_progress|completed"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "Название артефакта",
+      "type": "report|diagram|log|metrics",
+      "path": "путь/к/файлу",
+      "status": "completed|pending|in_progress"
+    }
+  ],
+  "summary": {
+    "overall_status": "green|yellow|red",
+    "readiness_for_v2": true,
+    "blocking_issues_count": 0,
+    "critical_issues_count": 0,
+    "high_issues_count": 0,
+    "next_steps": [
+      "Шаг 1",
+      "Шаг 2"
+    ]
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

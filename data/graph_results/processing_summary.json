@@ -1,0 +1,8 @@
+{
+  "timestamp": "2025-10-26T10:36:49.636333",
+  "processed_documents": 584,
+  "total_triplets": 101117,
+  "average_triplets_per_doc": 173.1455479452055,
+  "conversion_dir": "data\\converted",
+  "output_dir": "data\\graph_results"
+}

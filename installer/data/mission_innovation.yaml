@@ -1,0 +1,192 @@
+# TERAG Innovation Discovery Mission
+# Миссия для поиска практических реализаций, репозиториев GitHub, прототипов и стартапов
+
+mission:
+  name: "Innovation Discovery - Practical Implementations"
+  version: "1.0.0"
+  type: "innovation"  # Тип миссии для поиска инноваций
+  duration: 30  # days
+  schedule: "weekly"  # weekly - запуск раз в неделю
+  
+  # Компоненты миссии
+  components:
+    - brave_search
+    - bright_extraction
+    - signal_extraction
+    - deepconf_validation
+    - innovation_analysis  # Специальный анализ для инноваций
+    - graph_rag_update
+    - reasoning_phase
+    - metrics_logging
+    - discovery_report
+
+  # Цели миссии
+  goals:
+    - discover_practical_implementations
+    - find_open_source_projects
+    - identify_innovative_startups
+    - track_prototypes_and_demos
+    - extract_implementation_patterns
+
+  # Темы для поиска практических реализаций
+  topics:
+    - "new frameworks for reasoning ai 2025 site:github.com"
+    - "open source graph rag projects"
+    - "bioinformatics open innovation platforms"
+    - "cognitive architecture implementations site:github.com"
+    - "pemm framework implementation"
+    - "deepconf validation system"
+    - "graph rag production ready"
+    - "ai agent frameworks 2025"
+    - "knowledge graph startup"
+    - "osint automation tools"
+
+  # Фильтры для поиска
+  search_filters:
+    min_year: 2024
+    content_types:
+      - "repository"
+      - "implementation"
+      - "prototype"
+      - "demo"
+      - "startup"
+    indicators:
+      - "open source"
+      - "production ready"
+      - "implementation"
+      - "framework"
+      - "library"
+      - "SDK"
+      - "API"
+    sources:
+      - "github.com"
+      - "gitlab.com"
+      - "npmjs.com"
+      - "pypi.org"
+      - "stackoverflow.com"
+      - "producthunt.com"
+      - "indiehackers.com"
+
+  # Настройки компонентов
+  brave_search:
+    enabled: true
+    api_key: "${BRAVE_API_KEY}"
+    max_results_per_query: 20
+    max_queries_per_day: 100
+    languages: ["en"]
+    safe_search: "moderate"
+    sort_by: "date"
+
+  bright_extraction:
+    enabled: true
+    mcp_server: "bright_data"
+    scrape_method: "scrape_as_markdown"
+    max_pages_per_day: 200
+    timeout_seconds: 45
+    retry_attempts: 3
+
+  signal_extraction:
+    enabled: true
+    novelty_threshold: 0.6  # Ниже для практических реализаций
+    min_confidence: 0.5
+    extract_concepts: true
+    extract_entities: true
+    extract_relationships: true
+    detect_weak_signals: true
+    track_mentions: true
+
+  deepconf_validation:
+    enabled: true
+    confidence_threshold: 0.6
+    pemm_enabled: true
+    llm_critic_model: "qwen3"
+    validation_batch_size: 10
+    cross_source_validation: true
+    check_implementation_status: true  # Проверка статуса реализации
+
+  innovation_analysis:
+    enabled: true
+    extract_tech_stack: true  # Извлечение технологического стека
+    extract_license: true  # Извлечение лицензии
+    extract_stars: true  # Для GitHub репозиториев
+    extract_activity: true  # Активность проекта
+    categorize_innovation_type: true  # Тип инновации (framework, tool, platform)
+
+  graph_rag:
+    enabled: true
+    neo4j_uri: "${NEO4J_URI}"
+    neo4j_user: "${NEO4J_USER}"
+    neo4j_password: "${NEO4J_PASSWORD}"
+    batch_size: 50
+    create_relationships: true
+    confidence_property: "deepconf_score"
+    novelty_property: "novelty_index"
+    signal_strength_property: "signal_strength"
+    node_types:
+      - "Innovation"
+      - "Repository"
+      - "Project"
+      - "Startup"
+      - "Technology"
+    relationship_types:
+      - "IMPLEMENTS"
+      - "USES"
+      - "RELATED_TO"
+      - "MENTIONED_IN"
+      - "FOLLOWS"
+
+  reasoning:
+    enabled: true
+    llm_model: "qwen3"
+    max_reasoning_depth: 3
+    generate_anomalies: true
+    generate_insights: true
+    identify_potential: true
+    analyze_implementation_quality: true  # Анализ качества реализации
+
+  metrics:
+    enabled: true
+    prometheus_enabled: true
+    log_new_concepts: true
+    log_signal_confidence: true
+    log_innovation_types: true
+    log_tech_stack_distribution: true
+
+  # Выходные файлы
+  output:
+    daily_summary: "/data/innovation_summary.md"
+    graph_snapshot: "/data/innovation_graph_snapshot.json"
+    confidence_matrix: "/data/innovation_confidence_matrix.csv"
+    mission_log: "/data/innovation_mission_log.jsonl"
+    innovations_report: "/data/innovations_report.md"
+    tech_stack_analysis: "/data/tech_stack_analysis.json"
+
+  # Настройки расписания
+  schedule_config:
+    weekly_run_day: "Wednesday"  # День недели для запуска
+    weekly_run_time: "04:00"  # Время запуска (UTC)
+    timezone: "UTC"
+
+  # Ограничения ресурсов
+  resource_limits:
+    max_memory_mb: 8192
+    max_cpu_percent: 80
+    max_disk_gb: 20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

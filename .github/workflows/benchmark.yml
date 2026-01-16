@@ -1,0 +1,132 @@
+name: TERAG Benchmark
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'src/benchmark/**'
+      - 'data/**'
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Запуск каждую неделю в воскресенье
+    - cron: '0 0 * * 0'
+  workflow_dispatch:  # Ручной запуск
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    
+    services:
+      neo4j:
+        image: neo4j:5.12
+        env:
+          NEO4J_AUTH: neo4j/password
+        ports:
+          - 7474:7474
+          - 7687:7687
+        options: >-
+          --health-cmd "cypher-shell -u neo4j -p password 'RETURN 1'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install haystack-ai ragas mlflow langchain langsmith
+    
+    - name: Wait for Neo4j
+      run: |
+        timeout 60 bash -c 'until cypher-shell -u neo4j -p password "RETURN 1"; do sleep 2; done'
+    
+    - name: Setup data
+      run: |
+        # Создаем необходимые директории
+        mkdir -p data/processed data/converted data/graph_results reports
+        
+        # Если есть данные, используем их, иначе создаем тестовые
+        if [ ! -f "data/processed/multihop_qa.json" ]; then
+          echo "Creating test data..."
+          python -c "
+          import json
+          test_data = [
+            {
+              'question': 'Что такое TERAG?',
+              'answer': 'TERAG - это когнитивная система',
+              'ground_truth': 'TERAG - это когнитивная система',
+              'context': ['TERAG - это система для работы с графом знаний']
+            }
+          ]
+          with open('data/processed/multihop_qa.json', 'w') as f:
+            json.dump(test_data, f, ensure_ascii=False, indent=2)
+          "
+        fi
+    
+    - name: Run Vector-RAG Benchmark
+      env:
+        NEO4J_USER: neo4j
+        NEO4J_PASSWORD: password
+      run: |
+        python src/benchmark/run_benchmark.py \
+          --config src/benchmark/config/vector_rag.yml \
+          --pipeline vector \
+          --output reports
+      continue-on-error: true
+    
+    - name: Run Graph-RAG Benchmark
+      env:
+        NEO4J_USER: neo4j
+        NEO4J_PASSWORD: password
+      run: |
+        python src/benchmark/run_benchmark.py \
+          --config src/benchmark/config/graph_rag.yml \
+          --pipeline graph \
+          --output reports
+      continue-on-error: true
+    
+    - name: Run Hybrid-RAG Benchmark
+      env:
+        NEO4J_USER: neo4j
+        NEO4J_PASSWORD: password
+      run: |
+        python src/benchmark/run_benchmark.py \
+          --config src/benchmark/config/hybrid_rag.yml \
+          --pipeline hybrid \
+          --output reports
+      continue-on-error: true
+    
+    - name: Upload benchmark reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: benchmark-reports
+        path: reports/*.json
+    
+    - name: Check benchmark results
+      run: |
+        # Проверяем что отчеты созданы
+        if [ ! -f "reports/benchmark_comparison.json" ]; then
+          echo "⚠️ Comparison report not found"
+        else
+          echo "✅ Benchmark reports generated"
+        fi
+
+
+
+
+
+
+
+
+

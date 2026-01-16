@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TERAG Prompt Registry Schema",
+  "description": "Схема для регистрации промптов в MLflow",
+  "type": "object",
+  "required": ["name", "content", "version"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Имя промпта (уникальный идентификатор)",
+      "pattern": "^[a-z0-9_]+$",
+      "examples": ["planner_v1", "solver_base", "verifier_strict"]
+    },
+    "content": {
+      "type": "string",
+      "description": "Содержимое промпта (шаблон с переменными)",
+      "minLength": 10
+    },
+    "version": {
+      "type": "string",
+      "description": "Версия промпта (семантическое версионирование)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "examples": ["1.0.0", "2.1.0", "1.2.3"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Описание промпта и его назначения"
+    },
+    "variables": {
+      "type": "array",
+      "description": "Список переменных в промпте",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Имя переменной"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["string", "number", "boolean", "list"],
+            "description": "Тип переменной"
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Обязательна ли переменная"
+          },
+          "default": {
+            "description": "Значение по умолчанию"
+          }
+        },
+        "required": ["name", "type"]
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Теги для категоризации",
+      "items": {
+        "type": "string"
+      },
+      "examples": [["planner", "reasoning"], ["solver", "kag"], ["verifier", "validation"]]
+    },
+    "aliases": {
+      "type": "array",
+      "description": "Алиасы для версионирования",
+      "items": {
+        "type": "string",
+        "enum": ["@latest", "@staging", "@production", "@dev"]
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Дополнительные метаданные",
+      "additionalProperties": true
+    }
+  }
+}
+
+
+
+
+
+
+
+
+

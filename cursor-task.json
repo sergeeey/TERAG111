@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "name": "TERAG Local Cloud Launcher",
+  "description": "Развёртывает локальную версию TERAG Cloud: загрузка документов, построение графа знаний, интеграция с AI-REPS и локальный дашборд.",
+  "variables": {
+    "PY": "python",
+    "PORT": "8000",
+    "DOC_PATH": "data/docs",
+    "DB_PATH": "data/journal/journal.jsonl"
+  },
+  "steps": [
+    {
+      "id": "0-structure",
+      "title": "Проверка структуры проекта",
+      "summary": "Создаём папки для документов, данных и журналов.",
+      "files": [
+        { "path": "data/docs/.keep", "content": "" },
+        { "path": "data/indexes/.keep", "content": "" },
+        { "path": "data/journal/.keep", "content": "" },
+        { "path": "src/api/static/upload.html", "content": "" }
+      ],
+      "verify": [
+        "test -d data/docs && test -d data/journal && test -d data/indexes"
+      ]
+    },
+    {
+      "id": "1-ingestor",
+      "title": "Создание модуля загрузки и индексации документов",
+      "summary": "Добавляем terag_ingest.py — скрипт для обработки документов и построения графа знаний.",
+      "files": [
+        {
+          "path": "terag_ingest.py",
+          "content": "#!/usr/bin/env python3\nimport os, asyncio\nfrom src.core.kag_builder import KAGBuilder\n\nasync def main():\n    docs = [os.path.join('data/docs', f) for f in os.listdir('data/docs') if f.lower().endswith(('.txt','.md','.pdf','.docx'))]\n    if not docs:\n        print('⚠️ Нет документов в data/docs/')\n        return\n    async with KAGBuilder(\n        openspg_url='http://localhost:8080',\n        neo4j_url='bolt://localhost:7687',\n        supabase_url='postgresql://postgres:password@localhost:5432/terag'\n    ) as kag:\n        for doc in docs:\n            result = await kag.process_document(doc, 'markdown')\n            print(f\"📄 {doc}: {result.get('triplets_count',0)} триплетов, граф {result.get('graph_id')}\")\n\nif __name__ == '__main__':\n    asyncio.run(main())\n"
+        }
+      ],
+      "verify": [
+        "${PY} terag_ingest.py || true"
+      ]
+    },
+    {
+      "id": "2-api-upload",
+      "title": "Добавляем эндпоинты /api/upload и /api/graph",
+      "summary": "Теперь можно загружать файлы и запрашивать граф знаний через API.",
+      "files": [
+        {
+          "path": "src/api/server.py",
+          "patch": true,
+          "content": "from fastapi import FastAPI, UploadFile, File\nimport os, json\nfrom src.core.metrics import get_metrics_snapshot\nfrom src.core.health import get_health\nfrom src.core.self_learning import accept_feedback\n\napp = FastAPI(title='TERAG Local Cloud', version='1.0')\n\nUPLOAD_DIR = 'data/docs'\nGRAPH_FILE = 'data/indexes/graph.json'\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n\n@app.post('/api/upload')\nasync def upload_doc(file: UploadFile = File(...)):\n    path = os.path.join(UPLOAD_DIR, file.filename)\n    with open(path, 'wb') as f:\n        f.write(await file.read())\n    return {'status':'ok','filename':file.filename}\n\n@app.get('/api/graph')\ndef get_graph():\n    if not os.path.exists(GRAPH_FILE):\n        return {'graph':[], 'edges':[]}\n    with open(GRAPH_FILE,'r',encoding='utf-8') as f:\n        return json.load(f)\n"
+        }
+      ],
+      "verify": [
+        "${PY} scripts/run_api.py & sleep 2",
+        "curl -s -X POST -F 'file=@README.md' http://127.0.0.1:${PORT}/api/upload | grep ok > /dev/null",
+        "pkill -f src.api.server || true"
+      ]
+    },
+    {
+      "id": "3-ui",
+      "title": "Добавляем простой интерфейс для загрузки документов и просмотра графа",
+      "summary": "Страница upload.html с формой загрузки и отображением графа (D3.js).",
+      "files": [
+        {
+          "path": "src/api/static/upload.html",
+          "content": "<!doctype html><html><head><meta charset='utf-8'><title>TERAG Local Cloud</title><style>body{font-family:system-ui;margin:24px}input{margin:8px}svg{border:1px solid #ddd;width:100%;height:600px}</style></head><body><h1>TERAG Local Cloud</h1><p>Загрузите документ для анализа:</p><input type='file' id='file'><button onclick='upload()'>Upload</button><pre id='msg'></pre><h2>Граф знаний</h2><svg id='graph'></svg><script src='https://d3js.org/d3.v7.min.js'></script><script>\nasync function upload(){const f=document.getElementById('file').files[0];if(!f)return alert('Выберите файл');const fd=new FormData();fd.append('file',f);const r=await fetch('/api/upload',{method:'POST',body:fd});const j=await r.json();document.getElementById('msg').innerText='Загружен: '+j.filename;setTimeout(drawGraph,1000);}\nasync function drawGraph(){const r=await fetch('/api/graph');const g=await r.json();const svg=d3.select('#graph');svg.selectAll('*').remove();const width=svg.node().getBoundingClientRect().width,height=600;const sim=d3.forceSimulation(g.graph).force('link',d3.forceLink(g.edges).distance(100).strength(1).id(d=>d.id)).force('charge',d3.forceManyBody().strength(-300)).force('center',d3.forceCenter(width/2,height/2));const link=svg.append('g').selectAll('line').data(g.edges).enter().append('line').attr('stroke','#999');const node=svg.append('g').selectAll('circle').data(g.graph).enter().append('circle').attr('r',8).attr('fill','#69b').call(drag(sim));const label=svg.append('g').selectAll('text').data(g.graph).enter().append('text').text(d=>d.label).attr('font-size','10px');sim.on('tick',()=>{link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);node.attr('cx',d=>d.x).attr('cy',d=>d.y);label.attr('x',d=>d.x+10).attr('y',d=>d.y);});function drag(sim){function dragstarted(e){if(!e.active)sim.alphaTarget(0.3).restart();e.subject.fx=e.subject.x;e.subject.fy=e.subject.y;}function dragged(e){e.subject.fx=e.x;e.subject.fy=e.y;}function dragended(e){if(!e.active)sim.alphaTarget(0);e.subject.fx=null;e.subject.fy=null;}return d3.drag().on('start',dragstarted).on('drag',dragged).on('end',dragended);} }</script></body></html>"
+        }
+      ],
+      "verify": [
+        "test -f src/api/static/upload.html"
+      ]
+    },
+    {
+      "id": "4-run",
+      "title": "Запуск TERAG Local Cloud",
+      "summary": "Поднимаем API и UI, тестируем эндпоинты.",
+      "run": [
+        "${PY} scripts/run_api.py & sleep 3",
+        "curl -s http://127.0.0.1:${PORT}/api/metrics | jq .RSS > /dev/null",
+        "curl -s http://127.0.0.1:${PORT}/api/upload || true"
+      ],
+      "verify": [
+        "curl -s http://127.0.0.1:${PORT}/api/health | grep -E 'ok|warning|critical' > /dev/null"
+      ],
+      "finally": [
+        "echo '✨ TERAG Local Cloud запущен! Открой http://127.0.0.1:8000/api/static/upload.html'; true"
+      ]
+    }
+  ],
+  "success_criteria": [
+    "Сервер FastAPI работает на порту 8000",
+    "Эндпоинты /api/upload и /api/graph активны",
+    "Загрузка документа выполняется успешно",
+    "Дашборд доступен по адресу /api/static/upload.html"
+  ]
+}

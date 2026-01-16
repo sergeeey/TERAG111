@@ -1,0 +1,140 @@
+{
+  "timestamp": "2025-11-06T17:03:33.148955+00:00",
+  "modules": {
+    "LM Studio Client": {
+      "available": true,
+      "importable": true,
+      "error": null
+    },
+    "Graph Updater": {
+      "available": true,
+      "importable": true,
+      "error": null
+    },
+    "Learning Bridge": {
+      "available": true,
+      "importable": true,
+      "error": null
+    },
+    "Self-Organizing Graph": {
+      "available": true,
+      "importable": true,
+      "error": null
+    },
+    "Telegram Service": {
+      "available": true,
+      "importable": true,
+      "error": null
+    },
+    "OSINT Digest": {
+      "available": true,
+      "importable": true,
+      "error": null
+    },
+    "System Context": {
+      "available": true,
+      "importable": true,
+      "error": null
+    },
+    "Graph Metrics": {
+      "available": true,
+      "importable": true,
+      "error": null
+    }
+  },
+  "integrations": {
+    "LM Studio": {
+      "available": true,
+      "status": "client_ready"
+    },
+    "Neo4j": {
+      "available": true,
+      "nodes": 85,
+      "relations": 77
+    },
+    "Telegram": {
+      "available": true,
+      "token_set": true,
+      "chat_set": true
+    },
+    "Brave Search": {
+      "available": true,
+      "api_key_set": true
+    },
+    "Bright Data": {
+      "available": true,
+      "proxy_http_set": true,
+      "proxy_ws_set": true
+    }
+  },
+  "config": {
+    "env_file_exists": true,
+    "required_vars": {
+      "NEO4J_URI": true,
+      "NEO4J_USER": true,
+      "NEO4J_PASSWORD": true
+    },
+    "optional_vars": {
+      "TELEGRAM_BOT_TOKEN": true,
+      "TELEGRAM_CHAT_ID": true,
+      "BRAVE_API_KEY": true,
+      "BRIGHTDATA_PROXY_HTTP": true
+    }
+  },
+  "dependencies": {
+    "httpx": true,
+    "aiogram": true,
+    "neo4j": true,
+    "sentence_transformers": true,
+    "prometheus_client": true,
+    "psutil": true,
+    "docker": true,
+    "dotenv": true
+  },
+  "graph": {
+    "available": true,
+    "nodes": 85,
+    "relations": 77,
+    "entities": 59,
+    "signals": 22,
+    "domains": 4,
+    "error": null
+  },
+  "tasks": {
+    "08-graph-updater-integration.md": {
+      "exists": true,
+      "status": "completed"
+    },
+    "09-telegram-integration.md": {
+      "exists": true,
+      "status": "completed"
+    },
+    "10-learning-bridge-integration.md": {
+      "exists": true,
+      "status": "completed"
+    },
+    "10a-signal-discovery-enhancement.md": {
+      "exists": false,
+      "status": "missing"
+    },
+    "10b-self-organizing-knowledge-graph.md": {
+      "exists": true,
+      "status": "completed"
+    },
+    "11-auto-eval-monitoring.md": {
+      "exists": true,
+      "status": "completed"
+    },
+    "12-kag-solver-phase2.md": {
+      "exists": true,
+      "status": "completed"
+    },
+    "13-system-context-memory.md": {
+      "exists": true,
+      "status": "completed"
+    }
+  },
+  "overall_score": 1.0,
+  "issues": [],
+  "recommendations": []
+}

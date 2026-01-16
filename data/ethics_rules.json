@@ -1,0 +1,22 @@
+{
+  "check_toxicity": true,
+  "check_bias": true,
+  "check_unverifiable": true,
+  "blocked_topics": [],
+  "sensitivity_threshold": 0.7,
+  "description": "Правила этической фильтрации для TERAG",
+  "version": "1.0"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

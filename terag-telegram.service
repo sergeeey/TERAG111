@@ -1,0 +1,29 @@
+[Unit]
+Description=TERAG Telegram Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/path/to/TERAG111-1
+Environment="PATH=/usr/bin:/usr/local/bin"
+ExecStart=/usr/bin/python3 /path/to/TERAG111-1/src/integration/telegram_service.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+# Auditor CurSor Configuration
+# TERAG Project - AI-Audit Config v1.2
+
+audit_level: L3
+project_name: "TERAG AI System"
+version: "1.0"
+description: "TERAG - Cognitive System with Graph RAG and LLM integration"
+
+# Директории для аудита
+source_dirs:
+  - "src/"
+  - "src/core/"
+  - "src/api/"
+  - "scripts/"
+
+test_dir: "tests/"
+
+# Пороговые значения
+thresholds:
+  coverage: 80
+  security_issues: 5
+  coupling: 0.4
+  code_quality: 0.8
+  performance_regression: 0.1
+
+# Meta-аудит конфигурация
+meta_audit:
+  version: 1.2
+  spec_hash: "audit_spec_v1.2_hash"
+  self_validation:
+    - internal_consistency
+    - metric_coherence
+    - reproducibility_score
+    - terminology_consistency
+
+# Политика обновлений
+update_policy:
+  feedback_loop: enabled
+  report_channel: "AI-Governance/Spec-Feedback"
+  auto_update: false
+
+# Уведомления
+notifications:
+  enabled: true
+  thresholds:
+    environment_score: 0.8
+    overall_score: 0.85
+  
+  # Конфигурация уведомлений
+  email:
+    enabled: false
+  
+  slack:
+    enabled: false
+  
+  webhook:
+    enabled: false
+
+# Расширенные опции
+advanced:
+  include_git_history: true
+  include_dependencies: true
+  cross_check: true
+  parallel_execution: false
+
+# Когнитивные метрики
+cognitive_metrics:
+  rss_threshold: 0.8
+  cos_threshold: 0.8
+  faith_threshold: 0.85
+  resonance_threshold: 0.9
+
+# Операционные метрики
+operational_metrics:
+  uptime_threshold: 0.99
+  response_time_max_ms: 1000
+  error_rate_max: 0.01
+
+# Экспорт опций
+export:
+  formats:
+    - json
+    - markdown
+    - html
+  include_graphs: true
+  include_sources: true

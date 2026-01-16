@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERAG AI-REPS Dashboard</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .language-selector select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background: white;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .metric-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .graph-stats {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .graph-stats h2 {
+            margin: 0 0 20px 0;
+            font-size: 1.5em;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        /* Стили для блока вопросов */
+        .query-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .query-section h2 {
+            margin: 0 0 20px 0;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        
+        .query-form {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .query-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+        
+        .query-input:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+        
+        .query-button {
+            padding: 15px 30px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .query-button:hover {
+            background: #229954;
+        }
+        
+        .query-button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        /* Отдельный контейнер для ответов - НЕ перерисовывается */
+        .dialog-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            min-height: 200px;
+        }
+        
+        .dialog-container h2 {
+            margin: 0 0 20px 0;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        
+        .dialog-history {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .dialog-message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .dialog-message.user {
+            background: rgba(255, 255, 255, 0.15);
+            border-left-color: #3498db;
+        }
+        
+        .dialog-message.terag {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: #e74c3c;
+        }
+        
+        .message-header {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .message-content {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .message-sources {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+        
+        .message-sources h4 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+        }
+        
+        .message-sources ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .mini-graph-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .mini-graph-container h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+        
+        .mini-graph {
+            width: 100%;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+        
+        .loading-indicator {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .loading-indicator::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+        
+        .clear-history {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        
+        .clear-history:hover {
+            background: #c0392b;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+        
+        .error {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .last-update {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+        
+        /* Стили для D3 графа */
+        .node {
+            cursor: pointer;
+        }
+        
+        .node circle {
+            fill: #fff;
+            stroke: #3182bd;
+            stroke-width: 2px;
+        }
+        
+        .node text {
+            font: 12px sans-serif;
+            fill: #333;
+            text-anchor: middle;
+        }
+        
+        .link {
+            fill: none;
+            stroke: #999;
+            stroke-width: 2px;
+        }
+        
+        .link-label {
+            font: 10px sans-serif;
+            fill: #666;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-selector">
+            <select id="langSelector" onchange="setLanguage(this.value)">
+                <option value="ru">Русский</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        
+        <div class="header">
+            <h1 id="mainTitle">TERAG AI-REPS Dashboard</h1>
+            <p id="subtitle">Система когнитивного резонанса и самообучения</p>
+        </div>
+        
+        <!-- Обновляемая область метрик -->
+        <div id="metricsContent">
+            <div class="loading">Загрузка метрик...</div>
+        </div>
+        
+        <!-- Блок вопросов -->
+        <div class="query-section">
+            <h2 id="queryTitle">🔍 Задайте вопрос системе TERAG</h2>
+            <div class="query-form">
+                <input type="text" id="questionInput" class="query-input" 
+                       placeholder="Введите ваш вопрос на русском или английском языке..." 
+                       onkeypress="if(event.key==='Enter') askQuestion()">
+                <button id="askButton" class="query-button" onclick="askQuestion()">
+                    Спросить
+                </button>
+            </div>
+        </div>
+        
+        <!-- Отдельный контейнер для диалога - НЕ перерисовывается -->
+        <div class="dialog-container">
+            <h2 id="dialogTitle">💬 Диалог с TERAG</h2>
+            <button class="clear-history" onclick="clearHistory()">Очистить историю</button>
+            <div class="dialog-history" id="dialogHistory">
+                <div class="dialog-message terag">
+                    <div class="message-header">TERAG</div>
+                    <div class="message-content">Привет! Я готов ответить на ваши вопросы на основе графа знаний. Задайте любой вопрос!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'ru';
+        let metricsUpdater;
+        let dialogHistory = [];
+        
+        const translations = {
+            ru: {
+                title: 'TERAG AI-REPS Dashboard',
+                subtitle: 'Система когнитивного резонанса и самообучения',
+                loading: 'Загрузка метрик...',
+                metrics: 'Метрики AI-REPS',
+                graphStats: 'Статистика графа знаний',
+                queryTitle: '🔍 Задайте вопрос системе TERAG',
+                queryPlaceholder: 'Введите ваш вопрос на русском или английском языке...',
+                askButton: 'Спросить',
+                dialogTitle: '💬 Диалог с TERAG',
+                clearHistory: 'Очистить историю',
+                processing: 'Анализирую контекст',
+                lastUpdate: 'Последнее обновление',
+                documents: 'Документы',
+                triplets: 'Триплеты',
+                nodes: 'Узлы',
+                edges: 'Связи',
+                avgTriplets: 'Среднее триплетов на документ',
+                sources: 'Источники',
+                graph: 'Визуализация связей',
+                welcome: 'Привет! Я готов ответить на ваши вопросы на основе графа знаний. Задайте любой вопрос!'
+            },
+            en: {
+                title: 'TERAG AI-REPS Dashboard',
+                subtitle: 'Cognitive Resonance and Self-Learning System',
+                loading: 'Loading metrics...',
+                metrics: 'AI-REPS Metrics',
+                graphStats: 'Knowledge Graph Statistics',
+                queryTitle: '🔍 Ask TERAG a question',
+                queryPlaceholder: 'Enter your question in Russian or English...',
+                askButton: 'Ask',
+                dialogTitle: '💬 Dialog with TERAG',
+                clearHistory: 'Clear History',
+                processing: 'Analyzing context',
+                lastUpdate: 'Last update',
+                documents: 'Documents',
+                triplets: 'Triplets',
+                nodes: 'Nodes',
+                edges: 'Edges',
+                avgTriplets: 'Average triplets per document',
+                sources: 'Sources',
+                graph: 'Connection visualization',
+                welcome: 'Hello! I\'m ready to answer your questions based on the knowledge graph. Ask me anything!'
+            }
+        };
+        
+        // Загружаем историю диалога из localStorage
+        function loadDialogHistory() {
+            const saved = localStorage.getItem('terag_dialog_history');
+            if (saved) {
+                dialogHistory = JSON.parse(saved);
+                renderDialogHistory();
+            }
+        }
+        
+        // Сохраняем историю диалога в localStorage
+        function saveDialogHistory() {
+            localStorage.setItem('terag_dialog_history', JSON.stringify(dialogHistory));
+        }
+        
+        // Очищаем историю
+        function clearHistory() {
+            dialogHistory = [];
+            localStorage.removeItem('terag_dialog_history');
+            renderDialogHistory();
+        }
+        
+        // Рендерим историю диалога
+        function renderDialogHistory() {
+            const container = document.getElementById('dialogHistory');
+            const t = translations[currentLanguage];
+            
+            if (dialogHistory.length === 0) {
+                container.innerHTML = `
+                    <div class="dialog-message terag">
+                        <div class="message-header">TERAG</div>
+                        <div class="message-content">${t.welcome}</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            dialogHistory.forEach(msg => {
+                const timestamp = new Date(msg.timestamp).toLocaleTimeString();
+                html += `
+                    <div class="dialog-message ${msg.type}">
+                        <div class="message-header">${msg.type === 'user' ? 'Вы' : 'TERAG'} • ${timestamp}</div>
+                        <div class="message-content">${msg.content}</div>
+                        ${msg.sources ? `
+                            <div class="message-sources">
+                                <h4>${t.sources}:</h4>
+                                <ul>
+                                    ${msg.sources.map(source => `<li>${source.split('/').pop()}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                        ${msg.graphData ? `
+                            <div class="mini-graph-container">
+                                <h4>${t.graph}:</h4>
+                                <div class="mini-graph" id="graph_${msg.id}"></div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+            // Рисуем графы для сообщений с данными
+            dialogHistory.forEach(msg => {
+                if (msg.graphData) {
+                    setTimeout(() => drawMiniGraph(msg.graphData, `graph_${msg.id}`), 100);
+                }
+            });
+            
+            // Прокручиваем вниз
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        async function loadLanguage() {
+            try {
+                const response = await fetch('/api/get_language');
+                const data = await response.json();
+                currentLanguage = data.language || 'ru';
+                document.getElementById('langSelector').value = currentLanguage;
+                updateUI();
+            } catch (error) {
+                console.error('Error loading language:', error);
+                currentLanguage = 'ru';
+                updateUI();
+            }
+        }
+        
+        async function setLanguage(lang) {
+            try {
+                await fetch('/api/set_language', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ lang })
+                });
+                
+                currentLanguage = lang;
+                updateUI();
+                loadMetrics();
+            } catch (error) {
+                console.error('Error setting language:', error);
+            }
+        }
+        
+        function updateUI() {
+            const t = translations[currentLanguage];
+            document.getElementById('mainTitle').textContent = t.title;
+            document.getElementById('subtitle').textContent = t.subtitle;
+            document.getElementById('queryTitle').textContent = t.queryTitle;
+            document.getElementById('dialogTitle').textContent = t.dialogTitle;
+            document.getElementById('questionInput').placeholder = t.queryPlaceholder;
+            document.getElementById('askButton').textContent = t.askButton;
+            document.querySelector('.clear-history').textContent = t.clearHistory;
+            
+            // Обновляем историю диалога
+            renderDialogHistory();
+        }
+        
+        async function loadMetrics() {
+            try {
+                const [metricsResponse, statsResponse] = await Promise.all([
+                    fetch('/api/metrics'),
+                    fetch('/api/graph/stats')
+                ]);
+                
+                const metrics = await metricsResponse.json();
+                const stats = await statsResponse.json();
+                
+                displayMetrics(metrics, stats);
+            } catch (error) {
+                console.error('Error loading metrics:', error);
+                document.getElementById('metricsContent').innerHTML = 
+                    '<div class="error">Ошибка загрузки метрик</div>';
+            }
+        }
+        
+        function displayMetrics(metrics, stats) {
+            const t = translations[currentLanguage];
+            
+            const content = `
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h3>RSS</h3>
+                        <div class="metric-value">${metrics.RSS.toFixed(3)}</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>COS</h3>
+                        <div class="metric-value">${metrics.COS.toFixed(3)}</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>FAITH</h3>
+                        <div class="metric-value">${metrics.FAITH.toFixed(3)}</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Growth</h3>
+                        <div class="metric-value">${metrics.Growth.toFixed(3)}</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Resonance</h3>
+                        <div class="metric-value">${metrics.Resonance.toFixed(3)}</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Confidence</h3>
+                        <div class="metric-value">${metrics.confidence.toFixed(3)}</div>
+                    </div>
+                </div>
+                
+                <div class="graph-stats">
+                    <h2>${t.graphStats}</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">${stats.documents || 0}</div>
+                            <div class="stat-label">${t.documents}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${stats.triplets || 0}</div>
+                            <div class="stat-label">${t.triplets}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${stats.nodes || 0}</div>
+                            <div class="stat-label">${t.nodes}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${stats.edges || 0}</div>
+                            <div class="stat-label">${t.edges}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${(stats.average_triplets_per_doc || 0).toFixed(1)}</div>
+                            <div class="stat-label">${t.avgTriplets}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="last-update">
+                    ${t.lastUpdate}: ${new Date().toLocaleString()}
+                </div>
+            `;
+            
+            document.getElementById('metricsContent').innerHTML = content;
+        }
+        
+        async function askQuestion() {
+            const questionInput = document.getElementById('questionInput');
+            const askButton = document.getElementById('askButton');
+            
+            const question = questionInput.value.trim();
+            if (!question) return;
+            
+            // Добавляем вопрос пользователя в историю
+            const userMessage = {
+                id: Date.now(),
+                type: 'user',
+                content: question,
+                timestamp: new Date().toISOString()
+            };
+            dialogHistory.push(userMessage);
+            saveDialogHistory();
+            renderDialogHistory();
+            
+            // Очищаем поле ввода
+            questionInput.value = '';
+            
+            // Показываем состояние загрузки
+            askButton.disabled = true;
+            askButton.textContent = currentLanguage === 'ru' ? 'Обработка...' : 'Processing...';
+            
+            // Добавляем индикатор загрузки
+            const loadingMessage = {
+                id: Date.now() + 1,
+                type: 'terag',
+                content: translations[currentLanguage].processing,
+                timestamp: new Date().toISOString(),
+                loading: true
+            };
+            dialogHistory.push(loadingMessage);
+            renderDialogHistory();
+            
+            try {
+                const response = await fetch(`/api/query?question=${encodeURIComponent(question)}`);
+                const data = await response.json();
+                
+                // Удаляем индикатор загрузки
+                dialogHistory = dialogHistory.filter(msg => !msg.loading);
+                
+                // Добавляем ответ TERAG
+                const teragMessage = {
+                    id: Date.now() + 2,
+                    type: 'terag',
+                    content: data.answer,
+                    sources: data.sources,
+                    graphData: data.mini_graph,
+                    timestamp: new Date().toISOString()
+                };
+                dialogHistory.push(teragMessage);
+                saveDialogHistory();
+                renderDialogHistory();
+                
+            } catch (error) {
+                console.error('Error asking question:', error);
+                
+                // Удаляем индикатор загрузки
+                dialogHistory = dialogHistory.filter(msg => !msg.loading);
+                
+                // Добавляем сообщение об ошибке
+                const errorMessage = {
+                    id: Date.now() + 2,
+                    type: 'terag',
+                    content: currentLanguage === 'ru' ? 'Ошибка при обработке вопроса' : 'Error processing question',
+                    timestamp: new Date().toISOString()
+                };
+                dialogHistory.push(errorMessage);
+                saveDialogHistory();
+                renderDialogHistory();
+            } finally {
+                askButton.disabled = false;
+                askButton.textContent = translations[currentLanguage].askButton;
+            }
+        }
+        
+        function drawMiniGraph(graphData, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container || !graphData || !graphData.nodes || graphData.nodes.length === 0) {
+                return;
+            }
+            
+            // Очищаем контейнер
+            container.innerHTML = '';
+            
+            const svg = d3.select(`#${containerId}`)
+                .append("svg")
+                .attr("width", "100%")
+                .attr("height", "100%");
+            
+            const width = 600;
+            const height = 200;
+            
+            svg.attr("viewBox", `0 0 ${width} ${height}`);
+            
+            const simulation = d3.forceSimulation(graphData.nodes)
+                .force("link", d3.forceLink(graphData.edges).id(d => d.id).distance(80))
+                .force("charge", d3.forceManyBody().strength(-200))
+                .force("center", d3.forceCenter(width / 2, height / 2));
+            
+            const link = svg.append("g")
+                .selectAll("line")
+                .data(graphData.edges)
+                .enter().append("line")
+                .attr("class", "link")
+                .attr("stroke-width", 1.5);
+            
+            const linkLabels = svg.append("g")
+                .selectAll("text")
+                .data(graphData.edges)
+                .enter().append("text")
+                .attr("class", "link-label")
+                .text(d => d.label);
+            
+            const node = svg.append("g")
+                .selectAll("g")
+                .data(graphData.nodes)
+                .enter().append("g")
+                .attr("class", "node")
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+            
+            node.append("circle")
+                .attr("r", 15)
+                .attr("fill", "#fff")
+                .attr("stroke", "#3182bd")
+                .attr("stroke-width", 2);
+            
+            node.append("text")
+                .attr("dy", 4)
+                .attr("text-anchor", "middle")
+                .text(d => d.label.length > 12 ? d.label.substring(0, 12) + "..." : d.label)
+                .style("font-size", "10px")
+                .style("fill", "#333");
+            
+            simulation.on("tick", () => {
+                link
+                    .attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+                
+                linkLabels
+                    .attr("x", d => (d.source.x + d.target.x) / 2)
+                    .attr("y", d => (d.source.y + d.target.y) / 2);
+                
+                node
+                    .attr("transform", d => `translate(${d.x},${d.y})`);
+            });
+            
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+            
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+            
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+        }
+        
+        // Загружаем язык, метрики и историю при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLanguage();
+            loadMetrics();
+            loadDialogHistory();
+            
+            // Обновляем метрики каждые 30 секунд (реже, чтобы не мешать диалогу)
+            metricsUpdater = setInterval(loadMetrics, 30000);
+        });
+    </script>
+</body>
+</html>

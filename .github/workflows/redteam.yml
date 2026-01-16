@@ -1,0 +1,87 @@
+name: Red Team Security Testing
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'src/core/security/**'
+      - 'tests/security/**'
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Запуск каждую неделю в воскресенье
+    - cron: '0 0 * * 0'
+  workflow_dispatch:  # Ручной запуск
+
+jobs:
+  redteam:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install mlflow
+    
+    - name: Run Red Team tests
+      run: |
+        python scripts/run_redteam.py \
+          --prompts tests/security/redteam_prompts.json \
+          --output reports/redteam_report.json \
+          --mlflow
+      continue-on-error: true
+    
+    - name: Upload Red Team report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: redteam-report
+        path: reports/redteam_report.json
+    
+    - name: Check detection rate
+      run: |
+        if [ -f "reports/redteam_report.json" ]; then
+          python -c "
+          import json
+          with open('reports/redteam_report.json') as f:
+            data = json.load(f)
+          rate = data.get('detection_rate', 0)
+          if rate < 0.99:
+            print(f'❌ Detection rate {rate:.2%} is below target 99%')
+            exit(1)
+          else:
+            print(f'✅ Detection rate {rate:.2%} meets target (≥99%)')
+          "
+        else:
+          echo "⚠️ Red Team report not found"
+          exit(1
+    
+    - name: Security scan with Bandit
+      run: |
+        pip install bandit
+        bandit -r src/core/security/ -f json -o reports/bandit_report.json || true
+    
+    - name: Upload Bandit report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: bandit-report
+        path: reports/bandit_report.json
+
+
+
+
+
+
+
+
+

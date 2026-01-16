@@ -1,0 +1,502 @@
+[
+  {
+    "id": "TXN-00001",
+    "client_id": "CLIENT-020",
+    "client_name": "Попов Дмитрий Петрович",
+    "amount": 88275.11,
+    "currency": "KZT",
+    "transaction_date": "2026-01-04T20:04:08.617650",
+    "type": "transfer",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00002",
+    "client_id": "CLIENT-012",
+    "client_name": "Лебедев Иван Петрович",
+    "amount": 50071.01,
+    "currency": "KZT",
+    "transaction_date": "2026-01-01T23:36:08.617650",
+    "type": "transfer",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00003",
+    "client_id": "CLIENT-028",
+    "client_name": "Петров Сергей И.ович",
+    "amount": 19920.34,
+    "currency": "KZT",
+    "transaction_date": "2025-12-29T12:47:08.617650",
+    "type": "transfer",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00004",
+    "client_id": "CLIENT-006",
+    "client_name": "Лебедев Петр Александрович",
+    "amount": 74925.05,
+    "currency": "KZT",
+    "transaction_date": "2025-12-18T05:23:08.617650",
+    "type": "repayment",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00005",
+    "client_id": "CLIENT-018",
+    "client_name": "Попов Иван Петрович",
+    "amount": 4795.24,
+    "currency": "KZT",
+    "transaction_date": "2025-12-19T16:34:08.617650",
+    "type": "loan",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00006",
+    "client_id": "CLIENT-030",
+    "client_name": "Попов Дмитрий Петрович",
+    "amount": 90035.13,
+    "currency": "KZT",
+    "transaction_date": "2026-01-03T05:11:08.617650",
+    "type": "repayment",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00007",
+    "client_id": "CLIENT-002",
+    "client_name": "Соколов Алексей Петрович",
+    "amount": 54738.03,
+    "currency": "KZT",
+    "transaction_date": "2026-01-15T07:08:08.617650",
+    "type": "transfer",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00008",
+    "client_id": "CLIENT-020",
+    "client_name": "Попов Дмитрий Петрович",
+    "amount": 68336.25,
+    "currency": "KZT",
+    "transaction_date": "2025-12-26T20:12:08.617650",
+    "type": "transfer",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00009",
+    "client_id": "CLIENT-009",
+    "client_name": "Соколов Андрей Дмитриевич",
+    "amount": 93692.2,
+    "currency": "KZT",
+    "transaction_date": "2026-01-17T05:23:08.617650",
+    "type": "repayment",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00010",
+    "client_id": "CLIENT-017",
+    "client_name": "Попов Сергей Дмитриевич",
+    "amount": 31986.57,
+    "currency": "KZT",
+    "transaction_date": "2025-12-19T22:03:08.617650",
+    "type": "transfer",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00011",
+    "client_id": "CLIENT-014",
+    "client_name": "Соколов Алексей Сергеевич",
+    "amount": 56824.0,
+    "currency": "KZT",
+    "transaction_date": "2025-12-22T16:40:08.617650",
+    "type": "transfer",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00012",
+    "client_id": "CLIENT-012",
+    "client_name": "Лебедев Иван Петрович",
+    "amount": 10887.0,
+    "currency": "KZT",
+    "transaction_date": "2026-01-10T15:31:08.617650",
+    "type": "loan",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00013",
+    "client_id": "CLIENT-021",
+    "client_name": "Лебедев Дмитрий Дмитриевич",
+    "amount": 80318.34,
+    "currency": "KZT",
+    "transaction_date": "2026-01-04T23:11:08.617650",
+    "type": "transfer",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00014",
+    "client_id": "CLIENT-006",
+    "client_name": "Лебедев Петр Александрович",
+    "amount": 95873.25,
+    "currency": "KZT",
+    "transaction_date": "2026-01-01T02:33:08.617650",
+    "type": "repayment",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00015",
+    "client_id": "CLIENT-015",
+    "client_name": "Иванов Петр Александрович",
+    "amount": 4739.15,
+    "currency": "KZT",
+    "transaction_date": "2025-12-31T19:56:08.617650",
+    "type": "loan",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00016",
+    "client_id": "CLIENT-025",
+    "client_name": "Смирнов Иван Дмитриевич",
+    "amount": 16950.21,
+    "currency": "KZT",
+    "transaction_date": "2026-01-03T06:45:08.617650",
+    "type": "transfer",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00017",
+    "client_id": "CLIENT-017",
+    "client_name": "Попов Сергей Дмитриевич",
+    "amount": 63590.41,
+    "currency": "KZT",
+    "transaction_date": "2025-12-26T17:45:08.617650",
+    "type": "transfer",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00018",
+    "client_id": "CLIENT-005",
+    "client_name": "Попов Дмитрий Петрович",
+    "amount": 7115.62,
+    "currency": "KZT",
+    "transaction_date": "2025-12-22T08:22:08.617650",
+    "type": "transfer",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00019",
+    "client_id": "CLIENT-028",
+    "client_name": "Петров Сергей И.ович",
+    "amount": 9558.8,
+    "currency": "KZT",
+    "transaction_date": "2025-12-21T12:09:08.617650",
+    "type": "repayment",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00020",
+    "client_id": "CLIENT-030",
+    "client_name": "Попов Дмитрий Петрович",
+    "amount": 57056.26,
+    "currency": "KZT",
+    "transaction_date": "2026-01-14T13:05:08.617650",
+    "type": "repayment",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00021",
+    "client_id": "CLIENT-004",
+    "client_name": "Петров Сергей Иванович",
+    "amount": 65152.36,
+    "currency": "KZT",
+    "transaction_date": "2025-12-29T06:44:08.617650",
+    "type": "repayment",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00022",
+    "client_id": "CLIENT-012",
+    "client_name": "Лебедев Иван Петрович",
+    "amount": 99453.88,
+    "currency": "KZT",
+    "transaction_date": "2026-01-06T17:19:08.617650",
+    "type": "repayment",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00023",
+    "client_id": "CLIENT-019",
+    "client_name": "Кузнецов Петр Петрович",
+    "amount": 54550.97,
+    "currency": "KZT",
+    "transaction_date": "2026-01-15T08:42:08.617650",
+    "type": "transfer",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00024",
+    "client_id": "CLIENT-017",
+    "client_name": "Попов Сергей Дмитриевич",
+    "amount": 14346.52,
+    "currency": "KZT",
+    "transaction_date": "2026-01-14T01:37:08.617650",
+    "type": "transfer",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00025",
+    "client_id": "CLIENT-012",
+    "client_name": "Лебедев Иван Петрович",
+    "amount": 52000.9,
+    "currency": "KZT",
+    "transaction_date": "2025-12-28T08:43:08.617650",
+    "type": "repayment",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00026",
+    "client_id": "CLIENT-015",
+    "client_name": "Иванов Петр Александрович",
+    "amount": 13732.2,
+    "currency": "KZT",
+    "transaction_date": "2026-01-03T17:03:08.617650",
+    "type": "loan",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00027",
+    "client_id": "CLIENT-018",
+    "client_name": "Попов Иван Петрович",
+    "amount": 12444.72,
+    "currency": "KZT",
+    "transaction_date": "2026-01-17T05:53:08.617650",
+    "type": "repayment",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00028",
+    "client_id": "CLIENT-012",
+    "client_name": "Лебедев Иван Петрович",
+    "amount": 13358.15,
+    "currency": "KZT",
+    "transaction_date": "2026-01-04T04:48:08.617650",
+    "type": "transfer",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00029",
+    "client_id": "CLIENT-005",
+    "client_name": "Попов Дмитрий Петрович",
+    "amount": 68034.87,
+    "currency": "KZT",
+    "transaction_date": "2026-01-11T13:43:08.617650",
+    "type": "transfer",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00030",
+    "client_id": "CLIENT-024",
+    "client_name": "Соколов Алексей Петрович",
+    "amount": 85146.52,
+    "currency": "KZT",
+    "transaction_date": "2026-01-15T07:07:08.617650",
+    "type": "loan",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00031",
+    "client_id": "CLIENT-028",
+    "client_name": "Петров Сергей И.ович",
+    "amount": 49056.64,
+    "currency": "KZT",
+    "transaction_date": "2025-12-19T02:05:08.617650",
+    "type": "repayment",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00032",
+    "client_id": "CLIENT-016",
+    "client_name": "Сидоров Иван Петрович",
+    "amount": 65707.84,
+    "currency": "KZT",
+    "transaction_date": "2026-01-09T20:48:08.617650",
+    "type": "repayment",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00033",
+    "client_id": "CLIENT-020",
+    "client_name": "Попов Дмитрий Петрович",
+    "amount": 94822.56,
+    "currency": "KZT",
+    "transaction_date": "2026-01-05T23:55:08.617650",
+    "type": "loan",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00034",
+    "client_id": "CLIENT-016",
+    "client_name": "Сидоров Иван Петрович",
+    "amount": 62159.27,
+    "currency": "KZT",
+    "transaction_date": "2025-12-28T18:21:08.617650",
+    "type": "loan",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00035",
+    "client_id": "CLIENT-010",
+    "client_name": "Кузнецов Михаил Сергеевич",
+    "amount": 53757.5,
+    "currency": "KZT",
+    "transaction_date": "2025-12-18T00:52:08.617650",
+    "type": "loan",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00036",
+    "client_id": "CLIENT-030",
+    "client_name": "Попов Дмитрий Петрович",
+    "amount": 88583.12,
+    "currency": "KZT",
+    "transaction_date": "2026-01-06T17:32:08.617650",
+    "type": "transfer",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00037",
+    "client_id": "CLIENT-009",
+    "client_name": "Соколов Андрей Дмитриевич",
+    "amount": 67195.12,
+    "currency": "KZT",
+    "transaction_date": "2026-01-06T08:34:08.617650",
+    "type": "repayment",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00038",
+    "client_id": "CLIENT-004",
+    "client_name": "Петров Сергей Иванович",
+    "amount": 75741.13,
+    "currency": "KZT",
+    "transaction_date": "2026-01-02T14:01:08.617650",
+    "type": "loan",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00039",
+    "client_id": "CLIENT-003",
+    "client_name": "Смирнов Иван Дмитриевич",
+    "amount": 78212.44,
+    "currency": "KZT",
+    "transaction_date": "2025-12-27T15:08:08.617650",
+    "type": "transfer",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00040",
+    "client_id": "CLIENT-002",
+    "client_name": "Соколов Алексей Петрович",
+    "amount": 89293.95,
+    "currency": "KZT",
+    "transaction_date": "2026-01-17T00:08:08.617650",
+    "type": "repayment",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00041",
+    "client_id": "CLIENT-013",
+    "client_name": "Кузнецов Петр Александрович",
+    "amount": 83836.56,
+    "currency": "KZT",
+    "transaction_date": "2026-01-01T05:51:08.617650",
+    "type": "loan",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00042",
+    "client_id": "CLIENT-011",
+    "client_name": "Смирнов Андрей Александрович",
+    "amount": 81688.55,
+    "currency": "KZT",
+    "transaction_date": "2026-01-14T03:23:08.617650",
+    "type": "transfer",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00043",
+    "client_id": "CLIENT-007",
+    "client_name": "Петров Андрей Дмитриевич",
+    "amount": 18860.96,
+    "currency": "KZT",
+    "transaction_date": "2025-12-28T06:05:08.617650",
+    "type": "repayment",
+    "status": "completed"
+  },
+  {
+    "id": "TXN-00044",
+    "client_id": "CLIENT-028",
+    "client_name": "Петров Сергей И.ович",
+    "amount": 60187.9,
+    "currency": "KZT",
+    "transaction_date": "2025-12-29T06:47:08.617650",
+    "type": "repayment",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00045",
+    "client_id": "CLIENT-012",
+    "client_name": "Лебедев Иван Петрович",
+    "amount": 72061.14,
+    "currency": "KZT",
+    "transaction_date": "2025-12-28T23:59:08.617650",
+    "type": "loan",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00046",
+    "client_id": "CLIENT-013",
+    "client_name": "Кузнецов Петр Александрович",
+    "amount": 78311.4,
+    "currency": "KZT",
+    "transaction_date": "2026-01-04T18:39:08.617650",
+    "type": "repayment",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00047",
+    "client_id": "CLIENT-010",
+    "client_name": "Кузнецов Михаил Сергеевич",
+    "amount": 77990.01,
+    "currency": "KZT",
+    "transaction_date": "2026-01-16T20:16:08.617650",
+    "type": "repayment",
+    "status": "pending"
+  },
+  {
+    "id": "TXN-00048",
+    "client_id": "CLIENT-001",
+    "client_name": "Лебедев Дмитрий Дмитриевич",
+    "amount": 37445.12,
+    "currency": "KZT",
+    "transaction_date": "2025-12-18T03:26:08.617650",
+    "type": "transfer",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00049",
+    "client_id": "CLIENT-009",
+    "client_name": "Соколов Андрей Дмитриевич",
+    "amount": 79326.76,
+    "currency": "KZT",
+    "transaction_date": "2025-12-22T21:36:08.617650",
+    "type": "transfer",
+    "status": "failed"
+  },
+  {
+    "id": "TXN-00050",
+    "client_id": "CLIENT-003",
+    "client_name": "Смирнов Иван Дмитриевич",
+    "amount": 33708.92,
+    "currency": "KZT",
+    "transaction_date": "2026-01-07T18:08:08.617650",
+    "type": "loan",
+    "status": "failed"
+  }
+]

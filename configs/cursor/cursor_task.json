@@ -1,0 +1,113 @@
+{
+  "project": "TERAG 2.1 — Operational Upgrade (Vizier's Bridge)",
+  "owner": "Сергей Валерьевич",
+  "phase": "Benchmark → T.R.A.C. → Ethics → PromptOps → Vizier",
+  "version": "1.0",
+  "status": "Approved",
+  "goals": [
+    "Повысить фактологическую точность и устойчивость reasoning",
+    "Внедрить полную трассировку рассуждений через LangGraph",
+    "Создать безопасный Guardrail-as-Router для защиты от Prompt Injection",
+    "Реализовать операционный цикл PromptOps и CI/CD пайплайн",
+    "Разработать визуальный интерфейс ReasonGraph (Vizier's Bridge)"
+  ],
+
+  "implementation_plan": [
+    {
+      "phase": "1 — Benchmark & Validation",
+      "description": "Сравнение Vector-RAG, Graph-RAG и Hybrid GraphRAG по метрикам Faithfulness, Precision, Recall.",
+      "tasks": [
+        "Создать три пайплайна (Vector, Graph, Hybrid) в src/benchmark/pipelines/",
+        "Интегрировать RAGAs для автоматической оценки Faithfulness/Recall",
+        "Регистрировать результаты в MLflow + отчёт benchmark_report.json",
+        "Установить минимальные пороги метрик: Faithfulness ≥ 0.9, Recall ≥ 0.9"
+      ],
+      "priority": "HIGH",
+      "expected_result": "Документированный baseline TERAG Benchmark с метриками AI-REPS (R1–R3, E1–E2)."
+    },
+
+    {
+      "phase": "2 — LangGraph Core (T.R.A.C.)",
+      "description": "Реализация state machine с узлами Planner, Solver, Verifier и рабочей памятью Scratchpad.",
+      "tasks": [
+        "Создать src/core/agents/langgraph_core.py с классом TERAGStateGraph",
+        "Добавить Guardrail_Node как точку фильтрации unsafe input",
+        "Интегрировать Scratchpad (Chain-of-Thought) в State",
+        "Сериализовать ReasonGraph JSON после каждого шага reasoning"
+      ],
+      "priority": "CRITICAL",
+      "expected_result": "Рабочий T.R.A.C.-контур с трассировкой reasoning и audit-лентой в MLflow."
+    },
+
+    {
+      "phase": "3 — Security Layer (AI-REPS: S1–S2)",
+      "description": "Интеграция Guardrail-as-Router и Ethical Evaluation Node.",
+      "tasks": [
+        "Создать Guardrail_Node в LangGraph с классификацией safe/harmful",
+        "Добавить условные переходы к отказу при harmful input",
+        "Подключить Promptfoo Red Team тесты в CI/CD",
+        "Собрать Red Team отчёт и интегрировать результаты в MLflow"
+      ],
+      "priority": "HIGH",
+      "expected_result": "99% detection rate OWASP LLM01 + отчёт RedTeam_Report.json."
+    },
+
+    {
+      "phase": "4 — PromptOps Integration",
+      "description": "Построить полный операционный цикл Prompts-as-Code.",
+      "tasks": [
+        "Развернуть MLflow Prompt Registry (prompts/registry/)",
+        "Добавить загрузчик промптов в FastAPI backend (prompt_loader.py)",
+        "Настроить GitHub Actions для автоматических PromptLint, Bandit, pip-audit, RAGAs Eval",
+        "Создать алиасы @dev, @staging, @prod для версий промптов"
+      ],
+      "priority": "HIGH",
+      "expected_result": "Полноценный PromptOps pipeline с version control и автоматической валидацией."
+    },
+
+    {
+      "phase": "5 — Vizier's Bridge UX",
+      "description": "Визуализация когнитивного процесса агента в 3D и оценка Cognitive Resonance.",
+      "tasks": [
+        "Разработать FastAPI SSE endpoint для стриминга ReasonGraph JSON",
+        "Создать React Three Fiber компонент TeragVizierScene",
+        "Реализовать подсветку активных узлов и анимацию reasoning flow",
+        "Добавить метрику A.R.I. (Average Resonance Index) через UX-опросник"
+      ],
+      "priority": "MEDIUM",
+      "expected_result": "Иммерсивный UI ReasonGraph с измеримым UX-показателем доверия пользователя."
+    }
+  ],
+
+  "metrics": {
+    "faithfulness": ">= 0.90",
+    "context_precision": ">= 0.85",
+    "context_recall": ">= 0.90",
+    "secure_reasoning_index": ">= 0.8",
+    "owasp_llm01_detection_rate": ">= 0.99",
+    "cognitive_resonance_index": ">= 0.8"
+  },
+
+  "ci_cd_pipeline": {
+    "tools": ["MLflow", "LangSmith", "RAGAs", "Promptfoo", "Bandit", "pip-audit"],
+    "stages": ["Unit Tests", "PromptLint", "Security Scan", "RAG Eval", "Red Team", "Deploy"],
+    "reporting": ["MLflow UI", "GitHub Actions Artifacts", "LangSmith Dash"]
+  },
+
+  "deliverables": [
+    "benchmark_report.json",
+    "redteam_report.json",
+    "reason_graph.json",
+    "mlflow_run_logs/",
+    "vizier_scene.jsx"
+  ]
+}
+
+
+
+
+
+
+
+
+

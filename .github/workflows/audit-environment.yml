@@ -1,0 +1,275 @@
+name: Environment Audit CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Запуск каждый день в 2:00 UTC (5:00 MSK)
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      audit_level:
+        description: 'Уровень аудита'
+        required: true
+        default: 'L2'
+        type: choice
+        options:
+        - L1
+        - L2
+        - L3
+
+env:
+  PYTHONPATH: ${{ github.workspace }}/src
+  AUDIT_CONFIG: .auditconfig.yaml
+
+jobs:
+  environment-audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyyaml requests
+    
+    - name: Create Cursor environment simulation
+      run: |
+        # Создаём симуляцию Cursor окружения для CI
+        mkdir -p ~/.cursor/settings.json
+        echo '{"workspaceRoot": "${{ github.workspace }}"}' > ~/.cursor/settings.json
+        mkdir -p ~/.cursor/projects
+        mkdir -p ~/.cursor/mcp
+    
+    - name: Run Environment Audit
+      id: audit
+      run: |
+        python scripts/nightly_audit.py --environment-only --config $AUDIT_CONFIG
+        echo "audit_exit_code=$?" >> $GITHUB_OUTPUT
+    
+    - name: Upload audit reports
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: environment-audit-reports
+        path: audit_reports/nightly/
+        retention-days: 30
+    
+    - name: Parse audit results
+      id: parse_results
+      if: always()
+      run: |
+        # Парсим результаты последнего аудита
+        LATEST_REPORT=$(find audit_reports/nightly -name "environment_audit_*.json" | sort | tail -1)
+        
+        if [ -f "$LATEST_REPORT" ]; then
+          ENV_SCORE=$(python -c "import json; data=json.load(open('$LATEST_REPORT')); print(data.get('environment_score', 0))")
+          TOTAL_ISSUES=$(python -c "import json; data=json.load(open('$LATEST_REPORT')); print(data.get('total_issues', 0))")
+          STATUS=$(python -c "import json; data=json.load(open('$LATEST_REPORT')); print(data.get('status', 'unknown'))")
+          
+          echo "environment_score=$ENV_SCORE" >> $GITHUB_OUTPUT
+          echo "total_issues=$TOTAL_ISSUES" >> $GITHUB_OUTPUT
+          echo "audit_status=$STATUS" >> $GITHUB_OUTPUT
+        else
+          echo "environment_score=0" >> $GITHUB_OUTPUT
+          echo "total_issues=999" >> $GITHUB_OUTPUT
+          echo "audit_status=failed" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Check environment score threshold
+      id: check_threshold
+      run: |
+        ENV_SCORE=${{ steps.parse_results.outputs.environment_score }}
+        CRITICAL_THRESHOLD=0.5
+        WARNING_THRESHOLD=0.7
+        
+        if (( $(echo "$ENV_SCORE < $CRITICAL_THRESHOLD" | bc -l) )); then
+          echo "status=critical" >> $GITHUB_OUTPUT
+          echo "message=Environment score $ENV_SCORE is below critical threshold $CRITICAL_THRESHOLD" >> $GITHUB_OUTPUT
+        elif (( $(echo "$ENV_SCORE < $WARNING_THRESHOLD" | bc -l) )); then
+          echo "status=warning" >> $GITHUB_OUTPUT
+          echo "message=Environment score $ENV_SCORE is below warning threshold $WARNING_THRESHOLD" >> $GITHUB_OUTPUT
+        else
+          echo "status=success" >> $GITHUB_OUTPUT
+          echo "message=Environment score $ENV_SCORE is within acceptable range" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Comment on PR
+      if: github.event_name == 'pull_request' && steps.check_threshold.outputs.status != 'success'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { status, message, environment_score, total_issues } = {
+            status: '${{ steps.check_threshold.outputs.status }}',
+            message: '${{ steps.check_threshold.outputs.message }}',
+            environment_score: '${{ steps.parse_results.outputs.environment_score }}',
+            total_issues: '${{ steps.parse_results.outputs.total_issues }}'
+          };
+          
+          const icon = status === 'critical' ? '🔴' : '🟡';
+          const comment = `## ${icon} Environment Audit Alert
+          
+          **Status:** ${status.toUpperCase()}
+          **Environment Score:** ${environment_score}
+          **Issues Found:** ${total_issues}
+          
+          **Message:** ${message}
+          
+          Please check the [audit reports](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.
+          
+          ### Recommended Actions:
+          - Review environment configuration
+          - Check Cursor IDE settings
+          - Verify MCP integrations
+          - Update project structure if needed`;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
+    
+    - name: Create Issue on Critical Failure
+      if: steps.check_threshold.outputs.status == 'critical' && github.event_name == 'schedule'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { environment_score, total_issues } = {
+            environment_score: '${{ steps.parse_results.outputs.environment_score }}',
+            total_issues: '${{ steps.parse_results.outputs.total_issues }}'
+          };
+          
+          const title = `🔴 Critical Environment Audit Failure - Score: ${environment_score}`;
+          const body = `## Environment Audit Critical Alert
+          
+          **Environment Score:** ${environment_score} (Critical: < 0.5)
+          **Issues Found:** ${total_issues}
+          **Timestamp:** ${new Date().toISOString()}
+          
+          ### Immediate Actions Required:
+          1. Check Cursor IDE configuration
+          2. Verify workspace root settings
+          3. Review MCP integrations
+          4. Update project structure
+          
+          ### Audit Reports:
+          - [Latest Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          
+          ### Investigation Steps:
+          1. Run local audit: \`python scripts/nightly_audit.py --environment-only\`
+          2. Check Cursor settings: \`~/.cursor/settings.json\`
+          3. Verify MCP directory: \`~/.cursor/mcp/\`
+          4. Review project structure consistency
+          
+          ---
+          *This issue was automatically created by the Environment Audit CI/CD pipeline.*`;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: title,
+            body: body,
+            labels: ['bug', 'environment', 'critical', 'automated']
+          });
+    
+    - name: Fail on Critical Issues
+      if: steps.check_threshold.outputs.status == 'critical'
+      run: |
+        echo "❌ Environment audit failed with critical issues"
+        echo "Environment Score: ${{ steps.parse_results.outputs.environment_score }}"
+        echo "Total Issues: ${{ steps.parse_results.outputs.total_issues }}"
+        exit 1
+    
+    - name: Success Summary
+      if: steps.check_threshold.outputs.status == 'success'
+      run: |
+        echo "✅ Environment audit passed successfully"
+        echo "Environment Score: ${{ steps.parse_results.outputs.environment_score }}"
+        echo "Total Issues: ${{ steps.parse_results.outputs.total_issues }}"
+
+  full-audit:
+    runs-on: ubuntu-latest
+    needs: environment-audit
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.audit_level == 'L3')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyyaml requests
+    
+    - name: Download environment audit reports
+      uses: actions/download-artifact@v3
+      with:
+        name: environment-audit-reports
+        path: audit_reports/nightly/
+    
+    - name: Run Full Audit
+      run: |
+        python scripts/nightly_audit.py --config $AUDIT_CONFIG
+    
+    - name: Upload full audit reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: full-audit-reports
+        path: audit_reports/nightly/
+        retention-days: 30
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

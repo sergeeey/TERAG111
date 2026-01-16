@@ -1,0 +1,132 @@
+{
+  "project": "TERAG 2.1 — PromptOps Integration (Phase 4)",
+  "phase": "Phase 4",
+  "version": "1.0",
+  "owner": "Сергей Валерьевич",
+  "status": "Approved",
+  "goal": "Интегрировать систему управления промптами и наблюдаемости (PromptOps + LangSmith) в архитектуру TERAG.",
+
+  "objectives": [
+    "Создать MLflow Prompt Registry как единый источник правды для всех промптов системы.",
+    "Реализовать сервис динамической загрузки промптов в LangGraph (без перезапуска backend).",
+    "Интегрировать LangSmith для трассировки reasoning на уровне токенов и промежуточных шагов.",
+    "Настроить CI/CD пайплайн для 'Prompts as Code': линтинг, мутационное тестирование, версионирование.",
+    "Обеспечить полную воспроизводимость reasoning через связку MLflow + LangSmith."
+  ],
+
+  "implementation_plan": [
+    {
+      "task": "4.1 MLflow Prompt Registry",
+      "description": "Создание и настройка реестра промптов в MLflow, который хранит системные шаблоны и RAG-конфигурации.",
+      "files": [
+        "src/promptops/mlflow_registry.py",
+        "configs/prompts/registry_schema.json"
+      ],
+      "actions": [
+        "Создать класс PromptRegistryManager с методами register_prompt(), get_prompt(alias), list_prompts().",
+        "Добавить поддержку алиасов @latest, @staging, @production.",
+        "Реализовать версионирование промптов через MLflow Model Registry API.",
+        "Создать JSON Schema для формата промптов (имя, описание, revision, variables)."
+      ],
+      "expected_result": "Все промпты и шаблоны RAG регистрируются и извлекаются из MLflow, версионирование работает через алиасы."
+    },
+
+    {
+      "task": "4.2 Dynamic Prompt Loader Service",
+      "description": "FastAPI сервис для динамической загрузки промптов из MLflow Registry в LangGraph узлы.",
+      "files": [
+        "src/promptops/loader_service.py",
+        "src/promptops/router.py"
+      ],
+      "actions": [
+        "Создать FastAPI endpoint /api/prompts/{name}?alias=@production для загрузки промпта.",
+        "При инициализации LangGraph — подгружать актуальный промпт через LoaderService.",
+        "Добавить in-memory cache с TTL (60 мин).",
+        "Интегрировать обновление промптов без перезапуска backend."
+      ],
+      "expected_result": "LangGraph использует актуальные промпты из MLflow, обновления подхватываются в реальном времени."
+    },
+
+    {
+      "task": "4.3 LangSmith Observability",
+      "description": "Интеграция LangSmith SDK для глубокой трассировки reasoning.",
+      "files": [
+        "src/promptops/langsmith_integration.py",
+        "src/core/agents/langgraph_integration.py"
+      ],
+      "actions": [
+        "Подключить LangSmith SDK и API ключ через переменные окружения.",
+        "В каждом узле LangGraph (Planner, Solver, Verifier, Ethical) добавить вызов langsmith.log_step().",
+        "Логировать duration, tokens_used, sub_prompts, errors, intermediate_outputs.",
+        "Добавить MLflow ↔ LangSmith sync через run_id."
+      ],
+      "expected_result": "Все reasoning-шаги трассируются в LangSmith, ссылаются на MLflow run, и доступны в UI."
+    },
+
+    {
+      "task": "4.4 CI/CD for Prompts as Code",
+      "description": "Создание GitHub Actions пайплайна для автоматической проверки и тестирования промптов.",
+      "files": [
+        ".github/workflows/promptops.yml",
+        "tests/promptops/test_prompts_lint.py",
+        "tests/promptops/test_prompts_eval.py"
+      ],
+      "actions": [
+        "Добавить PromptLint и Promptfoo eval для проверки синтаксиса и поведения промптов.",
+        "Настроить пайплайн: lint → security scan → mutation test → RAG evaluation.",
+        "Добавить шаг с pip-audit и Bandit для безопасности.",
+        "Сохранять отчёты (prompt_eval_report.json) в артефакты CI."
+      ],
+      "expected_result": "Все промпты автоматически тестируются и валидируются при каждом PR, CI отклоняет ошибки."
+    },
+
+    {
+      "task": "4.5 Integration with LangGraph Core",
+      "description": "Интеграция динамической загрузки промптов в LangGraph узлы.",
+      "files": [
+        "src/core/agents/langgraph_core.py"
+      ],
+      "actions": [
+        "Добавить в инициализацию каждого узла загрузку промпта из PromptLoaderService.",
+        "При смене алиаса в MLflow, граф должен автоматически подхватывать новый шаблон.",
+        "Добавить логирование версии промпта в MLflow run.params.",
+        "Обеспечить совместимость с Guardrail и Ethical Node."
+      ],
+      "expected_result": "LangGraph Core полностью управляет промптами динамически, версии синхронизированы с MLflow."
+    }
+  ],
+
+  "metrics": {
+    "prompt_registry_coverage": ">= 0.95",
+    "prompt_lint_pass_rate": ">= 0.9",
+    "mlflow_sync_reliability": ">= 0.95",
+    "observability_trace_completeness": ">= 0.9"
+  },
+
+  "ci_cd_pipeline": {
+    "tools": ["PromptLint", "Promptfoo", "Bandit", "pip-audit", "LangSmith", "MLflow"],
+    "stages": ["Prompt Validation", "Security Scan", "RAG Evaluation", "Metrics Upload"],
+    "outputs": ["prompt_eval_report.json", "langsmith_traces", "mlflow_metrics"]
+  },
+
+  "deliverables": [
+    "src/promptops/mlflow_registry.py",
+    "src/promptops/loader_service.py",
+    "src/promptops/langsmith_integration.py",
+    "src/promptops/router.py",
+    "configs/prompts/registry_schema.json",
+    "tests/promptops/test_prompts_lint.py",
+    "tests/promptops/test_prompts_eval.py",
+    ".github/workflows/promptops.yml",
+    "docs/PROMPTOPS_IMPLEMENTATION.md"
+  ]
+}
+
+
+
+
+
+
+
+
+

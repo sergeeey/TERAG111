@@ -1,0 +1,75 @@
+{
+  "phase": "Phase 5 — Vizier's Bridge Review Fixes",
+  "owner": "Сергей Валерьевич",
+  "goal": "Исправить архитектурные нарушения, повысить кодовое соответствие стандартам TERAG и интегрировать observability.",
+  "priority": "critical",
+  "tasks": [
+    {
+      "id": "P0.1",
+      "title": "Dependency Injection для LangGraph",
+      "description": "Вынести инициализацию TERAGLangGraphIntegration из route handler. Добавить factory-функцию get_terag_graph() и использовать Depends() в FastAPI маршрутах.",
+      "files": ["src/api/routes/stream.py", "src/core/agents/langgraph_integration.py"]
+    },
+    {
+      "id": "P0.2",
+      "title": "Создание модуля ошибок TERAG",
+      "description": "Создать src/core/exceptions.py. Ввести классы TERAGError, StreamError, GraphError, ValidationError. Обеспечить структурированный возврат ошибок через SSE и API.",
+      "files": ["src/core/exceptions.py", "src/api/routes/stream.py"]
+    },
+    {
+      "id": "P1.1",
+      "title": "Добавить структурированное логирование с trace_id",
+      "description": "Интегрировать trace_id и correlation_id во все логи. Перейти на structured logging через JSONFormatter. Добавить trace_id в ReasonGraph serializer.",
+      "files": ["src/core/agents/langgraph_serializer.py", "src/core/utils/logging.py"]
+    },
+    {
+      "id": "P1.2",
+      "title": "Валидация confidence в LangGraph Serializer",
+      "description": "Добавить пороговое значение CONFIDENCE_THRESHOLD = 0.6. Все узлы ниже порога помечать как questionable и логировать предупреждение.",
+      "files": ["src/core/agents/langgraph_serializer.py"]
+    },
+    {
+      "id": "P1.3",
+      "title": "Валидация входных данных через Pydantic",
+      "description": "Создать модель ReasoningQuery в src/api/models/reasoning.py с проверкой query длины, символов и regex для thread_id. Использовать Depends() в stream.py.",
+      "files": ["src/api/models/reasoning.py", "src/api/routes/stream.py"]
+    },
+    {
+      "id": "P1.4",
+      "title": "Обработка разрыва соединения и cleanup SSE",
+      "description": "Добавить проверку request.is_disconnected(), закрытие потоков и очистку _active_streams при завершении.",
+      "files": ["src/api/routes/stream.py"]
+    },
+    {
+      "id": "P2.1",
+      "title": "Добавить интеграцию с MLflow и LangSmith в сериализатор",
+      "description": "Добавить параметры mlflow_tracer и langsmith_tracer в serialize(). Отправлять ReasonGraph JSON в observability системы.",
+      "files": ["src/core/agents/langgraph_serializer.py"]
+    },
+    {
+      "id": "P2.2",
+      "title": "Улучшить типизацию TypeScript в ViziersBridge.tsx",
+      "description": "Заменить any на конкретные типы, включить strict mode, добавить тип OrbitControls в useRef.",
+      "files": ["src/components/vizier/ViziersBridge.tsx"]
+    }
+  ],
+  "metrics": {
+    "code_compliance": ">= 0.9",
+    "confidence_validation_rate": ">= 0.95",
+    "trace_correlation_rate": ">= 0.9",
+    "sse_uptime": ">= 0.98"
+  },
+  "ci_cd": {
+    "workflow": ".github/workflows/visualization.yml",
+    "tests": ["pytest tests/api/test_stream.py", "pytest tests/core/test_serializer.py", "npm run lint"],
+    "reports": ["docs/PHASE5_REVIEW_FIX_SUMMARY.md"]
+  }
+}
+
+
+
+
+
+
+
+

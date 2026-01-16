@@ -1,0 +1,127 @@
+{
+  "project": "TERAG 2.1 — Security Layer (AI-REPS S1–S2)",
+  "phase": "Phase 3",
+  "version": "1.0",
+  "owner": "Сергей Валерьевич",
+  "status": "Approved",
+  "goal": "Усилить безопасность reasoning ядра TERAG через Guardrail-as-Router, Ethical Evaluation Node и Red Team пайплайн.",
+
+  "objectives": [
+    "Реализовать модуль Guardrail-as-Router для фильтрации prompt injection (OWASP LLM01–04).",
+    "Создать Ethical Evaluation Node (EEN) для оценки этической состоятельности ответов.",
+    "Интегрировать Red Team тестирование (Promptfoo) в CI/CD.",
+    "Добавить метрику Secure Reasoning Index (SRI) и логирование в MLflow.",
+    "Повысить OWASP LLM01 Detection Rate до ≥ 99%."
+  ],
+
+  "implementation_plan": [
+    {
+      "task": "3.1 Guardrail-as-Router",
+      "description": "Расширить Guardrail Node до маршрутизатора безопасности.",
+      "files": [
+        "src/core/security/guardrail_router.py",
+        "src/core/security/patterns.json"
+      ],
+      "actions": [
+        "Создать GuardrailRouter с функцией classify_input(prompt).",
+        "Добавить JSON-файл patterns.json с регулярками для prompt injection, jailbreak, Cypher-injection.",
+        "В GuardrailRouter реализовать Conditional Routing: safe → Planner, unsafe → Reject.",
+        "Добавить unit-тесты для каждого типа атаки."
+      ],
+      "expected_result": "Guardrail фильтрует вредоносные промпты, точность ≥ 99%."
+    },
+
+    {
+      "task": "3.2 Ethical Evaluation Node (EEN)",
+      "description": "Добавить узел в LangGraph после Verifier для оценки этического выравнивания.",
+      "files": [
+        "src/core/agents/ethical_node.py"
+      ],
+      "actions": [
+        "Создать класс EthicalEvaluationNode с методами evaluate_alignment(response).",
+        "Оценивать ответ по шкале: ethical, questionable, harmful.",
+        "Добавить в state поле 'ethical_score' и 'alignment_status'.",
+        "Интегрировать в LangGraph Core и MLflow логирование."
+      ],
+      "expected_result": "Ответы оцениваются по уровню этической допустимости, данные логируются."
+    },
+
+    {
+      "task": "3.3 Red Team CI/CD Integration",
+      "description": "Добавить автоматическое Red Team тестирование в GitHub Actions.",
+      "files": [
+        ".github/workflows/redteam.yml",
+        "tests/security/redteam_prompts.json",
+        "scripts/run_redteam.py"
+      ],
+      "actions": [
+        "Создать набор вредоносных промптов в redteam_prompts.json (20+ кейсов).",
+        "Интегрировать Promptfoo CLI для тестирования OWASP LLM01–LLM04.",
+        "Добавить скрипт run_redteam.py для анализа отчета и отправки в MLflow.",
+        "Настроить GitHub Actions для запуска Red Team job при каждом PR в main."
+      ],
+      "expected_result": "Автоматическое тестирование безопасности в CI/CD, отчеты сохраняются как артефакты."
+    },
+
+    {
+      "task": "3.4 Secure Reasoning Index (SRI)",
+      "description": "Добавить новую метрику безопасности reasoning и логирование в MLflow.",
+      "files": [
+        "src/core/agents/mlflow_integration.py"
+      ],
+      "actions": [
+        "Добавить расчёт метрики SRI (0–1) на основе успешности Guardrail фильтрации и EEN alignment.",
+        "Логировать SRI как метрику MLflow.",
+        "Добавить вывод SRI в ReasonGraph JSON."
+      ],
+      "expected_result": "Каждый reasoning-run получает SRI, доступный в MLflow UI и ReasonGraph."
+    },
+
+    {
+      "task": "3.5 Security Tests Suite",
+      "description": "Добавить тестовое покрытие для Guardrail и Ethical Node.",
+      "files": [
+        "tests/security/test_guardrail_router.py",
+        "tests/security/test_ethical_node.py"
+      ],
+      "actions": [
+        "Написать 10 тестов для GuardrailRouter (инъекции, jailbreak, обход).",
+        "Написать 10 тестов для Ethical Node (harmful/neutral/ethical).",
+        "Проверить сериализацию результатов в ReasonGraph JSON.",
+        "Покрытие ≥ 60%."
+      ],
+      "expected_result": "Проверенные узлы безопасности, CI успешно проходит тесты."
+    }
+  ],
+
+  "metrics": {
+    "llm01_detection_rate": ">= 0.99",
+    "secure_reasoning_index": ">= 0.8",
+    "ethical_alignment_score": ">= 0.85",
+    "test_coverage_security": ">= 0.6"
+  },
+
+  "ci_cd_pipeline": {
+    "tools": ["Promptfoo", "Bandit", "pip-audit", "MLflow"],
+    "stages": ["Security Scan", "Red Team", "Report Upload"],
+    "outputs": ["redteam_report.json", "mlflow_security_metrics"]
+  },
+
+  "deliverables": [
+    "src/core/security/guardrail_router.py",
+    "src/core/agents/ethical_node.py",
+    "scripts/run_redteam.py",
+    "tests/security/*",
+    ".github/workflows/redteam.yml",
+    "docs/SECURITY_LAYER_IMPLEMENTATION.md"
+  ]
+}
+
+
+
+
+
+
+
+
+

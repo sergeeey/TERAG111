@@ -1,0 +1,309 @@
+{
+  "file": "data\\converted\\Анкета агента 2 стр_en.txt",
+  "language": "en",
+  "triplets_count": 43,
+  "triplets": [
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Исходный файл: Анкета агента 2 стр.PDF",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Путь: data\\Солва\\Проверка Агентов\\Абильхаир Н.13.02.20г\\Ан",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "# Размер: 2850 символов",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "--- Страница 1 ---",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "ILAntt rn1rcry|/t\",ca4",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "V)a d'4 /r'L",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "u,lfu\" zlizl4qrr 6 08. /9$frn*fu/**fr/.(*;ryrnu'' r'/*taza",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "^/'tJ\"it'qqE J4't////3",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "o1f,rt 'nflEtztt;t*d7Jtza'm",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Zsfur\"/oa'2f oirilQu'yf* (, ?,f/\"zzza teuae",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "!il, s^'r L'r L-L-",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "tllZL o'/'\"t/[a.rz*aoVfulc\"f7jf,r.rA\"03. //'J006ol zt tztz g",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "'#r rr\"/ rttd",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "{annue o6o ecex poacrBeHHrrrax, pa6orauuux e TOO <<MurcpoSuH",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "n rrx AoqepHrrx opraHln3aqllfx:",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "flpHelexarucb Jrr,r Bbr paHee K aAMr4HncrparueHofi unr{ K yr",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "wm a!:r*tr.trtucrparr4BHofo xorcxca) &l(,tn",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Bpann ra Bu rpe4urrr s TOO <<MurcpoQuHarrcoBafl opraHlr3alln",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "-flunerecl rtr Bbt B Hacroflrrlee BpeM{ [oao3peBaeMbrM, o6s[",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "llpuruanalucr rr Brr cyaoM HeAeecuoco6nrru u:rr.r",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Htr,rercrcs nr4 y Bac sa6oresaHur, qpen.flTcrByronll4eorpaHr",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "ocyurecrBneHruo nol uovo.tuh*tn",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Ha -aoJrxHocr\" A.\"\"ru?-",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Orsouenne K a\"rrxoro.rrro: Hl /{L",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "Cocroure/cocror,rrr4 Jrlr Bbr Ha frerax B HapKonorrrlrecKoM ",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "lcuxnrecxoro 3aopoBbf (ncux. yrer)?",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "HerrpH srHru/HeAo[vrueHHrc B cB_ol{x x Koppylqrrn rr MOI4IeH",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "D-d-7 ,./2, r2*tt t b flAnt l",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "ilo4rnepN.uaro, qro Bce AaHHbIe FO B AHKETE OTBETbI BCDHbI n",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "no cyrrr 3aAaHHbrx Bor{pocoB.",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "-fl ne nospaxruo [porr4B rrpoBepKr,r coo6ueHr+rx MHoro B aHK",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "afeHTcKr{x ycnyr.",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "-f, npe4yupeN.[en/a, qro B cJD4rae fiprrurrr4r MeHir B Karre",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "aHKere.6yaer nn,rnrucfl aonoJrHr4TeJrbHbrM ocHoBaHHeM ana pa",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "flpn enrnolueHr{r4 cBorlx o6.qraHHocrefi Arenra o6nsyncr crp",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "PK, He noporrurb AenoByro pery'raulllo TOO <<MurcpoQnHaHcoBa",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "rrpr4aepxrrBarbcr rlpr4Hut{noB qecrHocrr4 ri npo3paqHocrr.r,",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "TperblrM JrrruaM, He B3brMaTb Hr{KaKoro He3aKoHHoro Bo3Harpa",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "noxHyro un$opuauruo o [pr{BneKaeMbrx 3aeMurr{Kax B ueJux o6u",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "c.{er TOO <<]\\llnnpo0ugarrcoBas opraHu3arl[s (<On,rafiHKas@[",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "fl npe.uynpeN4en/a, qro 3a coBeprrreHr{e, MorueHHlrrrecKrrx ",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "aaMr.{Hncrparr,rBHy}o, rpaxAaHcKo-[paBoByro r{ ar{cqulnuHapH",
+      "confidence": 0.85,
+      "language": "en"
+    },
+    {
+      "subject": "Document",
+      "predicate": "mentions",
+      "object": "{r cd f0c0TOO <<iVlunpoQuuaucoBas opraHr{saqufl <<OruafinKas",
+      "confidence": 0.85,
+      "language": "en"
+    }
+  ],
+  "processed_at": "2025-10-26T10:36:39.115826"
+}

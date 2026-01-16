@@ -1,0 +1,171 @@
+# TERAG Signal Discovery Mission
+# Миссия для обнаружения скрытых знаний, слабых сигналов и новых когнитивных направлений
+
+mission:
+  name: "Hidden Knowledge Signals Discovery"
+  version: "1.0.0"
+  type: "signals"  # Тип миссии для обнаружения сигналов
+  duration: 30  # days - продолжительность миссии
+  schedule: "weekly"  # weekly - запуск раз в неделю
+  
+  # Компоненты миссии
+  components:
+    - brave_search
+    - bright_extraction
+    - signal_extraction  # Специальный компонент для извлечения сигналов
+    - deepconf_validation
+    - novelty_analysis  # Анализ новизны концептов
+    - graph_rag_update
+    - reasoning_phase
+    - metrics_logging
+    - discovery_report
+
+  # Цели миссии
+  goals:
+    - discover_underreported_research_and_signals
+    - extract_structured_facts_and_meta_concepts
+    - validate_with_deepconf_and_insert_into_graph
+    - identify_novel_concepts_and_emerging_domains
+    - track_weak_signals_and_trending_topics
+
+  # Темы для поиска (специфичные запросы для слабых сигналов)
+  topics:
+    - "emergent technologies 2025 site:arxiv.org"
+    - "weak signals future civilization"
+    - "underrated scientific discoveries 2024"
+    - "AI epistemology confidence verification"
+    - "biotechnological feudalism governance"
+    - "paradox of confidence epistemology"
+    - "novel cognitive architectures"
+    - "first application of site:arxiv.org"
+    - "underreported research methodology"
+    - "emerging frameworks 2025"
+
+  # Фильтры для поиска
+  search_filters:
+    min_year: 2024  # Минимальный год публикации
+    content_types:
+      - "research"
+      - "methodology"
+      - "framework"
+      - "dataset"
+    indicators:
+      - "first application of"
+      - "novel architecture"
+      - "novel approach"
+      - "underreported"
+      - "weak signal"
+      - "emerging"
+    sources:
+      - "arxiv.org"
+      - "nature.com"
+      - "weforum.org"
+      - "imf.org"
+      - "github.com"
+      - "substack.com"
+      - "medium.com"
+
+  # Настройки компонентов
+  brave_search:
+    enabled: true
+    api_key: "${BRAVE_API_KEY}"
+    max_results_per_query: 20  # Больше результатов для поиска сигналов
+    max_queries_per_day: 100
+    languages: ["en"]
+    safe_search: "moderate"
+    sort_by: "date"  # Сортировка по дате для новых результатов
+
+  bright_extraction:
+    enabled: true
+    mcp_server: "bright_data"
+    scrape_method: "scrape_as_markdown"
+    max_pages_per_day: 200
+    timeout_seconds: 45
+    retry_attempts: 3
+
+  signal_extraction:
+    enabled: true
+    novelty_threshold: 0.7  # Порог новизны концепта
+    min_confidence: 0.6  # Минимальная уверенность для сигнала
+    extract_concepts: true
+    extract_entities: true
+    extract_relationships: true
+    detect_weak_signals: true
+    track_mentions: true  # Отслеживать упоминания концептов
+
+  deepconf_validation:
+    enabled: true
+    confidence_threshold: 0.65  # Немного ниже для слабых сигналов
+    pemm_enabled: true
+    llm_critic_model: "qwen3"
+    validation_batch_size: 10
+    cross_source_validation: true  # Валидация между источниками
+    check_doi: true  # Проверка наличия DOI
+    check_arxiv_id: true  # Проверка наличия arXiv ID
+
+  novelty_analysis:
+    enabled: true
+    novelty_index_model: "qwen3"
+    compare_with_existing: true  # Сравнение с существующими концептами
+    detect_trends: true  # Обнаружение трендов
+    track_growth: true  # Отслеживание роста упоминаний
+
+  graph_rag:
+    enabled: true
+    neo4j_uri: "${NEO4J_URI}"
+    neo4j_user: "${NEO4J_USER}"
+    neo4j_password: "${NEO4J_PASSWORD}"
+    batch_size: 50
+    create_relationships: true
+    confidence_property: "deepconf_score"
+    novelty_property: "novelty_index"
+    signal_strength_property: "signal_strength"
+    node_types:
+      - "Discovery"
+      - "Concept"
+      - "Signal"
+      - "Source"
+      - "Domain"
+    relationship_types:
+      - "RELATED_TO"
+      - "MENTIONED_IN"
+      - "EMERGES_FROM"
+      - "VALIDATES"
+
+  reasoning:
+    enabled: true
+    llm_model: "qwen3"
+    max_reasoning_depth: 3
+    generate_anomalies: true
+    generate_insights: true
+    identify_potential: true  # Выявление потенциальных применений
+
+  metrics:
+    enabled: true
+    prometheus_enabled: true
+    log_new_concepts: true
+    log_signal_confidence: true
+    log_novelty_distribution: true
+    log_graph_growth: true
+
+  # Выходные файлы
+  output:
+    daily_summary: "/data/discovery_summary.md"
+    graph_snapshot: "/data/graph_snapshot.json"
+    confidence_matrix: "/data/confidence_matrix.csv"
+    mission_log: "/data/signals_mission_log.jsonl"
+    discoveries_report: "/data/discoveries_report.md"
+    novelty_index: "/data/novelty_index.json"
+    weak_signals: "/data/weak_signals.json"
+
+  # Настройки расписания
+  schedule_config:
+    weekly_run_day: "Monday"  # День недели для запуска
+    weekly_run_time: "03:00"  # Время запуска (UTC)
+    timezone: "UTC"
+
+  # Ограничения ресурсов
+  resource_limits:
+    max_memory_mb: 8192  # Больше памяти для анализа
+    max_cpu_percent: 80
+    max_disk_gb: 20

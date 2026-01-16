@@ -1,0 +1,136 @@
+{
+  "owasp_llm01_prompt_injection": {
+    "description": "OWASP LLM01: Prompt Injection",
+    "patterns": [
+      {
+        "name": "ignore_instructions",
+        "pattern": "(?i)(ignore|forget|disregard|skip)\\s+(all|previous|above|earlier|prior)\\s+(instructions?|rules?|guidelines?|directives?)",
+        "severity": "high"
+      },
+      {
+        "name": "system_prompt_extraction",
+        "pattern": "(?i)(show|reveal|display|print|output|tell)\\s+(me\\s+)?(your|the|system)\\s+(prompt|instructions?|rules?|guidelines?|directives?)",
+        "severity": "high"
+      },
+      {
+        "name": "role_manipulation",
+        "pattern": "(?i)(you\\s+are|act\\s+as|pretend\\s+to\\s+be|roleplay|play\\s+the\\s+role|become)\\s+(a|an|the)?\\s*[^.]*",
+        "severity": "high"
+      },
+      {
+        "name": "instruction_override",
+        "pattern": "(?i)(new\\s+)?(instructions?|rules?|guidelines?|directives?)\\s*[:=]",
+        "severity": "medium"
+      },
+      {
+        "name": "context_switching",
+        "pattern": "(?i)(from\\s+now\\s+on|starting\\s+now|beginning\\s+now|hereafter|henceforth)",
+        "severity": "medium"
+      }
+    ]
+  },
+  "owasp_llm02_jailbreak": {
+    "description": "OWASP LLM02: Jailbreak",
+    "patterns": [
+      {
+        "name": "jailbreak_dan",
+        "pattern": "(?i)(dan|do\\s+anything\\s+now|developer\\s+mode|unrestricted\\s+mode)",
+        "severity": "high"
+      },
+      {
+        "name": "jailbreak_character",
+        "pattern": "(?i)(pretend|imagine|hypothetically|in\\s+a\\s+fictional|as\\s+a\\s+character)",
+        "severity": "medium"
+      },
+      {
+        "name": "jailbreak_developer",
+        "pattern": "(?i)(developer|debug|admin|root|sudo)\\s+(mode|access|privileges?)",
+        "severity": "high"
+      },
+      {
+        "name": "jailbreak_bypass",
+        "pattern": "(?i)(bypass|circumvent|override|disable)\\s+(safety|security|filter|restriction)",
+        "severity": "high"
+      }
+    ]
+  },
+  "owasp_llm03_training_data_extraction": {
+    "description": "OWASP LLM03: Training Data Extraction",
+    "patterns": [
+      {
+        "name": "data_extraction",
+        "pattern": "(?i)(extract|dump|export|download|save|copy)\\s+(all|the|your|training|model|data)",
+        "severity": "high"
+      },
+      {
+        "name": "model_info",
+        "pattern": "(?i)(what|tell|show|reveal)\\s+(is|are|your)\\s+(training|model|data|dataset|weights?)",
+        "severity": "medium"
+      }
+    ]
+  },
+  "owasp_llm04_model_dos": {
+    "description": "OWASP LLM04: Model Denial of Service",
+    "patterns": [
+      {
+        "name": "excessive_length",
+        "pattern": ".{10000,}",
+        "severity": "medium"
+      },
+      {
+        "name": "repetitive_content",
+        "pattern": "(.{1,50})\\1{20,}",
+        "severity": "low"
+      }
+    ]
+  },
+  "cypher_injection": {
+    "description": "Cypher Query Injection",
+    "patterns": [
+      {
+        "name": "cypher_query",
+        "pattern": "(?i)(match|create|delete|merge|set|remove|return|where|with|unwind)\\s+.*",
+        "severity": "high"
+      },
+      {
+        "name": "cypher_comment",
+        "pattern": "(?i)(//|/\\*|\\*/|--).*",
+        "severity": "medium"
+      }
+    ]
+  },
+  "harmful_content": {
+    "description": "Harmful Content Detection",
+    "patterns": [
+      {
+        "name": "violence",
+        "pattern": "(?i)(kill|murder|assassinate|violence|harm|hurt|attack)\\s+.*",
+        "severity": "high"
+      },
+      {
+        "name": "illegal_activities",
+        "pattern": "(?i)(how\\s+to\\s+)?(hack|exploit|steal|rob|break\\s+into|illegal)",
+        "severity": "high"
+      },
+      {
+        "name": "malware",
+        "pattern": "(?i)(malware|virus|trojan|ransomware|keylogger|backdoor)",
+        "severity": "high"
+      },
+      {
+        "name": "bypass_security",
+        "pattern": "(?i)(bypass|circumvent|hack|exploit|break)\\s+(security|authentication|authorization|encryption)",
+        "severity": "high"
+      }
+    ]
+  }
+}
+
+
+
+
+
+
+
+
+

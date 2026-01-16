@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Novel Cognitive Architecture",
+    "novelty_index": 0.85,
+    "confidence": 0.78,
+    "source_url": "https://arxiv.org/abs/2025.12345",
+    "extracted_at": "2025-01-26T10:30:00",
+    "description": "New approach to cognitive reasoning using graph-based knowledge representation"
+  },
+  {
+    "name": "AI Governance Framework",
+    "novelty_index": 0.72,
+    "confidence": 0.81,
+    "source_url": "https://example.com/ai-governance",
+    "extracted_at": "2025-01-25T15:20:00",
+    "description": "Emerging framework for ethical AI governance in enterprise environments"
+  },
+  {
+    "name": "Weak Signal Detection",
+    "novelty_index": 0.68,
+    "confidence": 0.75,
+    "source_url": "https://example.com/weak-signals",
+    "extracted_at": "2025-01-24T09:15:00",
+    "description": "Novel methodology for detecting weak signals in large-scale data streams"
+  }
+]
+

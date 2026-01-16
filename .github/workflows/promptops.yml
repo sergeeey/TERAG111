@@ -1,0 +1,93 @@
+name: PromptOps CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'src/promptops/**'
+      - 'configs/prompts/**'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Ручной запуск
+
+jobs:
+  promptops:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install mlflow langsmith
+    
+    - name: Prompt Lint
+      run: |
+        # Проверка схемы
+        python -c "
+        import json
+        from pathlib import Path
+        schema_path = Path('configs/prompts/registry_schema.json')
+        if schema_path.exists():
+            with open(schema_path) as f:
+                schema = json.load(f)
+            print('✅ Schema is valid')
+        else:
+            print('⚠️ Schema file not found')
+        "
+    
+    - name: Run PromptOps tests
+      run: |
+        pytest tests/promptops/ -v
+      continue-on-error: true
+    
+    - name: Security scan with Bandit
+      run: |
+        pip install bandit
+        bandit -r src/promptops/ -f json -o reports/bandit_promptops.json || true
+    
+    - name: Dependency audit
+      run: |
+        pip install pip-audit
+        pip-audit --format json --output reports/pip_audit_promptops.json || true
+    
+    - name: Upload reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: promptops-reports
+        path: reports/*.json
+    
+    - name: Check test results
+      run: |
+        if [ -f "reports/prompt_eval_report.json" ]; then
+          python -c "
+          import json
+          with open('reports/prompt_eval_report.json') as f:
+            data = json.load(f)
+          pass_rate = data.get('pass_rate', 0)
+          if pass_rate < 0.9:
+            print(f'❌ Prompt lint pass rate {pass_rate:.2%} is below target 90%')
+            exit(1)
+          else:
+            print(f'✅ Prompt lint pass rate {pass_rate:.2%} meets target (≥90%)')
+          "
+        else:
+          echo "⚠️ Prompt eval report not found"
+
+
+
+
+
+
+
+
+
